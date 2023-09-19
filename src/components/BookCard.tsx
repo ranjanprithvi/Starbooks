@@ -7,7 +7,6 @@ import {
     Heading,
     Image,
     Text,
-    VStack,
 } from "@chakra-ui/react";
 import Rating from "./Rating";
 
@@ -18,15 +17,18 @@ interface Props {
 const BookCard = ({ book }: Props) => {
     return (
         <Card borderRadius={10} overflow="hidden">
+            <Image
+                src={
+                    book.coverImage ||
+                    "https://bookcart.azurewebsites.net/Upload/Default_image.jpg"
+                }
+                borderRadius={10}
+                height="75%"
+                // overflow={"clip"}
+            />
             <CardBody>
-                <Image
-                    src={book.coverImage || "/src/assets/Default_noCover.jpg"}
-                    borderRadius={10}
-                    height="80%"
-                    overflow={"clip"}
-                />
                 <Heading
-                    marginY="10px"
+                    marginY="5px"
                     fontSize="2xl"
                     maxHeight="60px"
                     overflow={"hidden"}
