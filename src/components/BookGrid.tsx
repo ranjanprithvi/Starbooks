@@ -2,13 +2,25 @@ import React from "react";
 import useData from "../hooks/useData";
 import HttpService from "../services/http-service";
 import bookService, { Book } from "../services/book-service";
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, filter } from "@chakra-ui/react";
 import BookCard from "./BookCard";
 import BookCardSkeleton from "./BookCardSkeleton";
+import { Genre } from "../services/genre-service";
 
-const BookGrid = () => {
+interface Props {
+    selectedGenre: Genre | null;
+}
+
+const BookGrid = ({ selectedGenre }: Props) => {
     const { data: books, isLoading, error } = useData<Book>(bookService);
     const skeletonCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let filteredBooks = books;
+
+    if (selectedGenre) {
+        filteredBooks = books.filter(
+            (book) => book.genre._id === selectedGenre._id
+        );
+    }
 
     return (
         <div>
@@ -23,7 +35,7 @@ const BookGrid = () => {
                         <BookCardSkeleton key={skeleton} />
                     ))}
 
-                {books.map((book) => (
+                {filteredBooks.map((book) => (
                     <BookCard key={book._id} book={book} />
                 ))}
             </SimpleGrid>

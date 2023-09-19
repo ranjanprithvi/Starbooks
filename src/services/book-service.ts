@@ -1,3 +1,4 @@
+import { Genre } from "./genre-service";
 import HttpService from "./http-service";
 
 export interface Book {
@@ -5,6 +6,7 @@ export interface Book {
     title: string;
     coverImage: string;
     author: { name: string };
+    genre: Genre;
     rating: number;
 }
 
