@@ -2,34 +2,41 @@ import { useEffect, useState } from "react";
 import { CanceledError } from "../services/api-client";
 import HttpService, { Entity } from "../services/http-service";
 
-function useData<T extends Entity>(dataService: HttpService<T>) {
+function useData<T extends Entity>(
+    dataService: HttpService<T>,
+    query?: Object,
+    deps?: any[]
+) {
     const [data, setData] = useState<T[]>([]);
     const [error, setError] = useState<string>("");
     const [isLoading, setLoading] = useState<boolean>(false);
 
-    useEffect(() => {
-        setLoading(true);
+    useEffect(
+        () => {
+            setLoading(true);
 
-        const { request, cancel } = dataService.getAll();
+            const { request, cancel } = dataService.getAll(query || null);
 
-        request
-            .then((res) => {
-                setData(res.data);
-                setLoading(false);
-                setError("");
-            })
-            .catch((err) => {
-                if (err instanceof CanceledError) return;
-                setError(err.message);
-                setLoading(false);
-            })
-            .finally(() => {
-                console.log("Loader hidden");
-                // setLoading(false);
-            });
+            request
+                .then((res) => {
+                    setData(res.data);
+                    setLoading(false);
+                    setError("");
+                })
+                .catch((err) => {
+                    if (err instanceof CanceledError) return;
+                    setError(err.message);
+                    setLoading(false);
+                })
+                .finally(() => {
+                    console.log("Loader hidden");
+                    // setLoading(false);
+                });
 
-        return () => cancel();
-    }, []);
+            return () => cancel();
+        },
+        deps ? [...deps] : []
+    );
 
     return { data, setData, error, setError, isLoading };
 }

@@ -33,7 +33,7 @@ function App() {
                 </GridItem>
             </Show>
             <GridItem area="main">
-                <BookGrid selectedGenre={selectedGenre} />
+                <BookGrid queryObject={{ genre: selectedGenre?._id }} />
             </GridItem>
         </Grid>
     );

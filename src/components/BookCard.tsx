@@ -1,13 +1,6 @@
 import React from "react";
 import { Book } from "../services/book-service";
-import {
-    Card,
-    CardBody,
-    HStack,
-    Heading,
-    Image,
-    Text,
-} from "@chakra-ui/react";
+import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
 import Rating from "./Rating";
 
 interface Props {
@@ -27,12 +20,7 @@ const BookCard = ({ book }: Props) => {
                 // overflow={"clip"}
             />
             <CardBody>
-                <Heading
-                    marginY="5px"
-                    fontSize="2xl"
-                    maxHeight="60px"
-                    overflow={"hidden"}
-                >
+                <Heading marginY="5px" fontSize="2xl">
                     {book.title}
                 </Heading>
                 <HStack justifyContent={"space-between"}>

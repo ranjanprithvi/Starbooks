@@ -1,7 +1,8 @@
+import { AxiosRequestConfig } from "axios";
 import apiClient from "./api-client";
 
 export interface Entity {
-    _id: number;
+    _id: string;
 }
 
 class HttpService<T extends Entity> {
@@ -11,11 +12,12 @@ class HttpService<T extends Entity> {
         this.endpoint = endpoint;
     }
 
-    getAll() {
+    getAll(query: Object | null) {
         const controller = new AbortController();
         return {
             request: apiClient.get<T[]>(this.endpoint, {
                 signal: controller.signal,
+                params: query,
             }),
             cancel: () => controller.abort(),
         };

@@ -1,7 +1,7 @@
 import HttpService from "./http-service";
 
 export interface Genre {
-    _id: number;
+    _id: string;
     name: string;
 }
 
