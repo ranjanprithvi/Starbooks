@@ -1,6 +1,3 @@
-import React from "react";
-import useData from "../hooks/useData";
-import genreService, { Genre } from "../services/genre-service";
 import {
     HStack,
     List,
@@ -9,6 +6,9 @@ import {
     Text,
     Button,
 } from "@chakra-ui/react";
+import { genreIcons } from "./genreIcons";
+import useGenres from "../hooks/useGenres";
+import { Genre } from "../services/genre-service";
 
 interface Props {
     selectedGenre: Genre | null;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
-    const { data: genres, isLoading, error } = useData<Genre>(genreService);
+    const { genres, isLoading, error } = useGenres();
     if (error) return null;
     if (isLoading) return <Spinner />;
 
@@ -35,18 +35,27 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                     </Button>
                 </ListItem>
 
-                {genres.map((genre) => (
-                    <ListItem key={genre._id} paddingY="5px">
-                        <Button
-                            fontSize="lg"
-                            variant="link"
-                            colorScheme={selectedGenre === genre ? "teal" : ""}
-                            onClick={() => onSelectGenre(genre)}
-                        >
-                            {genre.name}
-                        </Button>
-                    </ListItem>
-                ))}
+                {genres.map((genre) => {
+                    // let GenreIcon = genreIcons[genre.name];
+                    return (
+                        <ListItem key={genre._id} paddingY="5px">
+                            {/* <BsFilePerson /> */}
+                            <Button
+                                fontSize="lg"
+                                variant="link"
+                                colorScheme={
+                                    selectedGenre === genre ? "teal" : ""
+                                }
+                                onClick={() => onSelectGenre(genre)}
+                            >
+                                <HStack>
+                                    {genreIcons[genre.name]}
+                                    <Text>{genre.name}</Text>
+                                </HStack>
+                            </Button>
+                        </ListItem>
+                    );
+                })}
             </List>
         </div>
     );

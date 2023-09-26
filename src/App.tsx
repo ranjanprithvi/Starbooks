@@ -5,9 +5,12 @@ import BookGrid from "./components/BookGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./services/genre-service";
+import AuthorSelector from "./components/AuthorSelector";
+import { Author } from "./services/author-service";
 
 function App() {
     const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+    const [selectedAuthor, setSelectedAuthor] = useState<Author | null>(null);
 
     return (
         <Grid
@@ -33,7 +36,16 @@ function App() {
                 </GridItem>
             </Show>
             <GridItem area="main">
-                <BookGrid queryObject={{ genre: selectedGenre?._id }} />
+                <AuthorSelector
+                    selectedAuthor={selectedAuthor}
+                    onSelectAuthor={setSelectedAuthor}
+                ></AuthorSelector>
+                <BookGrid
+                    queryObject={{
+                        genre: selectedGenre?._id,
+                        author: selectedAuthor?._id,
+                    }}
+                />
             </GridItem>
         </Grid>
     );

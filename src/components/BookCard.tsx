@@ -9,7 +9,7 @@ interface Props {
 
 const BookCard = ({ book }: Props) => {
     return (
-        <Card borderRadius={10} overflow="hidden">
+        <Card borderRadius={10} overflow="hidden" boxShadow={"2xl"}>
             <Image
                 src={
                     book.coverImage ||

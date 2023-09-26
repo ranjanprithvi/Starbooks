@@ -14,7 +14,7 @@ interface Props {
 
 const BookGrid = ({ queryObject }: Props) => {
     const {
-        data: books,
+        books,
         isLoading,
         error,
     } = useBooks(queryObject, [

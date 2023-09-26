@@ -2,10 +2,15 @@ import bookService, { Book, BookQuery } from "../services/book-service";
 import HttpService from "../services/http-service";
 import useData from "./useData";
 
-const useBooks = (query?: BookQuery, deps?: any[]) =>
-    useData<Book>(bookService, query, deps);
-// export default new HttpService<Book>("/books", {
-//     params: { genre: selectedGenre._id },
-// });
+const useBooks = (query?: BookQuery, deps?: any[]) => {
+    const {
+        data: books,
+        setData: setBooks,
+        error,
+        setError,
+        isLoading,
+    } = useData<Book>(bookService, query, deps);
+    return { books, setBooks, error, setError, isLoading };
+};
 
 export default useBooks;
