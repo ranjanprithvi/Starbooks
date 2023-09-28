@@ -1,19 +1,23 @@
 import "./App.css";
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import {
+    Box,
+    Grid,
+    GridItem,
+    HStack,
+    Show,
+    useColorModeValue,
+} from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import BookGrid from "./components/BookGrid";
-import GenreList from "./components/GenreList";
-import { useState } from "react";
-import { Genre } from "./services/genre-service";
-import AuthorSelector from "./components/AuthorSelector";
-import { Author } from "./services/author-service";
+import { Route, Routes } from "react-router-dom";
+import Books from "./components/Books";
+import BookDetails from "./components/BookDetails";
+import BookForm from "./components/BookForm";
 
 function App() {
-    const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-    const [selectedAuthor, setSelectedAuthor] = useState<Author | null>(null);
-
+    const textColor = useColorModeValue("gray.700", "white");
     return (
         <Grid
+            color={textColor}
             templateAreas={{
                 base: `"nav" "main"`,
                 lg: `"nav nav"         
@@ -27,26 +31,50 @@ function App() {
             <GridItem area="nav">
                 <NavBar />
             </GridItem>
-            <Show above="lg">
-                <GridItem area="aside" paddingX="5">
-                    <GenreList
-                        selectedGenre={selectedGenre}
-                        onSelectGenre={(genre) => setSelectedGenre(genre)}
+            <Routes>
+                <Route path="/" element={<Books />} />
+                <Route path="books/:id" element={<BookDetails />} />
+                <Route path="editBook/:id" element={<BookForm />} />
+                {/* User Routes
+                    <Route path="records/:id" element={<RecordForm />} />
+
+                    <Route path="appointments" element={<Appointments />} />
+                    <Route path="medicalrecords" element={<MedicalRecords />} />
+                    <Route
+                        path="externalrecords"
+                        element={<ExternalRecords />}
                     />
-                </GridItem>
-            </Show>
-            <GridItem area="main">
-                <AuthorSelector
-                    selectedAuthor={selectedAuthor}
-                    onSelectAuthor={setSelectedAuthor}
-                ></AuthorSelector>
-                <BookGrid
-                    queryObject={{
-                        genre: selectedGenre?._id,
-                        author: selectedAuthor?._id,
-                    }}
-                />
-            </GridItem>
+                    <Route path="prescriptions" element={<Prescriptions />} />
+                    <Route path="profiles/:id" element={<ProfileForm />} />
+                    <Route path="profiles" element={<Profiles />} />
+                    {/* </Route>
+                <Route
+                    path="/hospitaldashboard"
+                    element={<HospitalDashboard />}
+                > */}
+
+                {/* Hospital Routes */}
+                {/* <Route
+                        path="hospitalappointments"
+                        element={<HospitalAppointments />}
+                    />
+                    <Route path="allprofiles" element={<AllProfiles />} />
+                    <Route
+                        path="profiledocuments/:id"
+                        element={<ProfileDocuments />}
+                    />
+                    <Route path="createslots" element={<CreateSlotsForm />} />
+                </Route>
+                <Route path="/login" element={<LoginForm />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/rough" element={<Rough />} />
+
+                <Route path="/not-found" element={<NotFound />} />
+                <Route
+                    path="*"
+                    element={<Navigate to="/not-found" replace />}
+                /> */}
+            </Routes>
         </Grid>
     );
 }

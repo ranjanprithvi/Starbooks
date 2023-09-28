@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { CanceledError } from "../services/api-client";
-import HttpService, { Entity } from "../services/http-service";
+import { CanceledError } from "../../services/api-client";
+import HttpService, { Entity } from "../../services/http-service";
 
 function useData<T extends Entity>(
     dataService: HttpService<T>,
@@ -15,7 +15,7 @@ function useData<T extends Entity>(
         () => {
             setLoading(true);
 
-            const { request, cancel } = dataService.getAll(query || null);
+            const { request, cancel } = dataService.getAll(query);
 
             request
                 .then((res) => {
@@ -29,7 +29,7 @@ function useData<T extends Entity>(
                     setLoading(false);
                 })
                 .finally(() => {
-                    console.log("Loader hidden");
+                    // console.log("Loader hidden");
                     // setLoading(false);
                 });
 

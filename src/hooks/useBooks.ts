@@ -1,6 +1,6 @@
 import bookService, { Book, BookQuery } from "../services/book-service";
 import HttpService from "../services/http-service";
-import useData from "./useData";
+import useData from "./generic/useData";
 
 const useBooks = (query?: BookQuery, deps?: any[]) => {
     const {

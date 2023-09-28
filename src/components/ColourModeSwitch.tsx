@@ -8,7 +8,7 @@ const ColourModeSwitch = () => {
             <Switch
                 isChecked={colorMode === "dark"}
                 onChange={toggleColorMode}
-                colorScheme="green"
+                colorScheme="teal"
             />
 
             <Text>Dark Mode</Text>

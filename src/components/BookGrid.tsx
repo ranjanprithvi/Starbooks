@@ -1,5 +1,5 @@
 import React from "react";
-import useData from "../hooks/useData";
+import useData from "../hooks/generic/useData";
 import HttpService from "../services/http-service";
 import bookService, { Book, BookQuery } from "../services/book-service";
 import { SimpleGrid, filter } from "@chakra-ui/react";
@@ -7,20 +7,18 @@ import BookCard from "./BookCard";
 import BookCardSkeleton from "./BookCardSkeleton";
 import { Genre } from "../services/genre-service";
 import useBooks from "../hooks/useBooks";
+import { Link } from "react-router-dom";
 
 interface Props {
     queryObject: BookQuery;
 }
 
 const BookGrid = ({ queryObject }: Props) => {
-    const {
-        books,
-        isLoading,
-        error,
-    } = useBooks(queryObject, [
+    const { books, isLoading, error } = useBooks(queryObject, [
         queryObject.genre,
         queryObject.author,
         queryObject.search,
+        queryObject.sortBy,
     ]);
     const skeletonCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     // let filteredBooks = books;
@@ -45,7 +43,9 @@ const BookGrid = ({ queryObject }: Props) => {
                     ))}
 
                 {books.map((book) => (
-                    <BookCard key={book._id} book={book} />
+                    <Link to={`/books/${book._id}`} key={book._id}>
+                        <BookCard key={book._id} book={book} />
+                    </Link>
                 ))}
             </SimpleGrid>
         </div>

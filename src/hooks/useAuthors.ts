@@ -1,5 +1,5 @@
 import authorService, { Author } from "../services/author-service";
-import useData from "./useData";
+import useData from "./generic/useData";
 
 const useAuthors = () => {
     const {

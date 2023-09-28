@@ -12,7 +12,7 @@ class HttpService<T extends Entity> {
         this.endpoint = endpoint;
     }
 
-    getAll(query: Object | null) {
+    getAll(query?: Object) {
         const controller = new AbortController();
         return {
             request: apiClient.get<T[]>(this.endpoint, {
@@ -23,7 +23,17 @@ class HttpService<T extends Entity> {
         };
     }
 
-    delete(id: number) {
+    get(id: string) {
+        const controller = new AbortController();
+        return {
+            request: apiClient.get<T>(`${this.endpoint}/${id}`, {
+                signal: controller.signal,
+            }),
+            cancel: () => controller.abort(),
+        };
+    }
+
+    delete(id: string) {
         return apiClient.delete(`${this.endpoint}/${id}`);
     }
 

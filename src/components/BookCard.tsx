@@ -9,7 +9,12 @@ interface Props {
 
 const BookCard = ({ book }: Props) => {
     return (
-        <Card borderRadius={10} overflow="hidden" boxShadow={"2xl"}>
+        <Card
+            height={"100%"}
+            borderRadius={10}
+            overflow="hidden"
+            boxShadow={"2xl"}
+        >
             <Image
                 src={
                     book.coverImage ||
@@ -20,8 +25,9 @@ const BookCard = ({ book }: Props) => {
                 // overflow={"clip"}
             />
             <CardBody>
-                <Heading marginY="5px" fontSize="2xl">
-                    {book.title}
+                <Heading marginY="5px" fontSize="xl">
+                    {book.title +
+                        (book.yearPublished ? ` (${book.yearPublished})` : "")}
                 </Heading>
                 <HStack justifyContent={"space-between"}>
                     <Text color={"gray.500"}>{book.author.name}</Text>

@@ -1,5 +1,5 @@
 import genreService, { Genre } from "../services/genre-service";
-import useData from "./useData";
+import useData from "./generic/useData";
 
 const useGenres = () => {
     const {
