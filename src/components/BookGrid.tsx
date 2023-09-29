@@ -43,7 +43,7 @@ const BookGrid = ({ queryObject }: Props) => {
                     ))}
 
                 {books.map((book) => (
-                    <Link to={`/books/${book._id}`} key={book._id}>
+                    <Link to={`/bookDetails/${book._id}`} key={book._id}>
                         <BookCard key={book._id} book={book} />
                     </Link>
                 ))}

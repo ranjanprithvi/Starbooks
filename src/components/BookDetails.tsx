@@ -62,7 +62,7 @@ const BookDetails = () => {
                             alignItems="center"
                             height="100%"
                         >
-                            <Link to={`/editBook/${id}`}>
+                            <Link to={`/books/${id}`}>
                                 <Button colorScheme="facebook">Edit</Button>
                             </Link>
                         </Flex>

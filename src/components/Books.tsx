@@ -1,4 +1,4 @@
-import { Box, GridItem, HStack, Show } from "@chakra-ui/react";
+import { Box, Button, GridItem, HStack, Show } from "@chakra-ui/react";
 import { useState } from "react";
 import GenreList from "./GenreList";
 import Searchbar from "./Searchbar";
@@ -8,6 +8,7 @@ import BookGrid from "./BookGrid";
 import { BookSort, bookSortFields } from "../services/book-service";
 import { Genre } from "../services/genre-service";
 import { Author } from "../services/author-service";
+import { Link } from "react-router-dom";
 
 const Books = () => {
     const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
@@ -26,9 +27,12 @@ const Books = () => {
                 </GridItem>
             </Show>
             <GridItem area="main">
-                <Box margin={5}>
+                <HStack margin={5}>
                     <Searchbar setSearch={setSearch} />
-                </Box>
+                    <Link to="/books/new">
+                        <Button colorScheme="green">Add Book</Button>
+                    </Link>
+                </HStack>
                 <HStack justifyContent="space-between">
                     <AuthorSelector
                         selectedAuthor={selectedAuthor}

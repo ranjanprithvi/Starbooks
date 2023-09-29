@@ -1,17 +1,11 @@
 import "./App.css";
-import {
-    Box,
-    Grid,
-    GridItem,
-    HStack,
-    Show,
-    useColorModeValue,
-} from "@chakra-ui/react";
+import { Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Books from "./components/Books";
 import BookDetails from "./components/BookDetails";
 import BookForm from "./components/BookForm";
+import NotFound from "./components/NotFound";
 
 function App() {
     const textColor = useColorModeValue("gray.700", "white");
@@ -33,8 +27,14 @@ function App() {
             </GridItem>
             <Routes>
                 <Route path="/" element={<Books />} />
-                <Route path="books/:id" element={<BookDetails />} />
-                <Route path="editBook/:id" element={<BookForm />} />
+                <Route path="bookDetails/:id" element={<BookDetails />} />
+                <Route path="books/:id" element={<BookForm />} />
+                <Route path="/not-found" element={<NotFound />} />
+                <Route
+                    path="*"
+                    element={<Navigate to="/not-found" replace />}
+                />
+
                 {/* User Routes
                     <Route path="records/:id" element={<RecordForm />} />
 
