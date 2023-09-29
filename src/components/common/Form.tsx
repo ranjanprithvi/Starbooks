@@ -1,4 +1,10 @@
-import { FieldValues, Path, useForm } from "react-hook-form";
+import {
+    FieldValues,
+    Path,
+    UseFormHandleSubmit,
+    UseFormRegister,
+    FieldErrors,
+} from "react-hook-form";
 import {
     Button,
     FormControl,
@@ -13,6 +19,7 @@ import {
     SliderMark,
     SliderThumb,
     SliderTrack,
+    Textarea,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -27,7 +34,7 @@ interface SliderMarks {
 }
 
 export interface Field<T> {
-    type: "input" | "select" | "slider";
+    type: "textInput" | "textArea" | "select" | "slider";
     label: string;
     name: Path<T>;
     inputType?: string;
@@ -36,47 +43,69 @@ export interface Field<T> {
     placeholder?: string;
 }
 
-interface Props<T> {
+interface Props<T extends FieldValues> {
     resolver?: any;
     fields: Field<T>[];
     heading: string;
-    values?: T;
+    onSubmit: (data: T) => void;
+    handleSubmit: UseFormHandleSubmit<T>;
+    register: UseFormRegister<T>;
+    errors: FieldErrors<T>;
+    isValid: boolean;
 }
 
 const Form = <T extends FieldValues>({
-    resolver,
     fields,
     heading,
-    values,
+    onSubmit,
+    handleSubmit,
+    register,
+    errors,
+    isValid,
 }: Props<T>) => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isValid },
-    } = useForm<T>({
-        resolver: resolver,
-        values,
-    });
-
     const navigate = useNavigate();
-    const onSubmit = (data: T) => {
-        console.log(data);
-    };
 
     function renderInput({ label, name, inputType }: Field<T>) {
-        const options = inputType == "number" ? { valueAsNumber: true } : {};
         return (
             <>
                 <FormLabel htmlFor={name}>{label}</FormLabel>
                 <Input
+                    step="any"
                     id={name}
                     type={inputType}
-                    {...register(name, options)}
+                    {...register(name, {
+                        valueAsNumber: inputType == "number",
+                    })}
                 />
             </>
         );
     }
 
+    function renderTextArea({ label, name }: Field<T>) {
+        return (
+            <>
+                <FormLabel htmlFor={name}>{label}</FormLabel>
+                <Textarea id={name} {...register(name)} />
+            </>
+        );
+    }
+
+    // function renderNumberInput({ label, name }: Field<T>) {
+    //     return (
+    //         <>
+    //             <FormLabel htmlFor={name}>{label}</FormLabel>
+    //             <NumberInput id={name}>
+    //                 <NumberInputField
+    //                     {...register(name, { valueAsNumber: true })}
+    //                 />
+    //                 <NumberInputStepper>
+    //                     <NumberIncrementStepper />
+    //                     <NumberDecrementStepper />
+    //                 </NumberInputStepper>
+    //             </NumberInput>
+    //         </>
+    //     );
+    // }
     function renderSelect({ label, name, options, placeholder }: Field<T>) {
         return (
             <>
@@ -118,6 +147,12 @@ const Form = <T extends FieldValues>({
             case "slider":
                 renderElement = renderSlider;
                 break;
+            // case "numberInput":
+            //     renderElement = renderNumberInput;
+            //     break;
+            case "textArea":
+                renderElement = renderTextArea;
+                break;
             default:
                 renderElement = renderInput;
         }
@@ -131,6 +166,8 @@ const Form = <T extends FieldValues>({
             </>
         );
     }
+
+    // console.log(errors, isValid);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

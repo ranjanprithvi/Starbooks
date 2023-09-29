@@ -1,12 +1,14 @@
-import { Box, GridItem } from "@chakra-ui/react";
+import { Box, GridItem, useToast } from "@chakra-ui/react";
 import Form, { Field, Option } from "./common/Form";
-import { nan, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAuthors from "../hooks/useAuthors";
 import useGenres from "../hooks/useGenres";
 import useBook from "../hooks/useBook";
 import { useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
+import { useForm } from "react-hook-form";
+import bookService, { Book } from "../services/book-service";
 
 const schema = z.object({
     title: z
@@ -31,6 +33,7 @@ const schema = z.object({
         .union([
             z
                 .number()
+                .multipleOf(0.01)
                 .min(0, { message: "Rating must be between 0 and 5" })
                 .max(5, {
                     message: "Rating must be between 0 and 5",
@@ -49,12 +52,10 @@ const schema = z.object({
             z.nan(),
         ])
         .optional(),
-    coverImage: z
-        .union([
-            z.string().url({ message: "Cover image must be a valid URL" }),
-            z.undefined(),
-        ])
-        .optional(),
+    coverImage: z.union([
+        z.string().url({ message: "Cover image must be a valid URL" }),
+        z.literal(""),
+    ]),
     description: z.string().optional(),
 });
 
@@ -62,19 +63,87 @@ type BookData = z.infer<typeof schema>;
 
 const BookForm = () => {
     const navigate = useNavigate();
+    const toast = useToast();
     const { id } = useParams();
     if (!id) return null;
 
+    const resolver = zodResolver(schema);
+
+    // let values;
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isValid },
+        reset,
+    } = useForm<BookData>({
+        resolver,
+        // defaultValues: values,
+    });
+
+    function resetData(data: Book) {
+        let bookData = {
+            ..._.omit(data, ["author", "genre"]),
+            authorId: data.author?._id,
+            genreId: data.genre?._id,
+        };
+        console.log(bookData);
+
+        reset(bookData);
+    }
+
     const { authors } = useAuthors();
     const { genres } = useGenres();
-    const { book, error } = useBook(id);
+    const { book, error } = useBook(id, resetData, reset);
+
+    // if (!error) {
+    //     values = {
+    //         ..._.pick(book, _.keys(schema.shape)),
+    //         authorId: book.author?._id,
+    //         genreId: book.genre?._id,
+    //     } as BookData;
+    // }
 
     if (error && id != "new") navigate("/not-found");
 
-    const resolver = zodResolver(schema);
+    const onSubmit = (data: BookData) => {
+        console.log(data);
+        if (id == "new")
+            bookService
+                .add<BookData, Book>(data)
+                .then((book) => {
+                    navigate("/bookDetails/" + book.data._id, {
+                        replace: true,
+                    });
+                })
+                .catch((err) => {
+                    toast({
+                        title: "Error",
+                        description: err.response.data,
+                        status: "error",
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                });
+        else
+            bookService
+                .update<BookData, Book>(data, id)
+                .then((book) => {
+                    navigate("/bookDetails/" + id, { replace: true });
+                })
+                .catch((err) => {
+                    toast({
+                        title: "Error",
+                        description: err.response.data,
+                        status: "error",
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                });
+    };
 
     const fields: Field<BookData>[] = [
-        { type: "input", label: "Title", name: "title" },
+        { type: "textInput", label: "Title", name: "title" },
         {
             type: "select",
             label: "Author",
@@ -95,45 +164,35 @@ const BookForm = () => {
             placeholder: "--Select genre--",
         },
         {
-            type: "input",
+            type: "textInput",
             label: "Year Published",
             name: "yearPublished",
             inputType: "number",
         },
         {
-            type: "input",
+            type: "textInput",
             label: "Rating",
             name: "rating",
             inputType: "number",
         },
         {
-            type: "input",
+            type: "textInput",
             label: "Number in Stock",
             name: "numberInStock",
             inputType: "number",
         },
         {
-            type: "input",
+            type: "textInput",
             label: "Cover Image",
             name: "coverImage",
             inputType: "url",
         },
         {
-            type: "input",
+            type: "textArea",
             label: "Description",
             name: "description",
         },
     ];
-
-    let values;
-    if (!error) {
-        values = {
-            ..._.pick(book, _.keys(schema.shape)),
-            authorId: book.author?._id,
-            genreId: book.genre?._id,
-        } as BookData;
-    }
-    console.log(values);
 
     return (
         <GridItem colSpan={2} marginX={5}>
@@ -149,7 +208,11 @@ const BookForm = () => {
                     resolver={resolver}
                     fields={fields}
                     heading={id === "new" ? "New Book" : "Edit Book"}
-                    values={values}
+                    onSubmit={onSubmit}
+                    handleSubmit={handleSubmit}
+                    register={register}
+                    errors={errors}
+                    isValid={isValid}
                 />
             </Box>
         </GridItem>

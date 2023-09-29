@@ -5,14 +5,14 @@ export interface Entity {
     _id: string;
 }
 
-class HttpService<T extends Entity> {
+class HttpService {
     endpoint: string;
 
     constructor(endpoint: string) {
         this.endpoint = endpoint;
     }
 
-    getAll(query?: Object) {
+    getAll<T extends Entity>(query?: Object) {
         const controller = new AbortController();
         return {
             request: apiClient.get<T[]>(this.endpoint, {
@@ -23,7 +23,7 @@ class HttpService<T extends Entity> {
         };
     }
 
-    get(id: string) {
+    get<T extends Entity>(id: string) {
         const controller = new AbortController();
         return {
             request: apiClient.get<T>(`${this.endpoint}/${id}`, {
@@ -37,12 +37,12 @@ class HttpService<T extends Entity> {
         return apiClient.delete(`${this.endpoint}/${id}`);
     }
 
-    add(entity: T) {
-        return apiClient.post<T>(this.endpoint, entity);
+    add<T1, T2>(entity: T1) {
+        return apiClient.post<T2>(this.endpoint, entity);
     }
 
-    update(entity: T) {
-        return apiClient.put(`${this.endpoint}/${entity._id}`, entity);
+    update<T1, T2>(entity: T1, id: string) {
+        return apiClient.put<T2>(`${this.endpoint}/${id}`, entity);
     }
 }
 
