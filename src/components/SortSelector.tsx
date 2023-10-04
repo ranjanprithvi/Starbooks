@@ -7,7 +7,7 @@ import {
     MenuList,
 } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-import { BookSort, bookSortFields } from "../services/book-service";
+import { BookSort, bookSortFields } from "../models/book";
 
 interface Props {
     sortField: BookSort;

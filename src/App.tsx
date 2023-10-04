@@ -6,6 +6,8 @@ import Books from "./components/Books";
 import BookDetails from "./components/BookDetails";
 import BookForm from "./components/BookForm";
 import NotFound from "./components/NotFound";
+import Rentals from "./components/Rentals";
+import Users from "./components/Users";
 
 function App() {
     const textColor = useColorModeValue("gray.700", "white");
@@ -26,9 +28,11 @@ function App() {
                 <NavBar />
             </GridItem>
             <Routes>
-                <Route path="/" element={<Books />} />
+                <Route path="/books" element={<Books />} />
                 <Route path="bookDetails/:id" element={<BookDetails />} />
                 <Route path="books/:id" element={<BookForm />} />
+                <Route path="users" element={<Users />} />
+                <Route path="rentals" element={<Rentals />} />
                 <Route path="/not-found" element={<NotFound />} />
                 <Route
                     path="*"

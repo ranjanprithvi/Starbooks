@@ -17,11 +17,11 @@ import useBook from "../hooks/useBook";
 const BookDetails = () => {
     const { id } = useParams();
 
-    const { book, isLoading, error } = useBook(id || "new");
+    const { book, isLoading, error } = useBook(id);
 
     if (error) return <Text>Book Not Found!</Text>;
     return (
-        <GridItem colSpan={2}>
+        <GridItem colSpan={2} marginBottom={5} maxWidth="1280px" marginX="auto">
             <Box
                 marginX={"5"}
                 borderColor={"blue.800"}
@@ -63,7 +63,9 @@ const BookDetails = () => {
                             height="100%"
                         >
                             <Link to={`/books/${id}`}>
-                                <Button colorScheme="facebook">Edit</Button>
+                                <Button colorScheme="facebook" marginTop={5}>
+                                    Edit
+                                </Button>
                             </Link>
                         </Flex>
                     </GridItem>
@@ -117,7 +119,11 @@ const BookDetails = () => {
                         >
                             <Text fontWeight="bold">Availability: </Text>{" "}
                             {book.numberInStock > 0 ? (
-                                <Badge colorScheme="green" padding={2}>
+                                <Badge
+                                    colorScheme="green"
+                                    paddingX={2}
+                                    paddingY={{ md: 1 }}
+                                >
                                     {`Available (${book.numberInStock} copies)`}
                                 </Badge>
                             ) : (

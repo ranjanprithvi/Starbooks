@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import { CanceledError } from "../../services/api-client";
 import HttpService, { Entity } from "../../services/http-service";
 
-function useData<T extends Entity>(
-    dataService: HttpService<T>,
-    query?: Object,
-    deps?: any[]
-) {
+function useData<T extends Entity>(path: string, query?: Object, deps?: any[]) {
     const [data, setData] = useState<T[]>([]);
     const [error, setError] = useState<string>("");
     const [isLoading, setLoading] = useState<boolean>(false);
@@ -14,8 +10,8 @@ function useData<T extends Entity>(
     useEffect(
         () => {
             setLoading(true);
-
-            const { request, cancel } = dataService.getAll(query);
+            const dataService = new HttpService(path);
+            const { request, cancel } = dataService.getAll<T>(query);
 
             request
                 .then((res) => {

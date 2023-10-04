@@ -1,14 +1,14 @@
-import bookService, { Book } from "../services/book-service";
+import { Book } from "../models/book";
 import useDataItem from "./generic/useDataItem";
 
-const useBook = (id: string, resetBooks: any, reset: any) => {
+const useBook = (id: string = "new", reset?: any) => {
     const {
         data: book,
         setData: setBook,
         error,
         setError,
         isLoading,
-    } = useDataItem<Book>(bookService, id, resetBooks, reset);
+    } = useDataItem<Book>("/books", id, reset);
     return { book, setBook, error, setError, isLoading };
 };
 

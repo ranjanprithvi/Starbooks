@@ -1,4 +1,4 @@
-import authorService, { Author } from "../services/author-service";
+import { Author } from "../models/author";
 import useData from "./generic/useData";
 
 const useAuthors = () => {
@@ -8,7 +8,7 @@ const useAuthors = () => {
         error,
         setError,
         isLoading,
-    } = useData<Author>(authorService);
+    } = useData<Author>("/authors");
     return { authors, setAuthors, error, setError, isLoading };
 };
 

@@ -1,6 +1,5 @@
-import HttpService from "./http-service";
-import { Genre } from "./genre-service";
-import { Author } from "./author-service";
+import { Author } from "./author";
+import { Genre } from "./genre";
 
 export interface Book {
     _id: string;
@@ -31,5 +30,3 @@ export const bookSortFields: BookSort[] = [
     { name: "Rating", value: "-rating" },
     { name: "Year Published", value: "-yearPublished" },
 ];
-
-export default new HttpService<Book>("/books");

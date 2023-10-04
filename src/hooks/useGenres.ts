@@ -1,4 +1,4 @@
-import genreService, { Genre } from "../services/genre-service";
+import { Genre } from "../models/genre";
 import useData from "./generic/useData";
 
 const useGenres = () => {
@@ -8,7 +8,7 @@ const useGenres = () => {
         error,
         setError,
         isLoading,
-    } = useData<Genre>(genreService);
+    } = useData<Genre>("/genres");
     return { genres, setGenres, error, setError, isLoading };
 };
 

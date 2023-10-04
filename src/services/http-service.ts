@@ -42,7 +42,7 @@ class HttpService {
     }
 
     update<T1, T2>(entity: T1, id: string) {
-        return apiClient.put<T2>(`${this.endpoint}/${id}`, entity);
+        return apiClient.patch<T2>(`${this.endpoint}/${id}`, entity);
     }
 }
 

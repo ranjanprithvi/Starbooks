@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import { CanceledError } from "../../services/api-client";
 import HttpService, { Entity } from "../../services/http-service";
 
-function useDataItem<T extends Entity>(
-    dataService: HttpService,
-    id: string,
-    resetItems?: any,
-    reset?: any
-) {
+function useDataItem<T extends Entity>(path: string, id: string, reset?: any) {
     const [data, setData] = useState<T>({} as T);
     const [error, setError] = useState<string>("");
     const [isLoading, setLoading] = useState<boolean>(false);
@@ -16,6 +11,7 @@ function useDataItem<T extends Entity>(
         () => {
             setLoading(true);
 
+            const dataService = new HttpService(path);
             const { request, cancel } = dataService.get<T>(id);
 
             request
@@ -24,7 +20,7 @@ function useDataItem<T extends Entity>(
                     setLoading(false);
                     setError("");
 
-                    resetItems && resetItems(res.data);
+                    reset && reset(res.data);
                 })
                 .catch((err) => {
                     if (err instanceof CanceledError) return;

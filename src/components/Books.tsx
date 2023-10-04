@@ -1,14 +1,25 @@
-import { Box, Button, GridItem, HStack, Show } from "@chakra-ui/react";
+import {
+    Box,
+    Button,
+    GridItem,
+    HStack,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuList,
+    Show,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import GenreList from "./GenreList";
 import Searchbar from "./Searchbar";
 import AuthorSelector from "./AuthorSelector";
 import SortSelector from "./SortSelector";
 import BookGrid from "./BookGrid";
-import { BookSort, bookSortFields } from "../services/book-service";
-import { Genre } from "../services/genre-service";
-import { Author } from "../services/author-service";
 import { Link } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
+import { Author } from "../models/author";
+import { BookSort, bookSortFields } from "../models/book";
+import { Genre } from "../models/genre";
 
 const Books = () => {
     const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
@@ -27,11 +38,30 @@ const Books = () => {
                 </GridItem>
             </Show>
             <GridItem area="main">
-                <HStack margin={5}>
+                <HStack margin={5} justifyContent="space-between">
                     <Searchbar setSearch={setSearch} />
-                    <Link to="/books/new">
-                        <Button colorScheme="green">Add Book</Button>
-                    </Link>
+                    <Menu colorScheme="green">
+                        <MenuButton
+                            as={Button}
+                            colorScheme="green"
+                            leftIcon={<FaPlus></FaPlus>}
+                            paddingRight="7"
+                            // rightIcon={<BsChevronDown />}
+                        >
+                            Add
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem as={Link} to="/books/new">
+                                New Book
+                            </MenuItem>
+                            <MenuItem as={Link} to="/authors/new">
+                                New Author
+                            </MenuItem>
+                            <MenuItem as={Link} to="/genres/new">
+                                New Genre
+                            </MenuItem>
+                        </MenuList>
+                    </Menu>
                 </HStack>
                 <HStack justifyContent="space-between">
                     <AuthorSelector

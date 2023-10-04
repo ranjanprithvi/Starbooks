@@ -1,6 +1,6 @@
 import { Box, GridItem, useToast } from "@chakra-ui/react";
 import Form, { Field, Option } from "./common/Form";
-import { z } from "zod";
+import { string, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAuthors from "../hooks/useAuthors";
 import useGenres from "../hooks/useGenres";
@@ -8,17 +8,18 @@ import useBook from "../hooks/useBook";
 import { useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
 import { useForm } from "react-hook-form";
-import bookService, { Book } from "../services/book-service";
+import { Book } from "../models/book";
+import HttpService from "../services/http-service";
 
 const schema = z.object({
     title: z
         .string({ invalid_type_error: "Title is required" })
         .nonempty({ message: "Title is required" })
         .min(3, { message: "Title must be at least 3 characters long" }),
-    authorId: z
+    author: z
         .string({ invalid_type_error: "Author is required" })
         .nonempty({ message: "Author is required" }),
-    genreId: z
+    genre: z
         .string({ invalid_type_error: "Genre is required" })
         .nonempty({ message: "Genre is required" }),
     yearPublished: z
@@ -81,20 +82,9 @@ const BookForm = () => {
         // defaultValues: values,
     });
 
-    function resetData(data: Book) {
-        let bookData = {
-            ..._.omit(data, ["author", "genre"]),
-            authorId: data.author?._id,
-            genreId: data.genre?._id,
-        };
-        console.log(bookData);
-
-        reset(bookData);
-    }
-
     const { authors } = useAuthors();
     const { genres } = useGenres();
-    const { book, error } = useBook(id, resetData, reset);
+    const { book, error } = useBook(id, reset);
 
     // if (!error) {
     //     values = {
@@ -108,38 +98,35 @@ const BookForm = () => {
 
     const onSubmit = (data: BookData) => {
         console.log(data);
-        if (id == "new")
-            bookService
-                .add<BookData, Book>(data)
-                .then((book) => {
-                    navigate("/bookDetails/" + book.data._id, {
-                        replace: true,
-                    });
-                })
-                .catch((err) => {
-                    toast({
-                        title: "Error",
-                        description: err.response.data,
-                        status: "error",
-                        duration: 5000,
-                        isClosable: true,
-                    });
+        let bookService = new HttpService("/books");
+
+        let promise: Promise<{ data: Book }>;
+        if (id == "new") {
+            data = _.omitBy(data, (value) => !value) as BookData;
+            promise = bookService.add<BookData, Book>(data);
+        } else {
+            Number.isNaN(data.rating) && (data.rating = 0);
+            Number.isNaN(data.numberInStock) && (data.numberInStock = 0);
+
+            console.log(data);
+            promise = bookService.update<BookData, Book>(data, id);
+        }
+
+        promise
+            .then((res) => {
+                navigate("/bookDetails/" + res.data._id, {
+                    replace: true,
                 });
-        else
-            bookService
-                .update<BookData, Book>(data, id)
-                .then((book) => {
-                    navigate("/bookDetails/" + id, { replace: true });
-                })
-                .catch((err) => {
-                    toast({
-                        title: "Error",
-                        description: err.response.data,
-                        status: "error",
-                        duration: 5000,
-                        isClosable: true,
-                    });
+            })
+            .catch((err) => {
+                toast({
+                    title: "Error",
+                    description: err.response.data,
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
                 });
+            });
     };
 
     const fields: Field<BookData>[] = [
@@ -147,7 +134,7 @@ const BookForm = () => {
         {
             type: "select",
             label: "Author",
-            name: "authorId",
+            name: "author",
             options: authors.map(
                 (author) =>
                     ({ value: author._id, label: author.name } as Option)
@@ -157,7 +144,7 @@ const BookForm = () => {
         {
             type: "select",
             label: "Genre",
-            name: "genreId",
+            name: "genre",
             options: genres.map(
                 (genre) => ({ value: genre._id, label: genre.name } as Option)
             ),

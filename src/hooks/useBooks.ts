@@ -1,5 +1,4 @@
-import bookService, { Book, BookQuery } from "../services/book-service";
-import HttpService from "../services/http-service";
+import { Book, BookQuery } from "../models/book";
 import useData from "./generic/useData";
 
 const useBooks = (query?: BookQuery, deps?: any[]) => {
@@ -9,7 +8,7 @@ const useBooks = (query?: BookQuery, deps?: any[]) => {
         error,
         setError,
         isLoading,
-    } = useData<Book>(bookService, query, deps);
+    } = useData<Book>("/books", query, deps);
     return { books, setBooks, error, setError, isLoading };
 };
 
