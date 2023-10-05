@@ -25,11 +25,10 @@ const NavBar = () => {
     return (
         <HStack justifyContent="space-between" padding="5">
             <Link to="/books">
-                {colorMode == "dark" ? (
-                    <Image src={logoDark} height="10" />
-                ) : (
-                    <Image src={logo} height="10" />
-                )}
+                <Image
+                    src={colorMode == "dark" ? logoDark : logo}
+                    height="10"
+                />
             </Link>
             <HStack>
                 {navLinks.map((link) => (

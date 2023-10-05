@@ -17,7 +17,9 @@ import useBook from "../hooks/useBook";
 const BookDetails = () => {
     const { id } = useParams();
 
-    const { book, isLoading, error } = useBook(id);
+    const { book, isLoading, error } = useBook(id, {
+        populate: "author|genre",
+    });
 
     if (error) return <Text>Book Not Found!</Text>;
     return (

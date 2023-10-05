@@ -5,3 +5,9 @@ export interface User {
     membershipExpiry?: Date;
     isAdmin: boolean;
 }
+
+export interface UserQuery {
+    search?: string;
+    sortBy?: string;
+    populate?: string;
+}

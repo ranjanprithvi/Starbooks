@@ -8,6 +8,7 @@ import BookForm from "./components/BookForm";
 import NotFound from "./components/NotFound";
 import Rentals from "./components/Rentals";
 import Users from "./components/Users";
+import RentalForm from "./components/RentalForm";
 
 function App() {
     const textColor = useColorModeValue("gray.700", "white");
@@ -15,7 +16,8 @@ function App() {
         <Grid
             color={textColor}
             templateAreas={{
-                base: `"nav" "main"`,
+                base: `"nav" 
+                        "main"`,
                 lg: `"nav nav"         
                       "aside main"`,
             }}
@@ -33,6 +35,7 @@ function App() {
                 <Route path="books/:id" element={<BookForm />} />
                 <Route path="users" element={<Users />} />
                 <Route path="rentals" element={<Rentals />} />
+                <Route path="rentals/:id" element={<RentalForm />} />
                 <Route path="/not-found" element={<NotFound />} />
                 <Route
                     path="*"

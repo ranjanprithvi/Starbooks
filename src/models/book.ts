@@ -18,6 +18,7 @@ export interface BookQuery {
     genre?: string;
     search?: string;
     sortBy?: string;
+    populate?: string;
 }
 
 export interface BookSort {

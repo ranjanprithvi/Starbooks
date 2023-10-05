@@ -1,16 +1,26 @@
-import { Button, GridItem, useToast } from "@chakra-ui/react";
+import {
+    Button,
+    GridItem,
+    HStack,
+    Heading,
+    VStack,
+    useToast,
+} from "@chakra-ui/react";
 import Table from "./common/Table";
 import { Rental } from "../models/rental";
 import useRentals from "../hooks/useRentals";
 import _ from "lodash";
 import { Book } from "../models/book";
 import HttpService from "../services/http-service";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import moment from "moment";
+import { FaPlus } from "react-icons/fa";
 
 const Rentals = () => {
-    const { rentals, setRentals, error } = useRentals();
+    const { rentals, setRentals, isLoading, error } = useRentals();
     const toast = useToast();
     const navigate = useNavigate();
+    const screenSize = screenX;
 
     if (error) {
         console.log(error);
@@ -20,7 +30,6 @@ const Rentals = () => {
     const handleReturned = async (rental: Rental) => {
         let rentalService = new HttpService("/rentals/return");
 
-        let promise: Promise<{ data: Rental }>;
         rentalService
             .update<Rental, Rental>(rental, rental._id)
             .then((res) => {
@@ -37,14 +46,25 @@ const Rentals = () => {
             });
     };
     const rentalsData = rentals.map((rental) => ({
-        _id: { value: rental._id },
         book: { value: rental.book.title },
         user: { value: rental.user.name },
-        dateReturned: { value: rental.dateReturned?.toString() },
-        markReturned: {
+        // dateReturned: {
+        //     value: moment(rental.dateReturned).format("DD MMM YYYY"),
+        // },
+        _id: {
+            value: moment(
+                parseInt(rental._id.substring(0, 8), 16) * 1000
+            ).format("DD MMM YYYY"),
+        },
+        dateReturned: {
             renderComponent: function () {
-                return rental.dateReturned ? null : (
+                return rental.dateReturned ? (
+                    <div>
+                        {moment(rental.dateReturned).format("DD MMM YYYY")}
+                    </div>
+                ) : (
                     <Button
+                        size={"sm"}
                         colorScheme="red"
                         alignItems={"center"}
                         onClick={() => handleReturned(rental)}
@@ -56,17 +76,40 @@ const Rentals = () => {
         },
     }));
     return (
-        <GridItem colSpan={2} maxWidth="1240px" marginX="auto">
-            <Table
-                headers={[
-                    "Date Rented",
-                    "Book",
-                    "User",
-                    "Date Returned",
-                    "Return",
-                ]}
-                data={rentalsData}
-            ></Table>
+        <GridItem
+            colSpan={2}
+            maxWidth="1240px"
+            marginX="auto"
+            paddingX="5"
+            width="100%"
+        >
+            <VStack>
+                <Table
+                    headers={["Book", "User", "Date Out", "Returned"]}
+                    heading={{
+                        renderComponent: () => (
+                            <HStack
+                                justifyContent="space-between"
+                                width="100%"
+                                marginBottom={5}
+                            >
+                                <Heading>Rentals</Heading>
+                                <Button
+                                    as={Link}
+                                    to="/rentals/new"
+                                    leftIcon={<FaPlus />}
+                                    colorScheme="green"
+                                >
+                                    New Rental
+                                </Button>
+                            </HStack>
+                        ),
+                    }}
+                    data={rentalsData}
+                    fontSize="sm"
+                    isLoading={isLoading}
+                ></Table>
+            </VStack>
         </GridItem>
     );
 };

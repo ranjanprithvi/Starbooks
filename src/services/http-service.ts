@@ -23,11 +23,12 @@ class HttpService {
         };
     }
 
-    get<T extends Entity>(id: string) {
+    get<T extends Entity>(id: string, query?: Object) {
         const controller = new AbortController();
         return {
             request: apiClient.get<T>(`${this.endpoint}/${id}`, {
                 signal: controller.signal,
+                params: query,
             }),
             cancel: () => controller.abort(),
         };
