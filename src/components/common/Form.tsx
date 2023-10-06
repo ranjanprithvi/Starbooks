@@ -1,10 +1,4 @@
-import {
-    FieldValues,
-    Path,
-    UseFormHandleSubmit,
-    UseFormRegister,
-    FieldErrors,
-} from "react-hook-form";
+import { FieldValues, Path, useForm } from "react-hook-form";
 import {
     Button,
     FormControl,
@@ -22,7 +16,7 @@ import {
     Textarea,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { Entity } from "../../services/http-service";
+import { useEffect } from "react";
 
 export interface Option {
     value: string;
@@ -51,22 +45,35 @@ interface Props<T extends FieldValues> {
     fields: Field<T>[];
     heading: string;
     onSubmit: (data: T) => void;
-    handleSubmit: UseFormHandleSubmit<T>;
-    register: UseFormRegister<T>;
-    errors: FieldErrors<T>;
-    isValid: boolean;
+    resetObject?: T;
+    resetDependencies?: any[];
 }
 
 const Form = <T extends FieldValues>({
     fields,
     heading,
     onSubmit,
-    handleSubmit,
-    register,
-    errors,
-    isValid,
+    resolver,
+    resetObject,
+    resetDependencies,
 }: Props<T>) => {
     const navigate = useNavigate();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isValid },
+        reset,
+    } = useForm<T>({
+        resolver,
+    });
+
+    useEffect(
+        () => {
+            resetObject && reset(resetObject);
+        },
+        resetDependencies ? [...resetDependencies] : []
+    );
 
     function renderInput({ label, name, inputType, pattern }: Field<T>) {
         return (

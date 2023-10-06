@@ -69,32 +69,21 @@ const UserForm = () => {
 
     const resolver = zodResolver(schema);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isValid },
-        reset,
-    } = useForm<UserData>({
-        resolver,
-    });
-
     const { user, error } = useUser(id);
 
-    useEffect(() => {
-        reset({
-            name: user.name,
-            email: user.email,
-            countryCode: parseInt(user.countryCode),
-            phoneNumber: parseInt(user.phoneNumber),
-            dateOfBirth: moment(new Date(user.dateOfBirth || "")).format(
-                "YYYY-MM-DD"
-            ),
-            membershipExpiry: moment(
-                new Date(user.membershipExpiry || "")
-            ).format("YYYY-MM-DD"),
-            maxBorrow: user.maxBorrow,
-        });
-    }, [user]);
+    const resetObject = {
+        name: user.name,
+        email: user.email,
+        countryCode: parseInt(user.countryCode),
+        phoneNumber: parseInt(user.phoneNumber),
+        dateOfBirth: moment(new Date(user.dateOfBirth || "")).format(
+            "YYYY-MM-DD"
+        ),
+        membershipExpiry: moment(new Date(user.membershipExpiry || "")).format(
+            "YYYY-MM-DD"
+        ),
+        maxBorrow: user.maxBorrow,
+    };
 
     if (error && id != "new") navigate("/not-found");
 
@@ -195,10 +184,8 @@ const UserForm = () => {
                     fields={fields}
                     heading={id == "new" ? "New User" : "Edit User"}
                     onSubmit={onSubmit}
-                    handleSubmit={handleSubmit}
-                    register={register}
-                    errors={errors}
-                    isValid={isValid}
+                    resetObject={resetObject}
+                    resetDependencies={[user]}
                 />
             </Box>
         </GridItem>

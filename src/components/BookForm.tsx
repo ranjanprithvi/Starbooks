@@ -1,16 +1,14 @@
 import { Box, GridItem, useToast } from "@chakra-ui/react";
 import Form, { Field, Option } from "./common/Form";
-import { string, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAuthors from "../hooks/useAuthors";
 import useGenres from "../hooks/useGenres";
 import useBook from "../hooks/useBook";
 import { useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
-import { useForm } from "react-hook-form";
 import { Book } from "../models/book";
 import HttpService from "../services/http-service";
-import { useEffect } from "react";
 
 const schema = z.object({
     title: z
@@ -71,36 +69,22 @@ const BookForm = () => {
 
     const resolver = zodResolver(schema);
 
-    // let values;
-
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isValid },
-        reset,
-    } = useForm<BookData>({
-        resolver,
-        // defaultValues: values,
-    });
-
     const { authors } = useAuthors();
     const { genres } = useGenres();
     const { book, error } = useBook(id);
 
-    useEffect(() => {
-        reset({
-            ..._.pick(book, [
-                "title",
-                "yearPublished",
-                "rating",
-                "numberInStock",
-                "coverImage",
-                "description",
-            ]),
-            author: book.author?._id,
-            genre: book.genre?._id,
-        });
-    }, [book]);
+    const resetObject = {
+        ..._.pick(book, [
+            "title",
+            "yearPublished",
+            "rating",
+            "numberInStock",
+            "coverImage",
+            "description",
+        ]),
+        author: book.author?._id,
+        genre: book.genre?._id,
+    };
 
     // if (!error) {
     //     values = {
@@ -210,10 +194,8 @@ const BookForm = () => {
                     fields={fields}
                     heading={id === "new" ? "New Book" : "Edit Book"}
                     onSubmit={onSubmit}
-                    handleSubmit={handleSubmit}
-                    register={register}
-                    errors={errors}
-                    isValid={isValid}
+                    resetObject={resetObject}
+                    resetDependencies={[book]}
                 />
             </Box>
         </GridItem>
