@@ -85,7 +85,7 @@ const BookForm = () => {
 
     const { authors } = useAuthors();
     const { genres } = useGenres();
-    const { book, error } = useBook(id, {}, []);
+    const { book, error } = useBook(id);
 
     useEffect(() => {
         reset({

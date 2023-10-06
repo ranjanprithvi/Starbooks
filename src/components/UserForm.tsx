@@ -78,7 +78,7 @@ const UserForm = () => {
         resolver,
     });
 
-    const { user, error } = useUser(id, {});
+    const { user, error } = useUser(id);
 
     useEffect(() => {
         reset({
