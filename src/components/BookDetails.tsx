@@ -18,9 +18,7 @@ import { BsPencilSquare } from "react-icons/bs";
 const BookDetails = () => {
     const { id } = useParams();
 
-    const { book, isLoading, error } = useBook(id, {
-        populate: "author|genre",
-    });
+    const { book, isLoading, error } = useBook(id);
 
     if (error) return <Text>Book Not Found!</Text>;
     return (
@@ -34,8 +32,8 @@ const BookDetails = () => {
                 <Grid
                     width={"100%"}
                     templateRows={{
-                        base: "50px 4fr repeat(5,50px) 4fr",
-                        lg: "50px 4fr repeat(5,50px) 4fr",
+                        base: "50px 4fr repeat(5,50px) auto",
+                        lg: "50px 4fr repeat(5,50px) auto",
                     }}
                     templateColumns={{ base: "1fr", md: "1fr 1fr" }}
                     columnGap={{ base: 2, md: 8 }}

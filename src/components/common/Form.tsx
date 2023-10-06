@@ -40,6 +40,7 @@ export interface Field<T> {
     label: string;
     name: Path<T>;
     inputType?: string;
+    pattern?: string;
     options?: Option[];
     sliderMarks?: SliderMarks[];
     placeholder?: string;
@@ -67,7 +68,7 @@ const Form = <T extends FieldValues>({
 }: Props<T>) => {
     const navigate = useNavigate();
 
-    function renderInput({ label, name, inputType }: Field<T>) {
+    function renderInput({ label, name, inputType, pattern }: Field<T>) {
         return (
             <>
                 <FormLabel htmlFor={name}>{label}</FormLabel>
@@ -75,8 +76,10 @@ const Form = <T extends FieldValues>({
                     step="any"
                     id={name}
                     type={inputType}
+                    pattern={pattern}
                     {...register(name, {
-                        valueAsNumber: inputType == "number",
+                        valueAsNumber:
+                            inputType == "number" || inputType == "tel",
                     })}
                 />
             </>

@@ -10,6 +10,8 @@ import {
     Spinner,
     Text,
     Tooltip,
+    useColorMode,
+    useColorModeValue,
     useToast,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
@@ -22,6 +24,7 @@ import { AiOutlineRollback } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
 
 const UserDetails = () => {
+    const foreground = useColorModeValue("blue.800", "blue.100");
     const { id } = useParams();
     const toast = useToast();
 
@@ -65,8 +68,6 @@ const UserDetails = () => {
             },
         };
     });
-
-    console.log(tableData);
 
     return (
         <GridItem colSpan={2} marginBottom={5} maxWidth="1280px" marginX="auto">
@@ -193,6 +194,7 @@ const UserDetails = () => {
                     <GridItem marginTop={10} border="blue.100">
                         <HStack justifyContent="space-between">
                             <Heading size={"lg"}>Active Rentals</Heading>
+
                             <Tooltip
                                 label={
                                     user.activeRentals?.length >= user.maxBorrow
@@ -218,9 +220,8 @@ const UserDetails = () => {
                                         )
                                             event.preventDefault();
                                     }}
+                                    colorScheme="whatsapp"
                                     leftIcon={<FaPlus />}
-                                    color="blue.700"
-                                    backgroundColor="blue.100"
                                     isDisabled={
                                         user.activeRentals?.length >=
                                         user.maxBorrow
@@ -233,13 +234,15 @@ const UserDetails = () => {
                         </HStack>
                         <Divider marginY="2" />
 
-                        {tableData && (
+                        {tableData?.length > 0 ? (
                             <Table
                                 data={tableData}
                                 headers={["Book", "Date Out", "Returned"]}
                                 isLoading={isLoading}
                                 fontSize="sm"
                             ></Table>
+                        ) : (
+                            <Text>There are currently no active rentals</Text>
                         )}
                     </GridItem>
                 </Grid>

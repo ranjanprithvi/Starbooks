@@ -1,14 +1,14 @@
 import { Author } from "../models/author";
 import useData from "./generic/useData";
 
-const useAuthors = () => {
+const useAuthors = (deps?: any[]) => {
     const {
         data: authors,
         setData: setAuthors,
         error,
         setError,
         isLoading,
-    } = useData<Author>("/authors");
+    } = useData<Author>("/authors", {}, deps);
     return { authors, setAuthors, error, setError, isLoading };
 };
 
