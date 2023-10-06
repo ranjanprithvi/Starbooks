@@ -1,5 +1,6 @@
 import {
     Button,
+    Divider,
     GridItem,
     HStack,
     Heading,
@@ -10,68 +11,68 @@ import Table from "./common/Table";
 import { Rental } from "../models/rental";
 import useRentals from "../hooks/useRentals";
 import _ from "lodash";
-import { Book } from "../models/book";
 import HttpService from "../services/http-service";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import { FaPlus } from "react-icons/fa";
+import { AiOutlineRollback } from "react-icons/ai";
+
+export const handleReturned = async (rental: Rental, toast: any) => {
+    let rentalService = new HttpService("/rentals/return");
+
+    rentalService
+        .update<Rental, Rental>(rental, rental._id)
+        .then(() => {
+            window.location.reload();
+        })
+        .catch((err) => {
+            toast({
+                title: "Error",
+                description: err.response.data,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+            });
+        });
+};
 
 const Rentals = () => {
-    const { rentals, setRentals, isLoading, error } = useRentals();
+    const { rentals, isLoading, error } = useRentals();
     const toast = useToast();
-    const navigate = useNavigate();
-    const screenSize = screenX;
 
     if (error) {
         console.log(error);
         return null;
     }
 
-    const handleReturned = async (rental: Rental) => {
-        let rentalService = new HttpService("/rentals/return");
-
-        rentalService
-            .update<Rental, Rental>(rental, rental._id)
-            .then((res) => {
-                window.location.reload();
-            })
-            .catch((err) => {
-                toast({
-                    title: "Error",
-                    description: err.response.data,
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                });
-            });
-    };
     const rentalsData = rentals.map((rental) => ({
-        book: { value: rental.book.title },
-        user: { value: rental.user.name },
-        // dateReturned: {
-        //     value: moment(rental.dateReturned).format("DD MMM YYYY"),
-        // },
-        _id: {
-            value: moment(
-                parseInt(rental._id.substring(0, 8), 16) * 1000
-            ).format("DD MMM YYYY"),
-        },
-        dateReturned: {
-            renderComponent: function () {
-                return rental.dateReturned ? (
-                    <div>
-                        {moment(rental.dateReturned).format("DD MMM YYYY")}
-                    </div>
-                ) : (
-                    <Button
-                        size={"sm"}
-                        colorScheme="red"
-                        alignItems={"center"}
-                        onClick={() => handleReturned(rental)}
-                    >
-                        Mark as Returned
-                    </Button>
-                );
+        _id: rental._id,
+        rowData: {
+            book: { value: rental.book.title },
+            user: { value: rental.user.name },
+            dateOut: {
+                value: moment(
+                    parseInt(rental._id.substring(0, 8), 16) * 1000
+                ).format("DD MMM YYYY"),
+            },
+            dateReturned: {
+                renderComponent: function () {
+                    return rental.dateReturned ? (
+                        <div>
+                            {moment(rental.dateReturned).format("DD MMM YYYY")}
+                        </div>
+                    ) : (
+                        <Button
+                            leftIcon={<AiOutlineRollback />}
+                            colorScheme="red"
+                            size={"sm"}
+                            alignItems={"center"}
+                            onClick={() => handleReturned(rental, toast)}
+                        >
+                            Mark as Returned
+                        </Button>
+                    );
+                },
             },
         },
     }));
@@ -83,28 +84,32 @@ const Rentals = () => {
             paddingX="5"
             width="100%"
         >
-            <VStack>
+            <VStack
+                border="2px"
+                borderColor="gray.400"
+                borderRadius={20}
+                padding={10}
+                width="100%"
+            >
+                <HStack
+                    justifyContent="space-between"
+                    width="100%"
+                    paddingX="5"
+                    marginBottom={5}
+                >
+                    <Heading>Rentals</Heading>
+                    <Button
+                        as={Link}
+                        to="/rentals/new"
+                        leftIcon={<FaPlus />}
+                        colorScheme="green"
+                    >
+                        New Rental
+                    </Button>
+                </HStack>
+                <Divider />
                 <Table
                     headers={["Book", "User", "Date Out", "Returned"]}
-                    heading={{
-                        renderComponent: () => (
-                            <HStack
-                                justifyContent="space-between"
-                                width="100%"
-                                marginBottom={5}
-                            >
-                                <Heading>Rentals</Heading>
-                                <Button
-                                    as={Link}
-                                    to="/rentals/new"
-                                    leftIcon={<FaPlus />}
-                                    colorScheme="green"
-                                >
-                                    New Rental
-                                </Button>
-                            </HStack>
-                        ),
-                    }}
                     data={rentalsData}
                     fontSize="sm"
                     isLoading={isLoading}

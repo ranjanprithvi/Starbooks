@@ -2,14 +2,16 @@ import { Box, GridItem, useToast } from "@chakra-ui/react";
 import Form, { Field, Option } from "./common/Form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useRentals from "../hooks/useRentals";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
-import HttpService from "../services/http-service";
+import HttpService, { Entity } from "../services/http-service";
 import { Rental } from "../models/rental";
 import { useForm } from "react-hook-form";
 import useBooks from "../hooks/useBooks";
 import useUsers from "../hooks/useUsers";
+import { useEffect } from "react";
+import { Book } from "../models/book";
+import { User } from "../models/user";
 
 const schema = z.object({
     book: z
@@ -23,6 +25,9 @@ const schema = z.object({
 type RentalData = z.infer<typeof schema>;
 
 const RentalForm = () => {
+    const useQuery = () => new URLSearchParams(useLocation().search);
+    const query = useQuery();
+
     const navigate = useNavigate();
     const toast = useToast();
     const { id } = useParams();
@@ -41,7 +46,11 @@ const RentalForm = () => {
     });
 
     const { books } = useBooks();
-    const { users } = useUsers();
+    const { users } = useUsers({ isAdmin: false });
+
+    useEffect(() => {
+        reset({ user: query.get("user") || "", book: query.get("book") || "" });
+    }, [users, books]);
 
     if (id != "new") navigate("/not-found");
 
@@ -71,7 +80,12 @@ const RentalForm = () => {
             label: "Book",
             name: "book",
             options: books.map(
-                (book) => ({ value: book._id, label: book.title } as Option)
+                (book) =>
+                    ({
+                        value: book._id,
+                        label: book.title,
+                        disabled: book.numberInStock == 0,
+                    } as Option)
             ),
             placeholder: "--Select book--",
         },
@@ -80,7 +94,12 @@ const RentalForm = () => {
             label: "User",
             name: "user",
             options: users.map(
-                (user) => ({ value: user._id, label: user.name } as Option)
+                (user) =>
+                    ({
+                        value: user._id,
+                        label: user.name,
+                        disabled: user.activeRentals?.length >= user.maxBorrow,
+                    } as Option)
             ),
             placeholder: "--Select user--",
         },

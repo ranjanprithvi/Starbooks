@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import useBook from "../hooks/useBook";
+import { BsPencilSquare } from "react-icons/bs";
 
 const BookDetails = () => {
     const { id } = useParams();
@@ -33,11 +34,12 @@ const BookDetails = () => {
                 <Grid
                     width={"100%"}
                     templateRows={{
-                        base: "50px 200px repeat(5,50px) 4fr",
-                        lg: "50px 200px repeat(5,50px) 4fr",
+                        base: "50px 4fr repeat(5,50px) 4fr",
+                        lg: "50px 4fr repeat(5,50px) 4fr",
                     }}
                     templateColumns={{ base: "1fr", md: "1fr 1fr" }}
-                    columnGap={{ base: 0, md: 8 }}
+                    columnGap={{ base: 2, md: 8 }}
+                    rowGap={{ base: 2, md: 0 }}
                     padding={10}
                 >
                     <GridItem rowSpan={7}>
@@ -65,7 +67,11 @@ const BookDetails = () => {
                             height="100%"
                         >
                             <Link to={`/books/${id}`}>
-                                <Button colorScheme="facebook" marginTop={5}>
+                                <Button
+                                    leftIcon={<BsPencilSquare />}
+                                    colorScheme="facebook"
+                                    marginTop={5}
+                                >
                                     Edit
                                 </Button>
                             </Link>
@@ -83,8 +89,9 @@ const BookDetails = () => {
                         <Divider />
                         <Flex
                             justifyContent="space-between"
-                            alignItems="center"
                             height="100%"
+                            alignItems={{ base: "start", md: "center" }}
+                            flexDirection={{ base: "column", md: "row" }}
                         >
                             <Text fontWeight="bold">Author: </Text>{" "}
                             <Text>{book.author?.name}</Text>
@@ -94,8 +101,9 @@ const BookDetails = () => {
                         <Divider />
                         <Flex
                             justifyContent="space-between"
-                            alignItems="center"
                             height="100%"
+                            alignItems={{ base: "start", md: "center" }}
+                            flexDirection={{ base: "column", md: "row" }}
                         >
                             <Text fontWeight="bold">Year Published: </Text>{" "}
                             <Text>{book.yearPublished}</Text>
@@ -105,8 +113,9 @@ const BookDetails = () => {
                         <Divider />
                         <Flex
                             justifyContent="space-between"
-                            alignItems="center"
                             height="100%"
+                            alignItems={{ base: "start", md: "center" }}
+                            flexDirection={{ base: "column", md: "row" }}
                         >
                             <Text fontWeight="bold">Genre: </Text>{" "}
                             <Text>{book.genre?.name}</Text>
@@ -116,8 +125,9 @@ const BookDetails = () => {
                         <Divider />
                         <Flex
                             justifyContent="space-between"
-                            alignItems="center"
                             height="100%"
+                            alignItems={{ base: "start", md: "center" }}
+                            flexDirection={{ base: "column", md: "row" }}
                         >
                             <Text fontWeight="bold">Availability: </Text>{" "}
                             {book.numberInStock > 0 ? (
@@ -139,8 +149,9 @@ const BookDetails = () => {
                         <Divider />
                         <Flex
                             justifyContent="space-between"
-                            alignItems="center"
                             height="100%"
+                            alignItems={{ base: "start", md: "center" }}
+                            flexDirection={{ base: "column", md: "row" }}
                         >
                             <Text fontWeight="bold">Rating: </Text>{" "}
                             <Text>{book.rating}</Text>

@@ -9,6 +9,8 @@ import NotFound from "./components/NotFound";
 import Rentals from "./components/Rentals";
 import Users from "./components/Users";
 import RentalForm from "./components/RentalForm";
+import UserDetails from "./components/UserDetails";
+import UserForm from "./components/UserForm";
 
 function App() {
     const textColor = useColorModeValue("gray.700", "white");
@@ -34,6 +36,8 @@ function App() {
                 <Route path="bookDetails/:id" element={<BookDetails />} />
                 <Route path="books/:id" element={<BookForm />} />
                 <Route path="users" element={<Users />} />
+                <Route path="userDetails/:id" element={<UserDetails />} />
+                <Route path="users/:id" element={<UserForm />} />
                 <Route path="rentals" element={<Rentals />} />
                 <Route path="rentals/:id" element={<RentalForm />} />
                 <Route path="/not-found" element={<NotFound />} />

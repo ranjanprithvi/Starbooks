@@ -97,7 +97,6 @@ const BookForm = () => {
     if (error && id != "new") navigate("/not-found");
 
     const onSubmit = (data: BookData) => {
-        console.log(data);
         let bookService = new HttpService("/books");
 
         let promise: Promise<{ data: Book }>;
@@ -108,7 +107,6 @@ const BookForm = () => {
             Number.isNaN(data.rating) && (data.rating = 0);
             Number.isNaN(data.numberInStock) && (data.numberInStock = 0);
 
-            console.log(data);
             promise = bookService.update<BookData, Book>(data, id);
         }
 

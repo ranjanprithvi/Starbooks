@@ -7,15 +7,12 @@ import {
     Th,
     Tbody,
     Td,
-    Tfoot,
-    Button,
     VStack,
     Spinner,
     Divider,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
-import { Entity } from "../../services/http-service";
-import { head } from "lodash";
+import _ from "lodash";
 
 export interface TableRowData {
     value?: string | number | boolean;
@@ -23,27 +20,19 @@ export interface TableRowData {
 }
 
 interface Props {
-    data: Record<string, TableRowData>[];
-    heading?: TableRowData;
+    data: {
+        _id: string;
+        rowData: { [key: string]: TableRowData };
+    }[];
     headers: string[];
     fontSize?: string;
     isLoading?: boolean;
 }
 
-const Table = ({ heading, data, headers, isLoading, ...rest }: Props) => {
+const Table = ({ data, headers, isLoading, ...rest }: Props) => {
     return (
-        <TableContainer
-            border="2px"
-            borderColor="gray.400"
-            borderRadius={20}
-            padding={10}
-            width="100%"
-            {...rest}
-        >
+        <TableContainer width="100%">
             <VStack>
-                {heading?.value && <TableCaption>{heading.value}</TableCaption>}
-                {heading?.renderComponent && heading.renderComponent()}
-                <Divider />
                 {isLoading ? (
                     <Spinner />
                 ) : (
@@ -57,19 +46,22 @@ const Table = ({ heading, data, headers, isLoading, ...rest }: Props) => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {data.map((row) => {
-                                console.log(row);
+                            {data.map((rowObject) => {
                                 return (
-                                    <Tr key={row._id.value?.toString()}>
-                                        {Object.keys(row).map((key) => (
-                                            <Td key={key}>
-                                                {row[key].value
-                                                    ? row[key].value
-                                                    : row[
-                                                          key
-                                                      ].renderComponent?.()}
-                                            </Td>
-                                        ))}
+                                    <Tr key={rowObject._id}>
+                                        {Object.keys(rowObject.rowData).map(
+                                            (key) => (
+                                                <Td key={key}>
+                                                    {rowObject.rowData[key]
+                                                        .value
+                                                        ? rowObject.rowData[key]
+                                                              .value
+                                                        : rowObject.rowData[
+                                                              key
+                                                          ].renderComponent?.()}
+                                                </Td>
+                                            )
+                                        )}
                                     </Tr>
                                 );
                             })}

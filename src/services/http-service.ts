@@ -3,6 +3,7 @@ import apiClient from "./api-client";
 
 export interface Entity {
     _id: string;
+    [key: string]: any | undefined;
 }
 
 class HttpService {

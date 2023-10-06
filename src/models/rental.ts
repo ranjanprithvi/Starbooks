@@ -7,3 +7,9 @@ export interface Rental {
     user: User;
     dateReturned?: Date;
 }
+
+export interface RentalQuery {
+    search?: string;
+    sortBy?: string;
+    populate?: string;
+}

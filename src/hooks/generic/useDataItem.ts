@@ -24,7 +24,7 @@ function useDataItem<T extends Entity>(
                     setLoading(false);
                     setError("");
 
-                    
+                    console.log(res.data);
 
                     reset ? reset(res.data) : setData(res.data);
                 })

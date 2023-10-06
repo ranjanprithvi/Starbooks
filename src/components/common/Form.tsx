@@ -22,10 +22,12 @@ import {
     Textarea,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { Entity } from "../../services/http-service";
 
 export interface Option {
     value: string;
     label: string;
+    disabled?: boolean;
 }
 
 interface SliderMarks {
@@ -112,7 +114,11 @@ const Form = <T extends FieldValues>({
                 <FormLabel htmlFor={name}>{label}</FormLabel>
                 <Select placeholder={placeholder} {...register(name)}>
                     {options?.map((option) => (
-                        <option key={option.value} value={option.value}>
+                        <option
+                            key={option.value}
+                            value={option.value}
+                            disabled={option.disabled}
+                        >
                             {option.label}
                         </option>
                     ))}
