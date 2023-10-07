@@ -9,7 +9,7 @@ import {
     MenuList,
     Show,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import GenreList from "./GenreList";
 import Searchbar from "./Searchbar";
 import AuthorSelector from "./AuthorSelector";
@@ -20,12 +20,15 @@ import { FaPlus } from "react-icons/fa";
 import { Author } from "../models/author";
 import { BookSort, bookSortFields } from "../models/book";
 import { Genre } from "../models/genre";
+import { LoginContext } from "../contexts/loginContext";
 
 const Books = () => {
     const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
     const [selectedAuthor, setSelectedAuthor] = useState<Author | null>(null);
     const [search, setSearch] = useState<string>("");
     const [sortBy, setSortBy] = useState<BookSort>(bookSortFields[0]);
+
+    const { isLoggedIn, isAdmin } = useContext(LoginContext);
 
     return (
         <>
@@ -40,28 +43,30 @@ const Books = () => {
             <GridItem area="main">
                 <HStack margin={5} justifyContent="space-between">
                     <Searchbar setSearch={setSearch} />
-                    <Menu colorScheme="green">
-                        <MenuButton
-                            as={Button}
-                            colorScheme="green"
-                            leftIcon={<FaPlus></FaPlus>}
-                            paddingRight="7"
-                            // rightIcon={<BsChevronDown />}
-                        >
-                            Add
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem as={Link} to="/books/new">
-                                New Book
-                            </MenuItem>
-                            <MenuItem as={Link} to="/authors/new">
-                                New Author
-                            </MenuItem>
-                            <MenuItem as={Link} to="/genres/new">
-                                New Genre
-                            </MenuItem>
-                        </MenuList>
-                    </Menu>
+                    {isLoggedIn && isAdmin && (
+                        <Menu colorScheme="green">
+                            <MenuButton
+                                as={Button}
+                                colorScheme="green"
+                                leftIcon={<FaPlus></FaPlus>}
+                                paddingRight="7"
+                                // rightIcon={<BsChevronDown />}
+                            >
+                                Add
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem as={Link} to="/books/new">
+                                    New Book
+                                </MenuItem>
+                                <MenuItem as={Link} to="/authors/new">
+                                    New Author
+                                </MenuItem>
+                                <MenuItem as={Link} to="/genres/new">
+                                    New Genre
+                                </MenuItem>
+                            </MenuList>
+                        </Menu>
+                    )}
                 </HStack>
                 <HStack justifyContent="space-between">
                     <AuthorSelector

@@ -102,12 +102,12 @@ const BookForm = () => {
         let promise: Promise<{ data: Book }>;
         if (id == "new") {
             data = _.omitBy(data, (value) => !value) as BookData;
-            promise = bookService.add<BookData, Book>(data);
+            promise = bookService.post<BookData, Book>(data);
         } else {
             Number.isNaN(data.rating) && (data.rating = 0);
             Number.isNaN(data.numberInStock) && (data.numberInStock = 0);
 
-            promise = bookService.update<BookData, Book>(data, id);
+            promise = bookService.patch<BookData, Book>(data, id);
         }
 
         promise

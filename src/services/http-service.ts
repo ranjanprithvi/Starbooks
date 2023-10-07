@@ -39,11 +39,11 @@ class HttpService {
         return apiClient.delete(`${this.endpoint}/${id}`);
     }
 
-    add<T1, T2>(entity: T1) {
+    post<T1, T2>(entity: T1) {
         return apiClient.post<T2>(this.endpoint, entity);
     }
 
-    update<T1, T2>(entity: T1, id: string) {
+    patch<T1, T2>(entity: T1, id: string) {
         return apiClient.patch<T2>(`${this.endpoint}/${id}`, entity);
     }
 }

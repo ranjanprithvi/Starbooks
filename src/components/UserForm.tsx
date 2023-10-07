@@ -1,14 +1,12 @@
 import { Box, GridItem, useToast } from "@chakra-ui/react";
-import Form, { Field, Option } from "./common/Form";
+import Form, { Field } from "./common/Form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
 import HttpService from "../services/http-service";
 import { User } from "../models/user";
-import { useForm } from "react-hook-form";
 import useUser from "../hooks/useUser";
-import { useEffect } from "react";
 import moment from "moment";
 
 const schemaObject = {
@@ -100,13 +98,13 @@ const UserForm = () => {
             data = _.omitBy(data, (value) => {
                 return !value || value === "Invalid date";
             }) as UserData;
-            promise = userService.add<UserDTO, User>(dataDTO);
+            promise = userService.post<UserDTO, User>(dataDTO);
         } else {
             data = _.omitBy(
                 data,
                 (value) => value === "Invalid date"
             ) as UserData;
-            promise = userService.update<UserDTO, User>(dataDTO, id);
+            promise = userService.patch<UserDTO, User>(dataDTO, id);
         }
 
         promise

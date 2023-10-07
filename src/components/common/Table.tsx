@@ -19,11 +19,13 @@ export interface TableRowData {
     renderComponent?: () => ReactNode;
 }
 
+export interface TableData {
+    _id: string;
+    rowData: { [key: string]: TableRowData | undefined };
+}
+
 interface Props {
-    data: {
-        _id: string;
-        rowData: { [key: string]: TableRowData };
-    }[];
+    data: TableData[];
     headers: string[];
     fontSize?: string;
     isLoading?: boolean;
@@ -53,12 +55,12 @@ const Table = ({ data, headers, isLoading, ...rest }: Props) => {
                                             (key) => (
                                                 <Td key={key}>
                                                     {rowObject.rowData[key]
-                                                        .value
+                                                        ?.value
                                                         ? rowObject.rowData[key]
-                                                              .value
+                                                              ?.value
                                                         : rowObject.rowData[
                                                               key
-                                                          ].renderComponent?.()}
+                                                          ]?.renderComponent?.()}
                                                 </Td>
                                             )
                                         )}

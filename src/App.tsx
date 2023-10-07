@@ -11,42 +11,105 @@ import Users from "./components/Users";
 import RentalForm from "./components/RentalForm";
 import UserDetails from "./components/UserDetails";
 import UserForm from "./components/UserForm";
+import { useState } from "react";
+import { LoginContext } from "./contexts/loginContext";
+import LoginForm from "./components/LoginForm";
+import ProtectedAdminComponent from "./components/common/ProtectedAdminComponent";
+import ProtectedComponent from "./components/common/ProtectedComponent";
 
 function App() {
     const textColor = useColorModeValue("gray.700", "white");
+    const [isLoggedIn, setLoggedIn] = useState(
+        localStorage.getItem("token") !== null
+    );
+    const [isAdmin, setAdmin] = useState(
+        localStorage.getItem("isAdmin") == "true"
+    );
+
     return (
-        <Grid
-            color={textColor}
-            templateAreas={{
-                base: `"nav" 
-                        "main"`,
-                lg: `"nav nav"         
-                      "aside main"`,
-            }}
-            templateColumns={{
-                base: "1fr",
-                lg: "200px 1fr",
+        <LoginContext.Provider
+            value={{
+                isLoggedIn,
+                setLoggedIn: setLoggedIn,
+                isAdmin,
+                setAdmin: setAdmin,
             }}
         >
-            <GridItem area="nav">
-                <NavBar />
-            </GridItem>
-            <Routes>
-                <Route path="/books" element={<Books />} />
-                <Route path="bookDetails/:id" element={<BookDetails />} />
-                <Route path="books/:id" element={<BookForm />} />
-                <Route path="users" element={<Users />} />
-                <Route path="userDetails/:id" element={<UserDetails />} />
-                <Route path="users/:id" element={<UserForm />} />
-                <Route path="rentals" element={<Rentals />} />
-                <Route path="rentals/:id" element={<RentalForm />} />
-                <Route path="/not-found" element={<NotFound />} />
-                <Route
-                    path="*"
-                    element={<Navigate to="/not-found" replace />}
-                />
+            <Grid
+                color={textColor}
+                templateAreas={{
+                    base: `"nav" 
+                        "main"`,
+                    lg: `"nav nav"         
+                      "aside main"`,
+                }}
+                templateColumns={{
+                    base: "1fr",
+                    lg: "200px 1fr",
+                }}
+            >
+                <GridItem area="nav">
+                    <NavBar />
+                </GridItem>
+                <Routes>
+                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="/books" element={<Books />} />
+                    <Route path="bookDetails/:id" element={<BookDetails />} />
+                    <Route
+                        path="books/:id"
+                        element={
+                            <ProtectedAdminComponent>
+                                <BookForm />
+                            </ProtectedAdminComponent>
+                        }
+                    />
+                    <Route
+                        path="users"
+                        element={
+                            <ProtectedAdminComponent>
+                                <Users />
+                            </ProtectedAdminComponent>
+                        }
+                    />
+                    <Route
+                        path="userDetails/:id"
+                        element={
+                            <ProtectedComponent>
+                                <UserDetails />
+                            </ProtectedComponent>
+                        }
+                    />
+                    <Route
+                        path="users/:id"
+                        element={
+                            <ProtectedAdminComponent>
+                                <UserForm />
+                            </ProtectedAdminComponent>
+                        }
+                    />
+                    <Route
+                        path="rentals"
+                        element={
+                            <ProtectedAdminComponent>
+                                <Rentals />
+                            </ProtectedAdminComponent>
+                        }
+                    />
+                    <Route
+                        path="rentals/:id"
+                        element={
+                            <ProtectedAdminComponent>
+                                <RentalForm />
+                            </ProtectedAdminComponent>
+                        }
+                    />
+                    <Route path="/not-found" element={<NotFound />} />
+                    <Route
+                        path="*"
+                        element={<Navigate to="/not-found" replace />}
+                    />
 
-                {/* User Routes
+                    {/* User Routes
                     <Route path="records/:id" element={<RecordForm />} />
 
                     <Route path="appointments" element={<Appointments />} />
@@ -64,8 +127,8 @@ function App() {
                     element={<HospitalDashboard />}
                 > */}
 
-                {/* Hospital Routes */}
-                {/* <Route
+                    {/* Hospital Routes */}
+                    {/* <Route
                         path="hospitalappointments"
                         element={<HospitalAppointments />}
                     />
@@ -85,8 +148,9 @@ function App() {
                     path="*"
                     element={<Navigate to="/not-found" replace />}
                 /> */}
-            </Routes>
-        </Grid>
+                </Routes>
+            </Grid>
+        </LoginContext.Provider>
     );
 }
 

@@ -10,63 +10,109 @@ import {
     Spinner,
     Text,
     Tooltip,
-    useColorMode,
-    useColorModeValue,
+    useDisclosure,
     useToast,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import useUser from "../hooks/useUser";
 import moment from "moment";
-import Table from "./common/Table";
+import Table, { TableData } from "./common/Table";
 import { handleReturned } from "./Rentals";
 import { FaPlus } from "react-icons/fa";
 import { AiOutlineRollback } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
+import { ReactNode, useContext, useState } from "react";
+import { LoginContext } from "../contexts/loginContext";
+import Modal from "./Modal";
+import { Rental } from "../models/rental";
 
 const UserDetails = () => {
-    const foreground = useColorModeValue("blue.800", "blue.100");
     const { id } = useParams();
     const toast = useToast();
+    const { isAdmin } = useContext(LoginContext);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [rentalToReturn, setRentalToReturn] = useState<Rental>({} as Rental);
 
     const { user, isLoading, error } = useUser(id);
 
     if (error) return <Text>User Not Found!</Text>;
     if (isLoading) return <Spinner />;
 
-    console.log(user);
-    const tableData = user?.activeRentals?.map((rental) => {
-        return {
-            _id: rental._id,
-            rowData: {
-                book: { value: rental.book?.title },
-                dateOut: {
-                    value: moment(
-                        parseInt(rental._id.substring(0, 8), 16) * 1000
-                    ).format("DD MMM YYYY"),
-                },
-                dateReturned: {
-                    renderComponent: function () {
-                        return rental.dateReturned ? (
-                            <div>
-                                {moment(rental.dateReturned).format(
-                                    "DD MMM YYYY"
-                                )}
-                            </div>
-                        ) : (
-                            <Button
-                                leftIcon={<AiOutlineRollback />}
-                                colorScheme="red"
-                                size={"sm"}
-                                alignItems={"center"}
-                                onClick={() => handleReturned(rental, toast)}
-                            >
-                                Mark as Returned
-                            </Button>
-                        );
-                    },
-                },
-            },
-        };
+    const tableData: TableData[] = user?.activeRentals?.map((rental) => {
+        return isAdmin
+            ? {
+                  _id: rental._id,
+                  rowData: {
+                      book: { value: rental.book?.title },
+                      dateOut: {
+                          value: moment(
+                              parseInt(rental._id.substring(0, 8), 16) * 1000
+                          ).format("DD MMM YYYY"),
+                      },
+                      dateReturned: {
+                          renderComponent: function () {
+                              return rental.dateReturned ? (
+                                  <div>
+                                      {moment(rental.dateReturned).format(
+                                          "DD MMM YYYY"
+                                      )}
+                                  </div>
+                              ) : (
+                                  <>
+                                      <Button
+                                          leftIcon={<AiOutlineRollback />}
+                                          colorScheme="red"
+                                          size={"sm"}
+                                          alignItems={"center"}
+                                          onClick={() => {
+                                              setRentalToReturn(rental);
+                                              onOpen();
+                                          }}
+                                      >
+                                          Mark as Returned
+                                      </Button>
+                                      <Modal
+                                          header="Return"
+                                          body="Are you sure you want to mark the book as returned?"
+                                          onClose={onClose}
+                                          isOpen={isOpen}
+                                          renderFooter={() => (
+                                              <>
+                                                  <Button
+                                                      colorScheme="blue"
+                                                      mr="3"
+                                                      onClick={() =>
+                                                          handleReturned(
+                                                              rentalToReturn,
+                                                              toast
+                                                          )
+                                                      }
+                                                  >
+                                                      Yes
+                                                  </Button>
+                                                  <Button onClick={onClose}>
+                                                      Cancel
+                                                  </Button>
+                                              </>
+                                          )}
+                                      ></Modal>
+                                  </>
+                              );
+                          },
+                      },
+                  },
+              }
+            : {
+                  _id: rental._id,
+                  rowData: {
+                      book: { value: rental.book?.title },
+                      dateOut: {
+                          value: moment(
+                              parseInt(rental._id.substring(0, 8), 16) * 1000
+                          ).format("DD MMM YYYY"),
+                      },
+                  },
+              };
     });
 
     return (
@@ -95,15 +141,17 @@ const UserDetails = () => {
                                 <Heading size="2xl">{user.name}</Heading>
                             </Flex>
 
-                            <Link to={`/users/${id}`}>
+                            {isAdmin && (
                                 <Button
+                                    as={Link}
+                                    to={`/users/${id}`}
                                     leftIcon={<BsPencilSquare />}
                                     colorScheme="facebook"
                                     marginTop={5}
                                 >
                                     Edit
                                 </Button>
-                            </Link>
+                            )}
                         </Flex>
                     </GridItem>
 
@@ -195,49 +243,52 @@ const UserDetails = () => {
                         <HStack justifyContent="space-between">
                             <Heading size={"lg"}>Active Rentals</Heading>
 
-                            <Tooltip
-                                label={
-                                    user.activeRentals?.length >= user.maxBorrow
-                                        ? "Max Borrow Limit Reached"
-                                        : ""
-                                }
-                            >
-                                {/* <Link
+                            {isAdmin && (
+                                <Tooltip
+                                    label={
+                                        user.activeRentals?.length >=
+                                        user.maxBorrow
+                                            ? "Max Borrow Limit Reached"
+                                            : ""
+                                    }
+                                >
+                                    {/* <Link
                                     to={`/rentals/new?user=${user._id}`}
                                     isDisabled={
                                         user.activeRentals?.length >=
                                         user.maxBorrow
                                     }
                                 > */}
-                                <Button
-                                    size="sm"
-                                    as={Link}
-                                    to={`/rentals/new?user=${user._id}`}
-                                    onClick={(event) => {
-                                        if (
+                                    <Button
+                                        size="sm"
+                                        as={Link}
+                                        to={`/rentals/new?user=${user._id}`}
+                                        onClick={(event) => {
+                                            if (
+                                                user.activeRentals?.length >=
+                                                user.maxBorrow
+                                            )
+                                                event.preventDefault();
+                                        }}
+                                        colorScheme="whatsapp"
+                                        leftIcon={<FaPlus />}
+                                        isDisabled={
                                             user.activeRentals?.length >=
                                             user.maxBorrow
-                                        )
-                                            event.preventDefault();
-                                    }}
-                                    colorScheme="whatsapp"
-                                    leftIcon={<FaPlus />}
-                                    isDisabled={
-                                        user.activeRentals?.length >=
-                                        user.maxBorrow
-                                    }
-                                >
-                                    New Rental
-                                </Button>
-                                {/* </Link> */}
-                            </Tooltip>
+                                        }
+                                    >
+                                        New Rental
+                                    </Button>
+                                    {/* </Link> */}
+                                </Tooltip>
+                            )}
                         </HStack>
                         <Divider marginY="2" />
 
                         {tableData?.length > 0 ? (
                             <Table
                                 data={tableData}
-                                headers={["Book", "Date Out", "Returned"]}
+                                headers={["Book", "Date Out"]}
                                 isLoading={isLoading}
                                 fontSize="sm"
                             ></Table>

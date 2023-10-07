@@ -4,14 +4,10 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
-import HttpService, { Entity } from "../services/http-service";
+import HttpService from "../services/http-service";
 import { Rental } from "../models/rental";
-import { useForm } from "react-hook-form";
 import useBooks from "../hooks/useBooks";
 import useUsers from "../hooks/useUsers";
-import { useEffect } from "react";
-import { Book } from "../models/book";
-import { User } from "../models/user";
 
 const schema = z.object({
     book: z
@@ -35,29 +31,22 @@ const RentalForm = () => {
 
     const resolver = zodResolver(schema);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors, isValid },
-        reset,
-    } = useForm<RentalData>({
-        resolver,
-        // defaultValues: values,
-    });
-
     const { books } = useBooks();
     const { users } = useUsers({ isAdmin: false });
 
-    useEffect(() => {
-        reset({ user: query.get("user") || "", book: query.get("book") || "" });
-    }, [users, books]);
+    const resetObject = {
+        user: query.get("user") || "",
+        book: query.get("book") || "",
+    };
+
+    const resetDependencies = [users, books];
 
     if (id != "new") navigate("/not-found");
 
     const onSubmit = (data: RentalData) => {
         let rentalService = new HttpService("/rentals");
         rentalService
-            .add<RentalData, Rental>(data)
+            .post<RentalData, Rental>(data)
             .then((res) => {
                 navigate("/rentals", {
                     replace: true,
@@ -120,10 +109,8 @@ const RentalForm = () => {
                     fields={fields}
                     heading={"New Rental"}
                     onSubmit={onSubmit}
-                    handleSubmit={handleSubmit}
-                    register={register}
-                    errors={errors}
-                    isValid={isValid}
+                    resetObject={resetObject}
+                    resetDependencies={resetDependencies}
                 />
             </Box>
         </GridItem>

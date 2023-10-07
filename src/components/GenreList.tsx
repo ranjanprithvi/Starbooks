@@ -6,7 +6,7 @@ import {
     Text,
     Button,
 } from "@chakra-ui/react";
-import { genreIcons } from "./genreIcons";
+import { getGenreIcon } from "./genreIcons";
 import useGenres from "../hooks/useGenres";
 import { Genre } from "../models/genre";
 
@@ -49,7 +49,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                                 onClick={() => onSelectGenre(genre)}
                             >
                                 <HStack>
-                                    {genreIcons[genre.name]}
+                                    {getGenreIcon(genre.name)}
                                     <Text>{genre.name}</Text>
                                 </HStack>
                             </Button>

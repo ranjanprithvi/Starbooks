@@ -14,6 +14,7 @@ import {
     SliderThumb,
     SliderTrack,
     Textarea,
+    VStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -187,26 +188,28 @@ const Form = <T extends FieldValues>({
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Heading marginBottom="3">{heading}</Heading>
-            {fields.map((field) => (
-                <FormControl
-                    key={field.name}
-                    marginBottom={3}
-                    isInvalid={errors[field.name] ? true : false}
-                >
-                    {renderField(field)}
-                </FormControl>
-            ))}
+            <VStack>
+                <Heading marginBottom="5">{heading}</Heading>
+                {fields.map((field) => (
+                    <FormControl
+                        key={field.name}
+                        marginBottom={3}
+                        isInvalid={errors[field.name] ? true : false}
+                    >
+                        {renderField(field)}
+                    </FormControl>
+                ))}
 
-            <HStack justifyContent="flex-end">
-                {/* <Button isDisabled={!isValid} colorScheme="green" type="submit"> */}
-                <Button colorScheme="green" type="submit">
-                    Submit
-                </Button>
-                <Button onClick={() => navigate(-1)} colorScheme="gray">
-                    Cancel
-                </Button>
-            </HStack>
+                <HStack justifyContent="flex-end">
+                    {/* <Button isDisabled={!isValid} colorScheme="green" type="submit"> */}
+                    <Button colorScheme="green" type="submit">
+                        Submit
+                    </Button>
+                    <Button onClick={() => navigate(-1)} colorScheme="gray">
+                        Cancel
+                    </Button>
+                </HStack>
+            </VStack>
         </form>
     );
 };

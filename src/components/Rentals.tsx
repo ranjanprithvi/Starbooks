@@ -5,6 +5,7 @@ import {
     HStack,
     Heading,
     VStack,
+    useDisclosure,
     useToast,
 } from "@chakra-ui/react";
 import Table from "./common/Table";
@@ -16,12 +17,14 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import { FaPlus } from "react-icons/fa";
 import { AiOutlineRollback } from "react-icons/ai";
+import { useState } from "react";
+import Modal from "./Modal";
 
 export const handleReturned = async (rental: Rental, toast: any) => {
     let rentalService = new HttpService("/rentals/return");
 
     rentalService
-        .update<Rental, Rental>(rental, rental._id)
+        .patch<Rental, Rental>(rental, rental._id)
         .then(() => {
             window.location.reload();
         })
@@ -39,6 +42,8 @@ export const handleReturned = async (rental: Rental, toast: any) => {
 const Rentals = () => {
     const { rentals, isLoading, error } = useRentals();
     const toast = useToast();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [rentalToReturn, setRentalToReturn] = useState<Rental>({} as Rental);
 
     if (error) {
         console.log(error);
@@ -62,15 +67,45 @@ const Rentals = () => {
                             {moment(rental.dateReturned).format("DD MMM YYYY")}
                         </div>
                     ) : (
-                        <Button
-                            leftIcon={<AiOutlineRollback />}
-                            colorScheme="red"
-                            size={"sm"}
-                            alignItems={"center"}
-                            onClick={() => handleReturned(rental, toast)}
-                        >
-                            Mark as Returned
-                        </Button>
+                        <>
+                            <Button
+                                leftIcon={<AiOutlineRollback />}
+                                colorScheme="red"
+                                size={"sm"}
+                                alignItems={"center"}
+                                onClick={() => {
+                                    setRentalToReturn(rental);
+                                    onOpen();
+                                }}
+                            >
+                                Mark as Returned
+                            </Button>
+                            <Modal
+                                header="Return"
+                                body="Are you sure you want to mark the book as returned?"
+                                onClose={onClose}
+                                isOpen={isOpen}
+                                renderFooter={() => (
+                                    <>
+                                        <Button
+                                            colorScheme="blue"
+                                            mr="3"
+                                            onClick={() =>
+                                                handleReturned(
+                                                    rentalToReturn,
+                                                    toast
+                                                )
+                                            }
+                                        >
+                                            Yes
+                                        </Button>
+                                        <Button onClick={onClose}>
+                                            Cancel
+                                        </Button>
+                                    </>
+                                )}
+                            ></Modal>
+                        </>
                     );
                 },
             },

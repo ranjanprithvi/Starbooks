@@ -14,9 +14,12 @@ import {
 import { Link, useParams } from "react-router-dom";
 import useBook from "../hooks/useBook";
 import { BsPencilSquare } from "react-icons/bs";
+import { useContext } from "react";
+import { LoginContext } from "../contexts/loginContext";
 
 const BookDetails = () => {
     const { id } = useParams();
+    const { isLoggedIn, isAdmin } = useContext(LoginContext);
 
     const { book, isLoading, error } = useBook(id);
 
@@ -64,15 +67,18 @@ const BookDetails = () => {
                             alignItems="center"
                             height="100%"
                         >
-                            <Link to={`/books/${id}`}>
-                                <Button
-                                    leftIcon={<BsPencilSquare />}
-                                    colorScheme="facebook"
-                                    marginTop={5}
-                                >
-                                    Edit
-                                </Button>
-                            </Link>
+                            {" "}
+                            {isLoggedIn && isAdmin && (
+                                <Link to={`/books/${id}`}>
+                                    <Button
+                                        leftIcon={<BsPencilSquare />}
+                                        colorScheme="facebook"
+                                        marginTop={5}
+                                    >
+                                        Edit
+                                    </Button>
+                                </Link>
+                            )}
                         </Flex>
                     </GridItem>
 

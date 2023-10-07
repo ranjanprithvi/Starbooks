@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { IconType } from "react-icons";
 import { BsFilePerson } from "react-icons/bs";
-import { FaChild } from "react-icons/fa";
+import { FaChild, FaGlobe } from "react-icons/fa";
 import { RiChatSmile3Fill } from "react-icons/ri";
 import { FaCoins } from "react-icons/fa";
 import { GiSeaDragon } from "react-icons/gi";
@@ -12,7 +12,7 @@ import { PiDetectiveFill } from "react-icons/pi";
 import { PiBrainThin } from "react-icons/pi";
 import { RiKnifeBloodLine } from "react-icons/ri";
 
-export const genreIcons: { [key: string]: ReactNode } = {
+const genreIcons: { [key: string]: ReactNode } = {
     Autobiography: <BsFilePerson />,
     Children: <FaChild />,
     Comedy: <RiChatSmile3Fill />,
@@ -25,4 +25,8 @@ export const genreIcons: { [key: string]: ReactNode } = {
     Mystery: <PiDetectiveFill />,
     "Non-Fiction": <PiBrainThin />,
     Thriller: <RiKnifeBloodLine />,
+};
+
+export const getGenreIcon = (genre: string) => {
+    return genreIcons[genre] || <FaGlobe />;
 };
