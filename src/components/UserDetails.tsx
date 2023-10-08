@@ -23,7 +23,7 @@ import { AiOutlineRollback } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
 import { ReactNode, useContext, useState } from "react";
 import { LoginContext } from "../contexts/loginContext";
-import Modal from "./Modal";
+import Modal from "./common/Modal";
 import { Rental } from "../models/rental";
 
 const UserDetails = () => {
@@ -61,7 +61,7 @@ const UserDetails = () => {
                                   <>
                                       <Button
                                           leftIcon={<AiOutlineRollback />}
-                                          colorScheme="red"
+                                          colorScheme="teal"
                                           size={"sm"}
                                           alignItems={"center"}
                                           onClick={() => {
@@ -71,31 +71,6 @@ const UserDetails = () => {
                                       >
                                           Mark as Returned
                                       </Button>
-                                      <Modal
-                                          header="Return"
-                                          body="Are you sure you want to mark the book as returned?"
-                                          onClose={onClose}
-                                          isOpen={isOpen}
-                                          renderFooter={() => (
-                                              <>
-                                                  <Button
-                                                      colorScheme="blue"
-                                                      mr="3"
-                                                      onClick={() =>
-                                                          handleReturned(
-                                                              rentalToReturn,
-                                                              toast
-                                                          )
-                                                      }
-                                                  >
-                                                      Yes
-                                                  </Button>
-                                                  <Button onClick={onClose}>
-                                                      Cancel
-                                                  </Button>
-                                              </>
-                                          )}
-                                      ></Modal>
                                   </>
                               );
                           },
@@ -117,6 +92,26 @@ const UserDetails = () => {
 
     return (
         <GridItem colSpan={2} marginBottom={5} maxWidth="1280px" marginX="auto">
+            <Modal
+                header="Return"
+                body="Are you sure you want to mark the book as returned?"
+                onClose={onClose}
+                isOpen={isOpen}
+                renderFooter={() => (
+                    <>
+                        <Button
+                            colorScheme="teal"
+                            mr="3"
+                            onClick={() =>
+                                handleReturned(rentalToReturn, toast)
+                            }
+                        >
+                            Yes
+                        </Button>
+                        <Button onClick={onClose}>Cancel</Button>
+                    </>
+                )}
+            ></Modal>
             <Box
                 marginX={"5"}
                 borderColor={"blue.800"}
@@ -233,7 +228,7 @@ const UserDetails = () => {
                             alignItems={{ base: "start", md: "center" }}
                             flexDirection={{ base: "column", md: "row" }}
                         >
-                            <Text fontWeight="bold">Max Borrow: </Text>{" "}
+                            <Text fontWeight="bold">Book Limit: </Text>{" "}
                             <Text>{user.maxBorrow}</Text>
                         </Flex>
                     </GridItem>
@@ -248,7 +243,7 @@ const UserDetails = () => {
                                     label={
                                         user.activeRentals?.length >=
                                         user.maxBorrow
-                                            ? "Max Borrow Limit Reached"
+                                            ? "Book Limit Reached"
                                             : ""
                                     }
                                 >
@@ -270,7 +265,7 @@ const UserDetails = () => {
                                             )
                                                 event.preventDefault();
                                         }}
-                                        colorScheme="whatsapp"
+                                        colorScheme="green"
                                         leftIcon={<FaPlus />}
                                         isDisabled={
                                             user.activeRentals?.length >=
@@ -288,7 +283,7 @@ const UserDetails = () => {
                         {tableData?.length > 0 ? (
                             <Table
                                 data={tableData}
-                                headers={["Book", "Date Out"]}
+                                headers={["Book", "Date Out", ""]}
                                 isLoading={isLoading}
                                 fontSize="sm"
                             ></Table>

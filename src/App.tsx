@@ -16,6 +16,7 @@ import { LoginContext } from "./contexts/loginContext";
 import LoginForm from "./components/LoginForm";
 import ProtectedAdminComponent from "./components/common/ProtectedAdminComponent";
 import ProtectedComponent from "./components/common/ProtectedComponent";
+import AuthorGenreList from "./components/AuthorGenreList";
 
 function App() {
     const textColor = useColorModeValue("gray.700", "white");
@@ -48,9 +49,10 @@ function App() {
                     lg: "200px 1fr",
                 }}
             >
-                <GridItem area="nav">
+                <GridItem area="nav" marginBottom="5">
                     <NavBar />
                 </GridItem>
+
                 <Routes>
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/books" element={<Books />} />
@@ -102,6 +104,10 @@ function App() {
                                 <RentalForm />
                             </ProtectedAdminComponent>
                         }
+                    />
+                    <Route
+                        path="/authorGenreList"
+                        element={<AuthorGenreList />}
                     />
                     <Route path="/not-found" element={<NotFound />} />
                     <Route

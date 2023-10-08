@@ -161,7 +161,7 @@ const UserForm = () => {
         },
         {
             type: "textInput",
-            label: "Max Borrow",
+            label: "Book Limit",
             name: "maxBorrow",
             inputType: "number",
         },

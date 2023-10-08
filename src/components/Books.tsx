@@ -41,7 +41,11 @@ const Books = () => {
                 </GridItem>
             </Show>
             <GridItem area="main">
-                <HStack margin={5} justifyContent="space-between">
+                <HStack
+                    marginX={5}
+                    justifyContent="space-between"
+                    marginBottom={5}
+                >
                     <Searchbar setSearch={setSearch} />
                     {isLoggedIn && isAdmin && (
                         <Menu colorScheme="green">
@@ -58,12 +62,12 @@ const Books = () => {
                                 <MenuItem as={Link} to="/books/new">
                                     New Book
                                 </MenuItem>
-                                <MenuItem as={Link} to="/authors/new">
-                                    New Author
+                                <MenuItem as={Link} to="/authorGenreList">
+                                    Author/Genre
                                 </MenuItem>
-                                <MenuItem as={Link} to="/genres/new">
+                                {/* <MenuItem as={Link} to="/genres/new">
                                     New Genre
-                                </MenuItem>
+                                </MenuItem> */}
                             </MenuList>
                         </Menu>
                     )}

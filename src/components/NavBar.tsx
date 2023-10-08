@@ -10,6 +10,7 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
+    useDisclosure,
 } from "@chakra-ui/react";
 import logo from "../assets/Logo.png";
 import logoDark from "../assets/Logo-dark.png";
@@ -21,26 +22,18 @@ import { TbLogout } from "react-icons/tb";
 import { BsChevronDown } from "react-icons/bs";
 import { BiSolidUserCircle } from "react-icons/bi";
 import { FaUser } from "react-icons/fa";
+import { handleReturned } from "./Rentals";
+import Modal from "./common/Modal";
 
 interface NavItem {
     label: string;
     path: string;
 }
 
-const logout = (
-    setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
-    setAdmin: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("isAdmin");
-    setLoggedIn(false);
-    setAdmin(false);
-    window.location.assign("/books");
-};
-
 const NavBar = () => {
     const { pathname } = useLocation();
-    const { colorMode } = useColorMode();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     const { isLoggedIn, setLoggedIn, isAdmin, setAdmin } =
         useContext(LoginContext);
 
@@ -54,13 +47,40 @@ const NavBar = () => {
             );
     }
 
+    const logout = (
+        setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
+        setAdmin: React.Dispatch<React.SetStateAction<boolean>>
+    ) => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("isAdmin");
+        setLoggedIn(false);
+        setAdmin(false);
+    };
+
     return (
         <HStack justifyContent="space-between" padding="5">
+            <Modal
+                header="Logout"
+                body="Are you sure you want to logout?"
+                onClose={onClose}
+                isOpen={isOpen}
+                renderFooter={() => (
+                    <>
+                        <Button
+                            colorScheme="teal"
+                            onClick={() => {
+                                logout(setLoggedIn, setAdmin);
+                                window.location.assign("/books");
+                            }}
+                        >
+                            Yes
+                        </Button>
+                        <Button onClick={onClose}>Cancel</Button>
+                    </>
+                )}
+            />
             <Link to="/books">
-                <Image
-                    src={colorMode == "dark" ? logoDark : logo}
-                    height="10"
-                />
+                <Image src={logo} height="14" marginY="-5" />
             </Link>
             <HStack>
                 {navLinks.map((link) => (
@@ -93,10 +113,7 @@ const NavBar = () => {
                                     Overview
                                 </MenuItem>
                             )}
-                            <MenuItem
-                                icon={<TbLogout />}
-                                onClick={() => logout(setLoggedIn, setAdmin)}
-                            >
+                            <MenuItem icon={<TbLogout />} onClick={onOpen}>
                                 Logout
                             </MenuItem>
                         </MenuList>

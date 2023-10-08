@@ -5,11 +5,12 @@ import { BsSearch } from "react-icons/bs";
 
 interface Props {
     setSearch: (search: string) => void;
+    [key: string]: any;
 }
 
-const Searchbar = ({ setSearch }: Props) => {
+const Searchbar = ({ setSearch, ...rest }: Props) => {
     return (
-        <InputGroup borderRadius={5} size="sm">
+        <InputGroup borderRadius={5} size="sm" {...rest}>
             <InputLeftElement
                 pointerEvents="none"
                 children={<BsSearch color="gray.600" />}

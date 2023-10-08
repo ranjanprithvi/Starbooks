@@ -18,7 +18,7 @@ import moment from "moment";
 import { FaPlus } from "react-icons/fa";
 import { AiOutlineRollback } from "react-icons/ai";
 import { useState } from "react";
-import Modal from "./Modal";
+import Modal from "./common/Modal";
 
 export const handleReturned = async (rental: Rental, toast: any) => {
     let rentalService = new HttpService("/rentals/return");
@@ -70,7 +70,7 @@ const Rentals = () => {
                         <>
                             <Button
                                 leftIcon={<AiOutlineRollback />}
-                                colorScheme="red"
+                                colorScheme="teal"
                                 size={"sm"}
                                 alignItems={"center"}
                                 onClick={() => {
@@ -80,31 +80,6 @@ const Rentals = () => {
                             >
                                 Mark as Returned
                             </Button>
-                            <Modal
-                                header="Return"
-                                body="Are you sure you want to mark the book as returned?"
-                                onClose={onClose}
-                                isOpen={isOpen}
-                                renderFooter={() => (
-                                    <>
-                                        <Button
-                                            colorScheme="blue"
-                                            mr="3"
-                                            onClick={() =>
-                                                handleReturned(
-                                                    rentalToReturn,
-                                                    toast
-                                                )
-                                            }
-                                        >
-                                            Yes
-                                        </Button>
-                                        <Button onClick={onClose}>
-                                            Cancel
-                                        </Button>
-                                    </>
-                                )}
-                            ></Modal>
                         </>
                     );
                 },
@@ -119,6 +94,26 @@ const Rentals = () => {
             paddingX="5"
             width="100%"
         >
+            <Modal
+                header="Return"
+                body="Are you sure you want to mark the book as returned?"
+                onClose={onClose}
+                isOpen={isOpen}
+                renderFooter={() => (
+                    <>
+                        <Button
+                            colorScheme="teal"
+                            mr="3"
+                            onClick={() =>
+                                handleReturned(rentalToReturn, toast)
+                            }
+                        >
+                            Yes
+                        </Button>
+                        <Button onClick={onClose}>Cancel</Button>
+                    </>
+                )}
+            />
             <VStack
                 border="2px"
                 borderColor="gray.400"
