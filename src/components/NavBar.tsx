@@ -1,10 +1,8 @@
 import {
-    Box,
     Button,
     HStack,
     Image,
     LinkBox,
-    useColorMode,
     Link as ChakraLink,
     Menu,
     MenuButton,
@@ -13,7 +11,6 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 import logo from "../assets/Logo.png";
-import logoDark from "../assets/Logo-dark.png";
 import ColourModeSwitch from "./ColourModeSwitch";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
@@ -22,7 +19,6 @@ import { TbLogout } from "react-icons/tb";
 import { BsChevronDown } from "react-icons/bs";
 import { BiSolidUserCircle } from "react-icons/bi";
 import { FaUser } from "react-icons/fa";
-import { handleReturned } from "./Rentals";
 import Modal from "./common/Modal";
 
 interface NavItem {
@@ -38,14 +34,15 @@ const NavBar = () => {
         useContext(LoginContext);
 
     let navLinks = [] as NavItem[];
-    if (isLoggedIn) {
-        navLinks = [{ label: "Books", path: "/books" }];
-        if (isAdmin)
-            navLinks.push(
-                { label: "Users", path: "/users" },
-                { label: "Rentals", path: "/rentals" }
-            );
-    }
+    navLinks = [
+        { label: "Home", path: "/" },
+        { label: "Books", path: "/books" },
+    ];
+    if (isLoggedIn && isAdmin)
+        navLinks.push(
+            { label: "Users", path: "/users" },
+            { label: "Rentals", path: "/rentals" }
+        );
 
     const logout = (
         setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
@@ -68,6 +65,7 @@ const NavBar = () => {
                     <>
                         <Button
                             colorScheme="teal"
+                            mr={3}
                             onClick={() => {
                                 logout(setLoggedIn, setAdmin);
                                 window.location.assign("/books");
@@ -79,7 +77,7 @@ const NavBar = () => {
                     </>
                 )}
             />
-            <Link to="/books">
+            <Link to="/">
                 <Image src={logo} height="14" marginY="-5" />
             </Link>
             <HStack>
@@ -110,7 +108,7 @@ const NavBar = () => {
                                     to={"/userDetails/me"}
                                     icon={<FaUser />}
                                 >
-                                    Overview
+                                    My Profile
                                 </MenuItem>
                             )}
                             <MenuItem icon={<TbLogout />} onClick={onOpen}>

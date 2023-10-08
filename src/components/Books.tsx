@@ -3,6 +3,7 @@ import {
     Button,
     GridItem,
     HStack,
+    Input,
     Menu,
     MenuButton,
     MenuItem,
@@ -36,7 +37,10 @@ const Books = () => {
                 <GridItem area="aside" paddingX="5">
                     <GenreList
                         selectedGenre={selectedGenre}
-                        onSelectGenre={(genre) => setSelectedGenre(genre)}
+                        onSelectGenre={(genre) => {
+                            setSelectedGenre(genre);
+                            setSelectedAuthor(null);
+                        }}
                     />
                 </GridItem>
             </Show>
@@ -75,7 +79,12 @@ const Books = () => {
                 <HStack justifyContent="space-between">
                     <AuthorSelector
                         selectedAuthor={selectedAuthor}
-                        onSelectAuthor={setSelectedAuthor}
+                        onSelectAuthor={(e: Author) => {
+                            console.log(e);
+
+                            setSelectedAuthor(e);
+                            setSelectedGenre(null);
+                        }}
                     ></AuthorSelector>
                     <SortSelector
                         sortField={sortBy}

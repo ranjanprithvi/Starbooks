@@ -17,6 +17,7 @@ import LoginForm from "./components/LoginForm";
 import ProtectedAdminComponent from "./components/common/ProtectedAdminComponent";
 import ProtectedComponent from "./components/common/ProtectedComponent";
 import AuthorGenreList from "./components/AuthorGenreList";
+import Home from "./components/Home";
 
 function App() {
     const textColor = useColorModeValue("gray.700", "white");
@@ -54,6 +55,7 @@ function App() {
                 </GridItem>
 
                 <Routes>
+                    <Route path="/" element={<Home />} />
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/books" element={<Books />} />
                     <Route path="bookDetails/:id" element={<BookDetails />} />

@@ -1,13 +1,9 @@
-import React from "react";
-import useData from "../hooks/generic/useData";
-import HttpService from "../services/http-service";
-import bookService, { Book, BookQuery } from "../services/book-service";
-import { SimpleGrid, filter } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import BookCard from "./BookCard";
 import BookCardSkeleton from "./BookCardSkeleton";
-import { Genre } from "../services/genre-service";
 import useBooks from "../hooks/useBooks";
 import { Link } from "react-router-dom";
+import { BookQuery } from "../models/book";
 
 interface Props {
     queryObject: BookQuery;
