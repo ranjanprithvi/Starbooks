@@ -5,7 +5,7 @@ export default axios.create({
         // key:"value"
     },
     headers: { "x-auth-token": localStorage.getItem("token") },
-    baseURL: "http://localhost:3000/api",
+    baseURL: "https://starbooks-backend.onrender.com/api",
 });
 
 export { CanceledError };
