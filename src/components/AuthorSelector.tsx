@@ -5,11 +5,10 @@ import {
     MenuButton,
     MenuItem,
     MenuList,
-    StepSeparator,
 } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import useAuthors from "../hooks/useAuthors";
-import { Author } from "../services/author-service";
+import { Author } from "../models/author";
 
 interface Props {
     selectedAuthor: Author | null;
@@ -26,7 +25,7 @@ const AuthorSelector = ({ selectedAuthor, onSelectAuthor }: Props) => {
                 {" "}
                 {selectedAuthor ? selectedAuthor.name : "All Authors"}
             </MenuButton>
-            <MenuList>
+            <MenuList height="50vh" overflow="scroll">
                 <MenuItem onClick={() => onSelectAuthor(null)}>
                     All Authors
                 </MenuItem>

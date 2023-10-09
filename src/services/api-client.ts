@@ -5,7 +5,7 @@ export default axios.create({
         // key:"value"
     },
     headers: { "x-auth-token": localStorage.getItem("token") },
-    baseURL: "https://starbooks-backend.onrender.com/api",
+    baseURL: import.meta.env.VITE_BACKEND_URL,
 });
 
 export { CanceledError };

@@ -79,10 +79,10 @@ const Books = () => {
                 <HStack justifyContent="space-between">
                     <AuthorSelector
                         selectedAuthor={selectedAuthor}
-                        onSelectAuthor={(e: Author) => {
-                            console.log(e);
+                        onSelectAuthor={(author: Author | null) => {
+                            console.log(author);
 
-                            setSelectedAuthor(e);
+                            setSelectedAuthor(author);
                             setSelectedGenre(null);
                         }}
                     ></AuthorSelector>

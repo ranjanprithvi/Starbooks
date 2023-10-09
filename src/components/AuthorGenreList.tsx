@@ -1,6 +1,7 @@
 import useGenres from "../hooks/useGenres";
 import useAuthors from "../hooks/useAuthors";
 import {
+    Box,
     Button,
     GridItem,
     HStack,
@@ -35,11 +36,30 @@ const AuthorGenreList = () => {
         },
     ];
 
-    const onAdd = (listName: string, value: string = "") => {
+    const handleAdd = (listName: string, value: string = "") => {
         const service = new HttpService(`/${listName}s`);
 
         service
             .post({ name: value })
+            .then(() => {
+                window.location.reload();
+            })
+            .catch((err) => {
+                toast({
+                    title: "Error",
+                    description: err.response.data,
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                });
+            });
+    };
+
+    const handleDelete = (listName: string, id: string = "") => {
+        const service = new HttpService(`/${listName}s`);
+
+        service
+            .delete(id)
             .then(() => {
                 window.location.reload();
             })
@@ -80,8 +100,18 @@ const AuthorGenreList = () => {
                                     key={item._id}
                                     border="1px"
                                     borderColor="gray.50"
+                                    display="flex"
+                                    justifyContent="space-between"
                                 >
-                                    {item.name}
+                                    <Box>{item.name}</Box>
+                                    <Button
+                                        size="sm"
+                                        onClick={() =>
+                                            handleDelete(list.name, item._id)
+                                        }
+                                    >
+                                        -
+                                    </Button>
                                 </ListItem>
                             ))}
                         </List>
@@ -98,7 +128,7 @@ const AuthorGenreList = () => {
                                         ? (list.inputRef
                                               .current as HTMLInputElement)
                                         : null;
-                                    onAdd(list.name, textBox?.value);
+                                    handleAdd(list.name, textBox?.value);
                                 }}
                             >
                                 Add {list.name}

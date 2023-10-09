@@ -3,7 +3,7 @@ import { Navigate, Route } from "react-router-dom";
 import { LoginContext } from "../../contexts/loginContext";
 
 interface Props {
-    children: ReactNode;
+    children: JSX.Element;
 }
 
 const ProtectedComponent = ({ children }: Props) => {
