@@ -7,8 +7,8 @@ import {
     Button,
 } from "@chakra-ui/react";
 import { getGenreIcon } from "./genreIcons";
-import useGenres from "../hooks/useGenres";
-import { Genre } from "../models/genre";
+import useGenres from "../../hooks/useGenres";
+import { Genre } from "../../models/genre";
 
 interface Props {
     selectedGenre: Genre | null;

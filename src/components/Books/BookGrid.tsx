@@ -1,9 +1,9 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import BookCard from "./BookCard";
 import BookCardSkeleton from "./BookCardSkeleton";
-import useBooks from "../hooks/useBooks";
+import useBooks from "../../hooks/useBooks";
 import { Link } from "react-router-dom";
-import { BookQuery } from "../models/book";
+import { BookQuery } from "../../models/book";
 
 interface Props {
     queryObject: BookQuery;

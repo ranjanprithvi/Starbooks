@@ -8,17 +8,17 @@ import {
     useDisclosure,
     useToast,
 } from "@chakra-ui/react";
-import Table from "./common/Table";
-import { Rental } from "../models/rental";
-import useRentals from "../hooks/useRentals";
+import Table from "../common/Table";
+import { Rental } from "../../models/rental";
+import useRentals from "../../hooks/useRentals";
 import _ from "lodash";
-import HttpService from "../services/http-service";
+import HttpService from "../../services/http-service";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { FaPlus } from "react-icons/fa";
 import { AiOutlineRollback } from "react-icons/ai";
 import { useState } from "react";
-import Modal from "./common/Modal";
+import Modal from "../common/Modal";
 
 export const handleReturned = async (rental: Rental, toast: any) => {
     let rentalService = new HttpService("/rentals/return");

@@ -1,6 +1,6 @@
 import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
 import Rating from "./Rating";
-import { Book } from "../models/book";
+import { Book } from "../../models/book";
 
 interface Props {
     book: Book;

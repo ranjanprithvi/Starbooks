@@ -1,3 +1,4 @@
+import { Sort } from "../components/common/SortSelector";
 import { Author } from "./author";
 import { Genre } from "./genre";
 
@@ -21,11 +22,7 @@ export interface BookQuery {
     populate?: string;
 }
 
-export interface BookSort {
-    [key: string]: string;
-}
-
-export const bookSortFields: BookSort[] = [
+export const bookSortFields: Sort[] = [
     { name: "Date Added", value: "-_id" },
     { name: "Title", value: "title" },
     { name: "Rating", value: "-rating" },

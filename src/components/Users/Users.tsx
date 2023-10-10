@@ -1,5 +1,4 @@
 import {
-    Box,
     Button,
     Divider,
     GridItem,
@@ -10,23 +9,28 @@ import {
     MenuItem,
     MenuList,
     VStack,
+    useBreakpointValue,
     useDisclosure,
     useToast,
+    Text,
 } from "@chakra-ui/react";
-import Table from "./common/Table";
-import useUsers from "../hooks/useUsers";
+import Table from "../common/Table";
+import useUsers from "../../hooks/useUsers";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { FaEye, FaPlus, FaUser } from "react-icons/fa";
-import { BsChevronDown, BsEye } from "react-icons/bs";
-import { User } from "../models/user";
-import { TbTrash } from "react-icons/tb";
+import { BsChevronDown } from "react-icons/bs";
+import { User } from "../../models/user";
 import { useState } from "react";
-import { Rental } from "../models/rental";
-import Modal from "./common/Modal";
+import Modal from "../common/Modal";
+import Accordion, { AccordianRowData } from "../common/Accordion";
 
-const Users = () => {
+interface Props {
+    dataView?: string;
+}
+
+const Users = ({ dataView }: Props) => {
     const { users, isLoading, error } = useUsers({ isAdmin: false });
     const toast = useToast();
 
@@ -157,12 +161,63 @@ const Users = () => {
                 </HStack>
                 <Divider />
 
-                <Table
-                    headers={["Name", "Email", "Membership Expiry", ""]}
-                    data={usersData}
-                    fontSize="sm"
-                    isLoading={isLoading}
-                ></Table>
+                {dataView === "table" && (
+                    <Table
+                        headers={["Name", "Email", "Membership Expiry", ""]}
+                        data={usersData}
+                        fontSize="sm"
+                        isLoading={isLoading}
+                    ></Table>
+                )}
+                {dataView === "accordian" && (
+                    <Accordion
+                        width="100%"
+                        border="1px"
+                        borderColor="gray.100"
+                        data={users.map<AccordianRowData>((user) => ({
+                            mainContent: user.name,
+                            subContent: (
+                                <VStack alignItems="start">
+                                    <Text fontWeight={"bold"}>Email:</Text>
+                                    <Text>{user.email}</Text>
+                                    <Text fontWeight={"bold"}>
+                                        Membership Expiry:
+                                    </Text>
+                                    <Text>
+                                        {moment(user.membershipExpiry).format(
+                                            "DD MMM YYYY"
+                                        )}
+                                    </Text>
+                                    <Text fontWeight={"bold"}>Phone:</Text>
+                                    <Text>{`+${user.countryCode} ${user.phoneNumber}`}</Text>
+                                    <Text fontWeight={"bold"}>Book Limit:</Text>
+                                    <Text>{user.maxBorrow}</Text>
+                                    <HStack
+                                        justifyContent="space-between"
+                                        width="100%"
+                                    >
+                                        <Button
+                                            as={Link}
+                                            to={`/users/${user._id}`}
+                                            colorScheme="facebook"
+                                        >
+                                            Edit
+                                        </Button>
+                                        <Button
+                                            onClick={() => {
+                                                setUserToDelete(user);
+                                                onOpen();
+                                            }}
+                                            colorScheme="red"
+                                        >
+                                            Delete
+                                        </Button>
+                                    </HStack>
+                                </VStack>
+                            ),
+                        }))}
+                    />
+                )}
             </VStack>
         </GridItem>
     );

@@ -1,14 +1,14 @@
 import { Box, GridItem, useToast } from "@chakra-ui/react";
-import Form, { Field, Option } from "./common/Form";
+import Form, { Field, Option } from "../common/Form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useAuthors from "../hooks/useAuthors";
-import useGenres from "../hooks/useGenres";
-import useBook from "../hooks/useBook";
+import useAuthors from "../../hooks/useAuthors";
+import useGenres from "../../hooks/useGenres";
+import useBook from "../../hooks/useBook";
 import { useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
-import { Book } from "../models/book";
-import HttpService from "../services/http-service";
+import { Book } from "../../models/book";
+import HttpService from "../../services/http-service";
 
 const schema = z.object({
     title: z

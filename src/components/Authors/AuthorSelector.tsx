@@ -7,21 +7,22 @@ import {
     MenuList,
 } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-import useAuthors from "../hooks/useAuthors";
-import { Author } from "../models/author";
+import useAuthors from "../../hooks/useAuthors";
+import { Author } from "../../models/author";
 
 interface Props {
     selectedAuthor: Author | null;
     onSelectAuthor: (author: Author | null) => void;
+    size?: string;
 }
 
-const AuthorSelector = ({ selectedAuthor, onSelectAuthor }: Props) => {
+const AuthorSelector = ({ selectedAuthor, onSelectAuthor, size }: Props) => {
     const { authors, error } = useAuthors();
     if (error) return null;
 
     return (
         <Menu>
-            <MenuButton marginX="5" as={Button} rightIcon={<BsChevronDown />}>
+            <MenuButton as={Button} size={size} rightIcon={<BsChevronDown />}>
                 {" "}
                 {selectedAuthor ? selectedAuthor.name : "All Authors"}
             </MenuButton>

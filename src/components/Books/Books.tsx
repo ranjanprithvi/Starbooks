@@ -11,23 +11,23 @@ import {
     Show,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import GenreList from "./GenreList";
-import Searchbar from "./Searchbar";
-import AuthorSelector from "./AuthorSelector";
-import SortSelector from "./SortSelector";
+import GenreList from "../Genres/GenreList";
+import Searchbar from "../common/Searchbar";
+import AuthorSelector from "../Authors/AuthorSelector";
+import SortSelector, { Sort } from "../common/SortSelector";
 import BookGrid from "./BookGrid";
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
-import { Author } from "../models/author";
-import { BookSort, bookSortFields } from "../models/book";
-import { Genre } from "../models/genre";
-import { LoginContext } from "../contexts/loginContext";
+import { Author } from "../../models/author";
+import { bookSortFields } from "../../models/book";
+import { Genre } from "../../models/genre";
+import { LoginContext } from "../../contexts/loginContext";
 
 const Books = () => {
     const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
     const [selectedAuthor, setSelectedAuthor] = useState<Author | null>(null);
     const [search, setSearch] = useState<string>("");
-    const [sortBy, setSortBy] = useState<BookSort>(bookSortFields[0]);
+    const [sortBy, setSortBy] = useState<Sort>(bookSortFields[0]);
 
     const { isLoggedIn, isAdmin } = useContext(LoginContext);
 
@@ -50,11 +50,15 @@ const Books = () => {
                     justifyContent="space-between"
                     marginBottom={5}
                 >
-                    <Searchbar setSearch={setSearch} />
+                    <Searchbar
+                        setSearch={setSearch}
+                        placeholder="Search Books..."
+                    />
                     {isLoggedIn && isAdmin && (
                         <Menu colorScheme="green">
                             <MenuButton
                                 as={Button}
+                                size="sm"
                                 colorScheme="green"
                                 leftIcon={<FaPlus></FaPlus>}
                                 paddingRight="7"
@@ -76,8 +80,9 @@ const Books = () => {
                         </Menu>
                     )}
                 </HStack>
-                <HStack justifyContent="space-between">
+                <HStack marginX="5" justifyContent="space-between">
                     <AuthorSelector
+                        size="sm"
                         selectedAuthor={selectedAuthor}
                         onSelectAuthor={(author: Author | null) => {
                             console.log(author);
@@ -87,7 +92,8 @@ const Books = () => {
                         }}
                     ></AuthorSelector>
                     <SortSelector
-                        sortField={sortBy}
+                        sortBy={sortBy}
+                        sortFields={bookSortFields}
                         onSort={setSortBy}
                     ></SortSelector>
                 </HStack>

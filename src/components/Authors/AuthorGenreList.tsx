@@ -1,8 +1,9 @@
-import useGenres from "../hooks/useGenres";
-import useAuthors from "../hooks/useAuthors";
+import useGenres from "../../hooks/useGenres";
+import useAuthors from "../../hooks/useAuthors";
 import {
     Box,
     Button,
+    Flex,
     GridItem,
     HStack,
     Heading,
@@ -14,7 +15,7 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { useRef } from "react";
-import HttpService from "../services/http-service";
+import HttpService from "../../services/http-service";
 
 const AuthorGenreList = () => {
     const { genres } = useGenres();
@@ -75,8 +76,12 @@ const AuthorGenreList = () => {
     };
 
     return (
-        <GridItem colSpan={2} width="auto" margin={5}>
-            <HStack justifyContent="space-evenly">
+        <GridItem colSpan={2} width="auto" marginX="5">
+            <Flex
+                direction={{ base: "column", md: "row" }}
+                justifyContent="space-evenly"
+                gap={5}
+            >
                 {lists.map((list) => (
                     <VStack
                         key={list.name}
@@ -136,7 +141,7 @@ const AuthorGenreList = () => {
                         </HStack>
                     </VStack>
                 ))}
-            </HStack>
+            </Flex>
         </GridItem>
     );
 };

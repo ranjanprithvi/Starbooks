@@ -7,19 +7,27 @@ import {
     MenuList,
 } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-import { BookSort, bookSortFields } from "../models/book";
 
-interface Props {
-    sortField: BookSort;
-    onSort: (sortField: BookSort) => void;
+export interface Sort {
+    [key: string]: string;
 }
 
-const SortSelector = ({ sortField, onSort }: Props) => {
-    const sortFields = [...bookSortFields];
+interface Props {
+    sortBy: Sort;
+    sortFields: Sort[];
+    onSort: (sortField: Sort) => void;
+    size?: string;
+}
 
+const SortSelector = ({
+    sortBy: sortField,
+    sortFields,
+    onSort,
+    size,
+}: Props) => {
     return (
         <Menu>
-            <MenuButton marginX="5" as={Button} rightIcon={<BsChevronDown />}>
+            <MenuButton as={Button} rightIcon={<BsChevronDown />} size="sm">
                 {"Order By: " + sortField.name}
             </MenuButton>
 

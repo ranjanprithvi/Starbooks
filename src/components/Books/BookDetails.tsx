@@ -12,10 +12,10 @@ import {
     Text,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
-import useBook from "../hooks/useBook";
+import useBook from "../../hooks/useBook";
 import { BsPencilSquare } from "react-icons/bs";
 import { useContext } from "react";
-import { LoginContext } from "../contexts/loginContext";
+import { LoginContext } from "../../contexts/loginContext";
 
 const BookDetails = () => {
     const { id } = useParams();
@@ -38,8 +38,8 @@ const BookDetails = () => {
                         base: "50px 4fr repeat(5,50px) auto",
                         lg: "50px 4fr repeat(5,50px) auto",
                     }}
-                    templateColumns={{ base: "1fr", md: "1fr 1fr" }}
-                    columnGap={{ base: 2, md: 8 }}
+                    templateColumns={{ base: "auto", md: "1fr 1fr" }}
+                    columnGap={8}
                     rowGap={{ base: 2, md: 0 }}
                     padding={10}
                 >
@@ -53,8 +53,9 @@ const BookDetails = () => {
                                     "https://bookcart.azurewebsites.net/Upload/Default_image.jpg"
                                 }
                                 borderRadius={10}
+                                width={"100%"}
                                 // marginX={"auto"}
-                                height="100%"
+                                // height="100%"
                                 // overflow={"clip"}
                             />
                         )}
@@ -63,7 +64,10 @@ const BookDetails = () => {
                     <GridItem>
                         <Divider />
                         <Flex
-                            justifyContent="flex-end"
+                            justifyContent={{
+                                base: "flex-start",
+                                md: "flex-end",
+                            }}
                             alignItems="center"
                             height="100%"
                         >

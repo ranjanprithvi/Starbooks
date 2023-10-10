@@ -14,17 +14,17 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
-import useUser from "../hooks/useUser";
+import useUser from "../../hooks/useUser";
 import moment from "moment";
-import Table, { TableData } from "./common/Table";
-import { handleReturned } from "./Rentals";
+import Table, { TableData } from "../common/Table";
+import { handleReturned } from "../Rentals/Rentals";
 import { FaPlus } from "react-icons/fa";
 import { AiOutlineRollback } from "react-icons/ai";
 import { BsPencilSquare } from "react-icons/bs";
 import { ReactNode, useContext, useState } from "react";
-import { LoginContext } from "../contexts/loginContext";
-import Modal from "./common/Modal";
-import { Rental } from "../models/rental";
+import { LoginContext } from "../../contexts/loginContext";
+import Modal from "../common/Modal";
+import { Rental } from "../../models/rental";
 
 const UserDetails = () => {
     const { id } = useParams();

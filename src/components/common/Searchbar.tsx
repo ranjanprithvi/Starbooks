@@ -6,9 +6,10 @@ import { BsSearch } from "react-icons/bs";
 interface Props {
     setSearch: (search: string) => void;
     [key: string]: any;
+    placeholder?: string;
 }
 
-const Searchbar = ({ setSearch, ...rest }: Props) => {
+const Searchbar = ({ setSearch, placeholder, ...rest }: Props) => {
     return (
         <InputGroup borderRadius={5} size="sm" {...rest}>
             <InputLeftElement
@@ -17,7 +18,7 @@ const Searchbar = ({ setSearch, ...rest }: Props) => {
             />
             <Input
                 type="text"
-                placeholder="Search Books..."
+                placeholder={placeholder}
                 border="1px solid #949494"
                 onChange={_.debounce((e) => setSearch(e.target.value), 500)}
             />

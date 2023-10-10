@@ -1,22 +1,27 @@
 import "./App.css";
-import { Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
+import {
+    Grid,
+    GridItem,
+    useBreakpointValue,
+    useColorModeValue,
+} from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Books from "./components/Books";
-import BookDetails from "./components/BookDetails";
-import BookForm from "./components/BookForm";
+import Books from "./components/Books/Books";
+import BookDetails from "./components/Books/BookDetails";
+import BookForm from "./components/Books/BookForm";
 import NotFound from "./components/NotFound";
-import Rentals from "./components/Rentals";
-import Users from "./components/Users";
-import RentalForm from "./components/RentalForm";
-import UserDetails from "./components/UserDetails";
-import UserForm from "./components/UserForm";
+import Rentals from "./components/Rentals/Rentals";
+import Users from "./components/Users/Users";
+import RentalForm from "./components/Rentals/RentalForm";
+import UserDetails from "./components/Users/UserDetails";
+import UserForm from "./components/Users/UserForm";
 import { useState } from "react";
 import { LoginContext } from "./contexts/loginContext";
 import LoginForm from "./components/LoginForm";
 import ProtectedAdminComponent from "./components/common/ProtectedAdminComponent";
 import ProtectedComponent from "./components/common/ProtectedComponent";
-import AuthorGenreList from "./components/AuthorGenreList";
+import AuthorGenreList from "./components/Authors/AuthorGenreList";
 import Home from "./components/Home";
 
 function App() {
@@ -26,6 +31,18 @@ function App() {
     );
     const [isAdmin, setAdmin] = useState(
         localStorage.getItem("isAdmin") == "true"
+    );
+
+    const dataView = useBreakpointValue(
+        {
+            base: "accordian",
+            md: "table",
+        },
+        {
+            // Breakpoint to use when mediaqueries cannot be used, such as in server-side rendering
+            // (Defaults to 'base')
+            fallback: "md",
+        }
     );
 
     return (
@@ -38,6 +55,7 @@ function App() {
             }}
         >
             <Grid
+                width="100vw"
                 color={textColor}
                 templateAreas={{
                     base: `"nav" 
@@ -46,7 +64,7 @@ function App() {
                       "aside main"`,
                 }}
                 templateColumns={{
-                    base: "1fr",
+                    base: "100vw",
                     lg: "200px 1fr",
                 }}
             >
@@ -71,7 +89,7 @@ function App() {
                         path="users"
                         element={
                             <ProtectedAdminComponent>
-                                <Users />
+                                <Users dataView={dataView} />
                             </ProtectedAdminComponent>
                         }
                     />

@@ -9,17 +9,30 @@ import {
     MenuList,
     MenuItem,
     useDisclosure,
+    Show,
+    Icon,
+    Drawer,
+    DrawerBody,
+    DrawerCloseButton,
+    DrawerContent,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    Input,
 } from "@chakra-ui/react";
 import logo from "../assets/Logo.png";
 import ColourModeSwitch from "./ColourModeSwitch";
 import { NavLink, Link, useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { LoginContext } from "../contexts/loginContext";
 import { TbLogout } from "react-icons/tb";
 import { BsChevronDown } from "react-icons/bs";
 import { BiSolidUserCircle } from "react-icons/bi";
-import { FaUser } from "react-icons/fa";
+import { FaHamburger, FaUser } from "react-icons/fa";
 import Modal from "./common/Modal";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IconBase } from "react-icons/lib";
+import { AiOutlineMenu } from "react-icons/ai";
 
 interface NavItem {
     label: string;
@@ -29,6 +42,12 @@ interface NavItem {
 const NavBar = () => {
     const { pathname } = useLocation();
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const {
+        isOpen: isDrawerOpen,
+        onOpen: onDrawerOpen,
+        onClose: onDrawerClose,
+    } = useDisclosure();
+    const btnRef = useRef(null);
 
     const { isLoggedIn, setLoggedIn, isAdmin, setAdmin } =
         useContext(LoginContext);
@@ -55,7 +74,7 @@ const NavBar = () => {
     };
 
     return (
-        <HStack justifyContent="space-between" padding="5">
+        <>
             <Modal
                 header="Logout"
                 body="Are you sure you want to logout?"
@@ -77,57 +96,109 @@ const NavBar = () => {
                     </>
                 )}
             />
-            <Link to="/">
-                <Image src={logo} height="14" marginY="-5" />
-            </Link>
-            <HStack>
-                {navLinks.map((link) => (
-                    <LinkBox
-                        key={link.path}
-                        color={pathname == link.path ? "teal.400" : "gray"}
-                        marginRight={{ md: 7 }}
-                    >
-                        <NavLink to={link.path}>{link.label}</NavLink>
-                    </LinkBox>
-                ))}
+            <Drawer
+                isOpen={isDrawerOpen}
+                placement="top"
+                onClose={onDrawerClose}
+                finalFocusRef={btnRef}
+            >
+                <DrawerOverlay />
+                <DrawerContent width="150vw">
+                    <DrawerCloseButton />
+                    <DrawerHeader>Create your account</DrawerHeader>
 
-                <ColourModeSwitch marginRight="5" />
-                {isLoggedIn ? (
-                    <Menu>
-                        <MenuButton
-                            as={Button}
-                            leftIcon={<BiSolidUserCircle />}
-                            rightIcon={<BsChevronDown />}
+                    <DrawerBody>
+                        <Input placeholder="Type here..." />
+                    </DrawerBody>
+
+                    <DrawerFooter>
+                        <Button
+                            variant="outline"
+                            mr={3}
+                            onClick={onDrawerClose}
                         >
-                            Account
-                        </MenuButton>
-                        <MenuList>
-                            {isLoggedIn && !isAdmin && (
-                                <MenuItem
-                                    as={Link}
-                                    to={"/userDetails/me"}
-                                    icon={<FaUser />}
+                            Cancel
+                        </Button>
+                        <Button colorScheme="blue">Save</Button>
+                    </DrawerFooter>
+                </DrawerContent>
+            </Drawer>
+            <HStack justifyContent="space-between" padding="5">
+                <HStack>
+                    <Show below="sm">
+                        <Button
+                            ref={btnRef}
+                            onClick={onDrawerOpen}
+                            background={"transparent"}
+                            height="20px"
+                            marginLeft="-5px"
+                            padding="0"
+                        >
+                            <RxHamburgerMenu size="32px"></RxHamburgerMenu>
+                        </Button>
+                    </Show>
+                    <Link to="/">
+                        <Image src={logo} height={{ base: "12", md: "14" }} />
+                    </Link>
+                </HStack>
+                <HStack>
+                    <Show above="md">
+                        {navLinks.map((link) => (
+                            <LinkBox
+                                key={link.path}
+                                color={
+                                    pathname == link.path ? "teal.400" : "gray"
+                                }
+                                marginRight={{ md: 7 }}
+                            >
+                                <NavLink to={link.path}>{link.label}</NavLink>
+                            </LinkBox>
+                        ))}
+                    </Show>
+
+                    <ColourModeSwitch marginRight="5" />
+                    <Show above="md">
+                        {isLoggedIn ? (
+                            <Menu>
+                                <MenuButton
+                                    as={Button}
+                                    leftIcon={<BiSolidUserCircle />}
+                                    rightIcon={<BsChevronDown />}
                                 >
-                                    My Profile
-                                </MenuItem>
-                            )}
-                            <MenuItem icon={<TbLogout />} onClick={onOpen}>
-                                Logout
-                            </MenuItem>
-                        </MenuList>
-                    </Menu>
-                ) : (
-                    <Button
-                        as={ChakraLink}
-                        href="/login"
-                        colorScheme="teal"
-                        variant="outline"
-                    >
-                        Login
-                    </Button>
-                )}
+                                    Account
+                                </MenuButton>
+                                <MenuList>
+                                    {isLoggedIn && !isAdmin && (
+                                        <MenuItem
+                                            as={Link}
+                                            to={"/userDetails/me"}
+                                            icon={<FaUser />}
+                                        >
+                                            My Profile
+                                        </MenuItem>
+                                    )}
+                                    <MenuItem
+                                        icon={<TbLogout />}
+                                        onClick={onOpen}
+                                    >
+                                        Logout
+                                    </MenuItem>
+                                </MenuList>
+                            </Menu>
+                        ) : (
+                            <Button
+                                as={ChakraLink}
+                                href="/login"
+                                colorScheme="teal"
+                                variant="outline"
+                            >
+                                Login
+                            </Button>
+                        )}
+                    </Show>
+                </HStack>
             </HStack>
-        </HStack>
+        </>
     );
 };
 
