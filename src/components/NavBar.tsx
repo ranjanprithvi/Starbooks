@@ -140,8 +140,6 @@ const NavBar = () => {
                     <Link to="/">
                         <Image src={logo} height={{ base: "12", md: "14" }} />
                     </Link>
-                </HStack>
-                <HStack>
                     <Show above="md">
                         {navLinks.map((link) => (
                             <LinkBox
@@ -149,13 +147,14 @@ const NavBar = () => {
                                 color={
                                     pathname == link.path ? "teal.400" : "gray"
                                 }
-                                marginRight={{ md: 7 }}
+                                marginLeft={{ md: 7 }}
                             >
                                 <NavLink to={link.path}>{link.label}</NavLink>
                             </LinkBox>
                         ))}
                     </Show>
-
+                </HStack>
+                <HStack>
                     <ColourModeSwitch marginRight="5" />
                     <Show above="md">
                         {isLoggedIn ? (
