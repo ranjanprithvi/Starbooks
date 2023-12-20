@@ -10,7 +10,7 @@ import logo from "../assets/Logo.png";
 
 const Home = () => {
     return (
-        <GridItem colSpan={2}>
+        <GridItem colSpan={2} height="100%">
             <VStack
                 height="100%"
                 width="53vw"
@@ -27,26 +27,7 @@ const Home = () => {
                         manage the books catalog, users, and rentals.
                     </Box>
                     <br></br>
-                    <Box>Please use the following credentials to login:</Box>
                 </VStack>
-                <HStack justifyContent="space-around" width="100%">
-                    <VStack>
-                        <Box fontWeight="bold">Admin</Box>
-                        <Box>
-                            Email: Admin1@starbooks.com
-                            <br></br>
-                            Password: Admin1@starbooks.com
-                        </Box>
-                    </VStack>
-                    <VStack>
-                        <Box fontWeight="bold">Member</Box>
-                        <Box>
-                            Email: User3@starbooks.com
-                            <br></br>
-                            Password: User3@starbooks.com
-                        </Box>
-                    </VStack>
-                </HStack>
             </VStack>
         </GridItem>
     );

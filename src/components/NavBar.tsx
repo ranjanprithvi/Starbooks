@@ -19,6 +19,9 @@ import {
     DrawerHeader,
     DrawerOverlay,
     Input,
+    Tabs,
+    Tab,
+    TabList,
 } from "@chakra-ui/react";
 import logo from "../assets/Logo.png";
 import ColourModeSwitch from "./ColourModeSwitch";
@@ -63,10 +66,7 @@ const NavBar = () => {
             { label: "Rentals", path: "/rentals" }
         );
 
-    const logout = (
-        setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>,
-        setAdmin: React.Dispatch<React.SetStateAction<boolean>>
-    ) => {
+    const logout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("isAdmin");
         setLoggedIn(false);
@@ -86,7 +86,7 @@ const NavBar = () => {
                             colorScheme="teal"
                             mr={3}
                             onClick={() => {
-                                logout(setLoggedIn, setAdmin);
+                                logout();
                                 window.location.assign("/books");
                             }}
                         >
@@ -141,21 +141,33 @@ const NavBar = () => {
                         <Image src={logo} height={{ base: "12", md: "14" }} />
                     </Link>
                     <Show above="md">
-                        {navLinks.map((link) => (
-                            <LinkBox
-                                key={link.path}
-                                color={
-                                    pathname == link.path ? "teal.400" : "gray"
-                                }
-                                marginLeft={{ md: 7 }}
-                            >
-                                <NavLink to={link.path}>{link.label}</NavLink>
-                            </LinkBox>
-                        ))}
+                        <Tabs marginLeft="3">
+                            <TabList>
+                                {navLinks.map((link) => (
+                                    <Link to={link.path} key={link.path}>
+                                        <Tab
+                                            color={
+                                                pathname == link.path
+                                                    ? "teal.400"
+                                                    : "gray"
+                                            }
+                                            borderBottom={
+                                                pathname == link.path
+                                                    ? "2px"
+                                                    : "none"
+                                            }
+                                            // marginLeft={{ md: 7 }}
+                                        >
+                                            {link.label}
+                                        </Tab>
+                                    </Link>
+                                ))}
+                            </TabList>
+                        </Tabs>
                     </Show>
                 </HStack>
                 <HStack>
-                    <ColourModeSwitch marginRight="5" />
+                    <ColourModeSwitch marginRight="3" />
                     <Show above="md">
                         {isLoggedIn ? (
                             <Menu>
