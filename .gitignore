@@ -33,3 +33,13 @@ coverage/lcov-report/prettify.css
 coverage/lcov-report/prettify.js
 coverage/lcov-report/sort-arrow-sprite.png
 coverage/lcov-report/sorter.js
+coverage/lcov-report/Home.tsx.html
+coverage/lcov-report/components/index.html
+coverage/lcov-report/components/LoginForm.tsx.html
+coverage/lcov-report/components/common/Form.tsx.html
+coverage/lcov-report/components/common/index.html
+coverage/lcov-report/contexts/index.html
+coverage/lcov-report/contexts/loginContext.ts.html
+coverage/lcov-report/services/api-client.ts.html
+coverage/lcov-report/services/http-service.ts.html
+coverage/lcov-report/services/index.html
