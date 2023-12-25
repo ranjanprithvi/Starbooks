@@ -48,7 +48,8 @@ const AuthorGenreList = () => {
             .catch((err) => {
                 toast({
                     title: "Error",
-                    description: err.response.data,
+                    description:
+                        err.response?.data || "Sorry. Something went wrong",
                     status: "error",
                     duration: 5000,
                     isClosable: true,
@@ -67,7 +68,8 @@ const AuthorGenreList = () => {
             .catch((err) => {
                 toast({
                     title: "Error",
-                    description: err.response.data,
+                    description:
+                        err.response?.data || "Sorry. Something went wrong",
                     status: "error",
                     duration: 5000,
                     isClosable: true,

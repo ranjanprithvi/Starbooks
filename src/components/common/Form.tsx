@@ -78,7 +78,7 @@ const Form = <T extends FieldValues>({
 
     function renderInput({ label, name, inputType, pattern }: Field<T>) {
         return (
-            <>
+            <FormControl>
                 <FormLabel htmlFor={name}>{label}</FormLabel>
                 <Input
                     step="any"
@@ -90,16 +90,16 @@ const Form = <T extends FieldValues>({
                             inputType == "number" || inputType == "tel",
                     })}
                 />
-            </>
+            </FormControl>
         );
     }
 
     function renderTextArea({ label, name }: Field<T>) {
         return (
-            <>
+            <FormControl>
                 <FormLabel htmlFor={name}>{label}</FormLabel>
                 <Textarea id={name} {...register(name)} />
-            </>
+            </FormControl>
         );
     }
 
@@ -119,9 +119,10 @@ const Form = <T extends FieldValues>({
     //         </>
     //     );
     // }
+
     function renderSelect({ label, name, options, placeholder }: Field<T>) {
         return (
-            <>
+            <FormControl>
                 <FormLabel htmlFor={name}>{label}</FormLabel>
                 <Select placeholder={placeholder} {...register(name)}>
                     {options?.map((option) => (
@@ -134,13 +135,13 @@ const Form = <T extends FieldValues>({
                         </option>
                     ))}
                 </Select>
-            </>
+            </FormControl>
         );
     }
 
     function renderSlider({ label, name, sliderMarks }: Field<T>) {
         return (
-            <>
+            <FormControl>
                 <FormLabel htmlFor={name}>{label}</FormLabel>
                 <Slider>
                     {sliderMarks?.map((mark) => (
@@ -151,7 +152,7 @@ const Form = <T extends FieldValues>({
                     </SliderTrack>
                     <SliderThumb />
                 </Slider>
-            </>
+            </FormControl>
         );
     }
 
@@ -202,7 +203,7 @@ const Form = <T extends FieldValues>({
 
                 <HStack justifyContent="flex-end">
                     {/* <Button isDisabled={!isValid} colorScheme="green" type="submit"> */}
-                    <Button colorScheme="green" type="submit">
+                    <Button colorScheme="green" type="submit" id="submit">
                         Submit
                     </Button>
                     <Button onClick={() => navigate(-1)} colorScheme="gray">

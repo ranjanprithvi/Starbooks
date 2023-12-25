@@ -38,7 +38,6 @@ const Users = ({ dataView }: Props) => {
     const [userToDelete, setUserToDelete] = useState<User>({} as User);
 
     if (error) {
-        console.log(error);
         return null;
     }
 

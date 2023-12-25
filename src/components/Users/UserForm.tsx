@@ -86,7 +86,6 @@ const UserForm = () => {
     if (error && id != "new") navigate("/not-found");
 
     const onSubmit = (data: UserData) => {
-        console.log(data);
         const dataDTO = {
             ...data,
             countryCode: data.countryCode?.toString(),

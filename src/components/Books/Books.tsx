@@ -85,8 +85,6 @@ const Books = () => {
                         size="sm"
                         selectedAuthor={selectedAuthor}
                         onSelectAuthor={(author: Author | null) => {
-                            console.log(author);
-
                             setSelectedAuthor(author);
                             setSelectedGenre(null);
                         }}

@@ -1,12 +1,12 @@
-import { Box, GridItem, useToast } from "@chakra-ui/react";
+import { Box, GridItem } from "@chakra-ui/react";
 import Form, { Field } from "./common/Form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
 import { useContext } from "react";
 import { LoginContext } from "../contexts/loginContext";
 import HttpService from "../services/http-service";
+import { useToast } from "../hooks/generic/useToast";
 
 const schema = z.object({
     email: z
@@ -26,8 +26,8 @@ interface LoginResponse {
 }
 
 const LoginForm = () => {
-    const navigate = useNavigate();
-    const toast = useToast();
+    // const navigate = useNavigate();
+    const { showError } = useToast();
     const { setLoggedIn, setAdmin } = useContext(LoginContext);
 
     const resolver = zodResolver(schema);
@@ -62,13 +62,7 @@ const LoginForm = () => {
                 // navigate("/books");
             })
             .catch((err) => {
-                toast({
-                    title: "Error",
-                    description: err.response.data,
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                });
+                showError(err.response?.data || "Sorry. Something went wrong");
             });
     };
 

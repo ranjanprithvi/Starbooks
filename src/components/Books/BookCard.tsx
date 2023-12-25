@@ -1,6 +1,6 @@
 import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
 import Rating from "./Rating";
-import { Book } from "../../models/book";
+import { Book, defaultBookCover } from "../../models/book";
 
 interface Props {
     book: Book;
@@ -15,10 +15,7 @@ const BookCard = ({ book }: Props) => {
             boxShadow={"2xl"}
         >
             <Image
-                src={
-                    book.coverImage ||
-                    "https://bookcart.azurewebsites.net/Upload/Default_image.jpg"
-                }
+                src={book.coverImage || defaultBookCover}
                 borderRadius={10}
                 height="75%"
                 // overflow={"clip"}

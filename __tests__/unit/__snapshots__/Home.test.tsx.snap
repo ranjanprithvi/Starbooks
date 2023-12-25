@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders the home page 1`] = `
+<div
+  className="css-19x3waq"
+>
+  <div
+    className="chakra-stack css-18x02rm"
+  >
+    <img
+      className="chakra-image css-1jsohtw"
+      src="test-file-stub"
+    />
+    <h2
+      className="chakra-heading css-0"
+    >
+      Welcome to Starbooks!
+    </h2>
+    <div
+      className="chakra-stack css-tl3ftk"
+    >
+      <div
+        className="css-0"
+      >
+        Starbooks is a library management app where visitors can view the books catalog, members can view their details and active rentals after logging in, and admins can manage the books catalog, users, and rentals.
+      </div>
+      <br />
+    </div>
+  </div>
+</div>
+`;

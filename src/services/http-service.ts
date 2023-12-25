@@ -1,4 +1,3 @@
-import { AxiosRequestConfig } from "axios";
 import apiClient from "./api-client";
 
 export interface Entity {

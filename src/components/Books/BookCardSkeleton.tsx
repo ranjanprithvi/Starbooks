@@ -1,6 +1,6 @@
 import { Card, CardBody, Skeleton, SkeletonText } from "@chakra-ui/react";
 
-const BookCard = () => {
+const BookCardSkeleton = () => {
     return (
         <Card borderRadius={10} overflow="hidden">
             <CardBody>
@@ -11,4 +11,4 @@ const BookCard = () => {
     );
 };
 
-export default BookCard;
+export default BookCardSkeleton;

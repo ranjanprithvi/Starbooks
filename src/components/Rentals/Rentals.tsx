@@ -46,7 +46,6 @@ const Rentals = () => {
     const [rentalToReturn, setRentalToReturn] = useState<Rental>({} as Rental);
 
     if (error) {
-        console.log(error);
         return null;
     }
 

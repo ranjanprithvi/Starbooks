@@ -5,12 +5,12 @@ import { Genre } from "./genre";
 export interface Book {
     _id: string;
     title: string;
-    coverImage: string;
+    coverImage?: string;
     author: Author;
     genre: Genre;
     rating: number;
     yearPublished: number;
-    description: string;
+    description?: string;
     numberInStock: number;
 }
 
@@ -21,6 +21,8 @@ export interface BookQuery {
     sortBy?: string;
     populate?: string;
 }
+
+export const defaultBookCover = "/src/assets/default-no-cover.jpeg";
 
 export const bookSortFields: Sort[] = [
     { name: "Date Added", value: "-_id" },

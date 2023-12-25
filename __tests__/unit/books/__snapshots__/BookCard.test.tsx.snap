@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BookCard renders correctly 1`] = `
+<div
+  className="chakra-card css-12r5yzq"
+>
+  <img
+    className="chakra-image css-1ec1yfo"
+    src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1681496408i/58536026.jpg"
+  />
+  <div
+    className="chakra-card__body css-0"
+  >
+    <h2
+      className="chakra-heading css-119ujjf"
+    >
+      test (2021)
+    </h2>
+    <div
+      className="chakra-stack css-1y3f6ad"
+    >
+      <p
+        className="chakra-text css-ax9bdp"
+      >
+        author1
+      </p>
+      <span
+        className="chakra-badge css-4z4zi4"
+      >
+        5
+      </span>
+    </div>
+  </div>
+</div>
+`;

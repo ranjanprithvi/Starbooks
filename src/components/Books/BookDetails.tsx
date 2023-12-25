@@ -16,12 +16,27 @@ import useBook from "../../hooks/useBook";
 import { BsPencilSquare } from "react-icons/bs";
 import { useContext } from "react";
 import { LoginContext } from "../../contexts/loginContext";
+import { defaultBookCover } from "../../models/book";
 
 const BookDetails = () => {
     const { id } = useParams();
     const { isLoggedIn, isAdmin } = useContext(LoginContext);
 
-    const { book, isLoading, error } = useBook(id);
+    const {
+        book: {
+            coverImage,
+            title,
+            numberInStock,
+            author,
+            genre,
+            yearPublished,
+            description,
+            rating,
+            _id,
+        },
+        isLoading,
+        error,
+    } = useBook(id);
 
     if (error) return <Text>Book Not Found!</Text>;
     return (
@@ -48,10 +63,7 @@ const BookDetails = () => {
                             <Skeleton height="100%"></Skeleton>
                         ) : (
                             <Image
-                                src={
-                                    book.coverImage ||
-                                    "https://bookcart.azurewebsites.net/Upload/Default_image.jpg"
-                                }
+                                src={coverImage || defaultBookCover}
                                 borderRadius={10}
                                 width={"100%"}
                                 // marginX={"auto"}
@@ -89,7 +101,7 @@ const BookDetails = () => {
                     <GridItem>
                         {" "}
                         <Flex alignItems="center" height="100%">
-                            <Heading>{book.title}</Heading>
+                            <Heading>{title}</Heading>
                         </Flex>
                     </GridItem>
 
@@ -102,7 +114,7 @@ const BookDetails = () => {
                             flexDirection={{ base: "column", md: "row" }}
                         >
                             <Text fontWeight="bold">Author: </Text>{" "}
-                            <Text>{book.author?.name}</Text>
+                            <Text>{author?.name}</Text>
                         </Flex>
                     </GridItem>
                     <GridItem>
@@ -114,7 +126,7 @@ const BookDetails = () => {
                             flexDirection={{ base: "column", md: "row" }}
                         >
                             <Text fontWeight="bold">Year Published: </Text>{" "}
-                            <Text>{book.yearPublished}</Text>
+                            <Text>{yearPublished}</Text>
                         </Flex>
                     </GridItem>
                     <GridItem>
@@ -126,7 +138,7 @@ const BookDetails = () => {
                             flexDirection={{ base: "column", md: "row" }}
                         >
                             <Text fontWeight="bold">Genre: </Text>{" "}
-                            <Text>{book.genre?.name}</Text>
+                            <Text>{genre?.name}</Text>
                         </Flex>
                     </GridItem>
                     <GridItem>
@@ -138,13 +150,13 @@ const BookDetails = () => {
                             flexDirection={{ base: "column", md: "row" }}
                         >
                             <Text fontWeight="bold">Availability: </Text>{" "}
-                            {book.numberInStock > 0 ? (
+                            {numberInStock > 0 ? (
                                 <Badge
                                     colorScheme="green"
                                     paddingX={2}
                                     paddingY={{ md: 1 }}
                                 >
-                                    {`Available (${book.numberInStock} copies)`}
+                                    {`Available (${numberInStock} copies)`}
                                 </Badge>
                             ) : (
                                 <Badge colorScheme="red" padding={2}>
@@ -162,7 +174,7 @@ const BookDetails = () => {
                             flexDirection={{ base: "column", md: "row" }}
                         >
                             <Text fontWeight="bold">Rating: </Text>{" "}
-                            <Text>{book.rating}</Text>
+                            <Text>{rating}</Text>
                         </Flex>
                     </GridItem>
                     <GridItem
@@ -173,7 +185,7 @@ const BookDetails = () => {
                         <Heading size={"lg"}>Description</Heading>
                         <Divider marginY="2" />
 
-                        <Text>{book.description}</Text>
+                        <Text>{description}</Text>
                     </GridItem>
                 </Grid>
             </Box>
