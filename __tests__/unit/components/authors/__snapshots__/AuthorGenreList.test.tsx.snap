@@ -30,6 +30,7 @@ exports[`AuthorGenreList renders correctly 1`] = `
           </div>
           <button
             className="chakra-button css-4xx2wk"
+            data-testid="delete-author-1"
             onClick={[Function]}
             type="button"
           >
@@ -46,6 +47,7 @@ exports[`AuthorGenreList renders correctly 1`] = `
           </div>
           <button
             className="chakra-button css-4xx2wk"
+            data-testid="delete-author-2"
             onClick={[Function]}
             type="button"
           >
@@ -96,6 +98,7 @@ exports[`AuthorGenreList renders correctly 1`] = `
           </div>
           <button
             className="chakra-button css-4xx2wk"
+            data-testid="delete-genre-1"
             onClick={[Function]}
             type="button"
           >
@@ -112,6 +115,7 @@ exports[`AuthorGenreList renders correctly 1`] = `
           </div>
           <button
             className="chakra-button css-4xx2wk"
+            data-testid="delete-genre-2"
             onClick={[Function]}
             type="button"
           >

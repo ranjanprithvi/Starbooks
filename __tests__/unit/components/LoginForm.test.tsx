@@ -12,7 +12,7 @@ const correctEmail = "correctEmail@starbooks.com";
 const correctPassword = "correctPassword";
 const wrongEmail = "wrongEmail@starbooks.com";
 
-const mockedSetLoggedIn = jest.fn();
+const mSetLoggedIn = jest.fn();
 
 //mock window.location.replace
 const mockReplace = jest.fn();
@@ -24,23 +24,23 @@ Object.defineProperty(window, "location", {
 
 //mock apiClient
 jest.mock("../../../src/services/api-client");
-const mockedApiClient = apiClient as jest.Mocked<typeof apiClient>;
+const mApiClient = apiClient as jest.Mocked<typeof apiClient>;
 
 //mock useToast
-const mockedShowError = jest.fn();
-const mockedShowSuccess = jest.fn();
+const mShowError = jest.fn();
+const mShowSuccess = jest.fn();
 jest.mock("../../../src/hooks/generic/useToast");
-const mockedUseToast = useToast as jest.MockedFunction<typeof useToast>;
-mockedUseToast.mockReturnValue({
-    showError: mockedShowError,
-    showSuccess: mockedShowSuccess,
+const mUseToast = useToast as jest.MockedFunction<typeof useToast>;
+mUseToast.mockReturnValue({
+    showError: mShowError,
+    showSuccess: mShowSuccess,
 });
 
 //mock useNavigate
-const mockedUseNavigate = jest.fn();
+const mUseNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
     ...(jest.requireActual("react-router-dom") as any),
-    useNavigate: () => mockedUseNavigate,
+    useNavigate: () => mUseNavigate,
 }));
 
 afterEach(() => {
@@ -58,14 +58,14 @@ describe("LoginForm", () => {
     });
 
     it("calls the post method with the credentials when both email and password are entered", async () => {
-        mockedApiClient.post.mockResolvedValueOnce({
+        mApiClient.post.mockResolvedValueOnce({
             data: { token: "1234", isAdmin: true },
         });
         render(
             <LoginContext.Provider
                 value={{
                     isLoggedIn: false,
-                    setLoggedIn: mockedSetLoggedIn,
+                    setLoggedIn: mSetLoggedIn,
                     isAdmin: false,
                     setAdmin: jest.fn(),
                 }}
@@ -87,7 +87,7 @@ describe("LoginForm", () => {
             loginButton.click();
         });
 
-        expect(mockedApiClient.post).toHaveBeenCalledWith("/auth/login", {
+        expect(mApiClient.post).toHaveBeenCalledWith("/auth/login", {
             email: correctEmail,
             password: correctPassword,
         });
@@ -99,7 +99,7 @@ describe("LoginForm", () => {
             <LoginContext.Provider
                 value={{
                     isLoggedIn: false,
-                    setLoggedIn: mockedSetLoggedIn,
+                    setLoggedIn: mSetLoggedIn,
                     isAdmin: false,
                     setAdmin: jest.fn(),
                 }}
@@ -118,7 +118,7 @@ describe("LoginForm", () => {
             loginButton.click();
         });
 
-        expect(mockedApiClient.post).not.toHaveBeenCalled();
+        expect(mApiClient.post).not.toHaveBeenCalled();
     });
 
     it("does not attempt login when no password is entered", async () => {
@@ -126,7 +126,7 @@ describe("LoginForm", () => {
             <LoginContext.Provider
                 value={{
                     isLoggedIn: false,
-                    setLoggedIn: mockedSetLoggedIn,
+                    setLoggedIn: mSetLoggedIn,
                     isAdmin: false,
                     setAdmin: jest.fn(),
                 }}
@@ -144,12 +144,12 @@ describe("LoginForm", () => {
             loginButton.click();
         });
 
-        expect(mockedApiClient.post).not.toHaveBeenCalled();
+        expect(mApiClient.post).not.toHaveBeenCalled();
     });
 
     it("displays error message in case of bad request", async () => {
         const message = "Invalid username or password";
-        mockedApiClient.post.mockRejectedValueOnce({
+        mApiClient.post.mockRejectedValueOnce({
             response: {
                 data: message,
             },
@@ -159,7 +159,7 @@ describe("LoginForm", () => {
             <LoginContext.Provider
                 value={{
                     isLoggedIn: false,
-                    setLoggedIn: mockedSetLoggedIn,
+                    setLoggedIn: mSetLoggedIn,
                     isAdmin: false,
                     setAdmin: jest.fn(),
                 }}
@@ -182,7 +182,7 @@ describe("LoginForm", () => {
             loginButton.click();
         });
 
-        expect(mockedShowError).toHaveBeenCalledWith(message);
+        expect(mShowError).toHaveBeenCalledWith(message);
 
         // expect(
         //     await screen.findByText(/invalid username or password/i)
@@ -191,10 +191,10 @@ describe("LoginForm", () => {
 
     it("displays error message in case of network error", async () => {
         const message = "Sorry. Something went wrong";
-        mockedApiClient.post.mockRejectedValueOnce({
+        mApiClient.post.mockRejectedValueOnce({
             response: "Error",
         });
-        mockedApiClient.post.mockResolvedValueOnce({
+        mApiClient.post.mockResolvedValueOnce({
             data: { token: "1234", isAdmin: true },
         });
         process.env.VITE_BACKEND_URL = "http://invalidUrl";
@@ -202,7 +202,7 @@ describe("LoginForm", () => {
             <LoginContext.Provider
                 value={{
                     isLoggedIn: false,
-                    setLoggedIn: mockedSetLoggedIn,
+                    setLoggedIn: mSetLoggedIn,
                     isAdmin: false,
                     setAdmin: jest.fn(),
                 }}
@@ -225,7 +225,7 @@ describe("LoginForm", () => {
             loginButton.click();
         });
 
-        expect(mockedShowError).toHaveBeenCalledWith(message);
+        expect(mShowError).toHaveBeenCalledWith(message);
     });
 
     it("navigates to previous screen when canceled", async () => {
@@ -233,6 +233,6 @@ describe("LoginForm", () => {
 
         const cancelButton = screen.getByText(/cancel/i);
         cancelButton.click();
-        expect(mockedUseNavigate).toHaveBeenCalledWith(-1);
+        expect(mUseNavigate).toHaveBeenCalledWith(-1);
     });
 });

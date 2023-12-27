@@ -4,15 +4,15 @@ import AuthorSelector from "../../../../src/components/Authors/AuthorSelector";
 import useAuthors from "../../../../src/hooks/useAuthors";
 import "@testing-library/jest-dom";
 
-const mockedOnSelectAuthor = jest.fn();
+const mOnSelectAuthor = jest.fn();
 
 //mock useAuthors
 jest.mock("../../../../src/hooks/useAuthors");
-const mockedUseAuthors = useAuthors as jest.MockedFunction<typeof useAuthors>;
+const mUseAuthors = useAuthors as jest.MockedFunction<typeof useAuthors>;
 
 describe("AuthorSelector", () => {
     it("renders correctly", () => {
-        mockedUseAuthors.mockReturnValueOnce({
+        mUseAuthors.mockReturnValueOnce({
             authors: [
                 {
                     _id: "1",
@@ -35,7 +35,7 @@ describe("AuthorSelector", () => {
                     _id: "1",
                     name: "author1",
                 }}
-                onSelectAuthor={mockedOnSelectAuthor}
+                onSelectAuthor={mOnSelectAuthor}
             />
         );
         expect(
@@ -44,7 +44,7 @@ describe("AuthorSelector", () => {
     });
 
     it("displays 'all authors' when no selected author is passed", () => {
-        mockedUseAuthors.mockReturnValueOnce({
+        mUseAuthors.mockReturnValueOnce({
             authors: [
                 {
                     _id: "1",
@@ -64,7 +64,7 @@ describe("AuthorSelector", () => {
         render(
             <AuthorSelector
                 selectedAuthor={null}
-                onSelectAuthor={mockedOnSelectAuthor}
+                onSelectAuthor={mOnSelectAuthor}
             />
         );
         expect(screen.getByTestId("author-menubutton")).toHaveTextContent(
@@ -73,7 +73,7 @@ describe("AuthorSelector", () => {
     });
 
     it("calls onSelectAuthor when author is selected and display author name in menubutton", () => {
-        mockedUseAuthors.mockReturnValueOnce({
+        mUseAuthors.mockReturnValueOnce({
             authors: [
                 {
                     _id: "1",
@@ -93,12 +93,12 @@ describe("AuthorSelector", () => {
         render(
             <AuthorSelector
                 selectedAuthor={null}
-                onSelectAuthor={mockedOnSelectAuthor}
+                onSelectAuthor={mOnSelectAuthor}
             />
         );
 
         fireEvent.click(screen.getByText("author1"));
-        expect(mockedOnSelectAuthor).toHaveBeenCalledWith({
+        expect(mOnSelectAuthor).toHaveBeenCalledWith({
             _id: "1",
             name: "author1",
         });

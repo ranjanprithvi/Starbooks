@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CanceledError } from "../../services/api-client";
-import HttpService, { Entity } from "../../services/http-service";
+import { httpService, Entity } from "../../services/http-service";
 
 function useDataItem<T extends Entity>(
     path: string,
@@ -15,7 +15,7 @@ function useDataItem<T extends Entity>(
     useEffect(() => {
         setLoading(true);
 
-        const dataService = new HttpService(path);
+        const dataService = httpService(path);
         const { request, cancel } = dataService.get<T>(id, query);
 
         request

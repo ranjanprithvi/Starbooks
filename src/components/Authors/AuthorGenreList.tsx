@@ -15,7 +15,7 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { useRef } from "react";
-import HttpService from "../../services/http-service";
+import { httpService } from "../../services/http-service";
 
 const AuthorGenreList = () => {
     const { genres } = useGenres();
@@ -38,7 +38,7 @@ const AuthorGenreList = () => {
     ];
 
     const handleAdd = (listName: string, value: string = "") => {
-        const service = new HttpService(`/${listName}s`);
+        const service = httpService(`/${listName}s`);
 
         service
             .post({ name: value })
@@ -58,7 +58,7 @@ const AuthorGenreList = () => {
     };
 
     const handleDelete = (listName: string, id: string = "") => {
-        const service = new HttpService(`/${listName}s`);
+        const service = httpService(`/${listName}s`);
 
         service
             .delete(id)
@@ -112,6 +112,7 @@ const AuthorGenreList = () => {
                                 >
                                     <Box>{item.name}</Box>
                                     <Button
+                                        data-testid={`delete-${list.name}-${item._id}`}
                                         size="sm"
                                         onClick={() =>
                                             handleDelete(list.name, item._id)

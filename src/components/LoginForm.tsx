@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import _ from "lodash";
 import { useContext } from "react";
 import { LoginContext } from "../contexts/loginContext";
-import HttpService from "../services/http-service";
+import { httpService } from "../services/http-service";
 import { useToast } from "../hooks/generic/useToast";
 
 const schema = z.object({
@@ -47,7 +47,7 @@ const LoginForm = () => {
     ];
 
     const onLogin = (data: LoginData) => {
-        const authService = new HttpService("/auth/login");
+        const authService = httpService("/auth/login");
         authService
             .post<LoginData, LoginResponse>(data)
             .then((response) => {

@@ -8,20 +8,20 @@ import { Book, defaultBookCover } from "../../../../src/models/book";
 import useBook from "../../../../src/hooks/useBook";
 
 //mock useParams
-const mockedUseParams = jest.fn();
+const mUseParams = jest.fn();
 jest.mock("react-router-dom", () => ({
     ...jest.requireActual("react-router-dom"),
-    useParams: () => mockedUseParams,
+    useParams: () => mUseParams,
 }));
-mockedUseParams.mockReturnValue({ id: "123" });
+mUseParams.mockReturnValue({ id: "123" });
 
 //mock useBook
 jest.mock("../../../../src/hooks/useBook");
-const mockedUseBook = useBook as jest.MockedFunction<typeof useBook>;
+const mUseBook = useBook as jest.MockedFunction<typeof useBook>;
 
 describe("BookDetails ", () => {
     it("renders correctly", () => {
-        mockedUseBook.mockReturnValueOnce({
+        mUseBook.mockReturnValueOnce({
             book: {
                 _id: "123",
                 title: "test",
@@ -44,7 +44,7 @@ describe("BookDetails ", () => {
     });
 
     it("renders correctly with no cover image", () => {
-        mockedUseBook.mockReturnValueOnce({
+        mUseBook.mockReturnValueOnce({
             book: {} as Book,
             setBook: jest.fn(),
             isLoading: false,
@@ -59,7 +59,7 @@ describe("BookDetails ", () => {
 
     it("renders error message when no book with given Id is found", () => {
         const errorMsg = "Book Not Found!";
-        mockedUseBook.mockReturnValueOnce({
+        mUseBook.mockReturnValueOnce({
             book: {} as Book,
             setBook: jest.fn(),
             isLoading: false,

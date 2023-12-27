@@ -8,7 +8,7 @@ import useBook from "../../hooks/useBook";
 import { useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
 import { Book } from "../../models/book";
-import HttpService from "../../services/http-service";
+import { httpService } from "../../services/http-service";
 
 const schema = z.object({
     title: z
@@ -97,7 +97,7 @@ const BookForm = () => {
     if (error && id != "new") navigate("/not-found");
 
     const onSubmit = (data: BookData) => {
-        let bookService = new HttpService("/books");
+        let bookService = httpService("/books");
 
         let promise: Promise<{ data: Book }>;
         if (id == "new") {

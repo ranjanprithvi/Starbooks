@@ -47,4 +47,6 @@ class HttpService {
     }
 }
 
-export default HttpService;
+export const httpService = function (endpoint: string) {
+    return new HttpService(endpoint);
+};
