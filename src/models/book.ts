@@ -5,12 +5,12 @@ import { Genre } from "./genre";
 export interface Book {
     _id: string;
     title: string;
-    coverImage?: string;
+    coverImage: string;
     author: Author;
     genre: Genre;
     rating: number;
     yearPublished: number;
-    description?: string;
+    description: string;
     numberInStock: number;
 }
 

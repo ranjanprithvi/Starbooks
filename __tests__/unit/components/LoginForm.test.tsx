@@ -1,11 +1,11 @@
 import "@testing-library/jest-dom";
-import LoginForm from "../../src/components/LoginForm";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { userEvent } from "@testing-library/user-event";
+import LoginForm from "../../../src/components/LoginForm";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import { LoginContext } from "../../src/contexts/loginContext";
-import apiClient from "../../src/services/api-client";
-import { useToast } from "../../src/hooks/generic/useToast";
+import { LoginContext } from "../../../src/contexts/loginContext";
+import apiClient from "../../../src/services/api-client";
+import { useToast } from "../../../src/hooks/generic/useToast";
+import React from "react";
 // import mockAxios from "jest-mock-axios";
 
 const correctEmail = "correctEmail@starbooks.com";
@@ -23,13 +23,13 @@ Object.defineProperty(window, "location", {
 });
 
 //mock apiClient
-jest.mock("../../src/services/api-client");
+jest.mock("../../../src/services/api-client");
 const mockedApiClient = apiClient as jest.Mocked<typeof apiClient>;
 
 //mock useToast
 const mockedShowError = jest.fn();
 const mockedShowSuccess = jest.fn();
-jest.mock("../../src/hooks/generic/useToast");
+jest.mock("../../../src/hooks/generic/useToast");
 const mockedUseToast = useToast as jest.MockedFunction<typeof useToast>;
 mockedUseToast.mockReturnValue({
     showError: mockedShowError,

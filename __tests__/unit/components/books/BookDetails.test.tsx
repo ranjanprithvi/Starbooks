@@ -1,11 +1,11 @@
-/* eslint-env jest */
+import React from "react";
 import "@testing-library/jest-dom";
 import renderer from "react-test-renderer";
 import { render, screen } from "@testing-library/react";
 
-import BookDetails from "../../../src/components/Books/BookDetails";
-import { Book, defaultBookCover } from "../../../src/models/book";
-import useBook from "../../../src/hooks/useBook";
+import BookDetails from "../../../../src/components/Books/BookDetails";
+import { Book, defaultBookCover } from "../../../../src/models/book";
+import useBook from "../../../../src/hooks/useBook";
 
 //mock useParams
 const mockedUseParams = jest.fn();
@@ -16,7 +16,7 @@ jest.mock("react-router-dom", () => ({
 mockedUseParams.mockReturnValue({ id: "123" });
 
 //mock useBook
-jest.mock("../../../src/hooks/useBook");
+jest.mock("../../../../src/hooks/useBook");
 const mockedUseBook = useBook as jest.MockedFunction<typeof useBook>;
 
 describe("BookDetails ", () => {

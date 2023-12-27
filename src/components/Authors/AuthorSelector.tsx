@@ -16,13 +16,22 @@ interface Props {
     size?: string;
 }
 
-const AuthorSelector = ({ selectedAuthor, onSelectAuthor, size }: Props) => {
+const AuthorSelector = ({
+    selectedAuthor,
+    onSelectAuthor,
+    size = "md",
+}: Props) => {
     const { authors, error } = useAuthors();
     if (error) return null;
 
     return (
         <Menu>
-            <MenuButton as={Button} size={size} rightIcon={<BsChevronDown />}>
+            <MenuButton
+                as={Button}
+                size={size}
+                rightIcon={<BsChevronDown />}
+                data-testid="author-menubutton"
+            >
                 {" "}
                 {selectedAuthor ? selectedAuthor.name : "All Authors"}
             </MenuButton>

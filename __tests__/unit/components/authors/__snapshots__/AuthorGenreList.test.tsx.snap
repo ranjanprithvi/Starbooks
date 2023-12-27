@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthorGenreList renders correctly 1`] = `
+<div
+  className="css-v3bkq2"
+>
+  <div
+    className="css-qaksvd"
+  >
+    <div
+      className="chakra-stack css-12gdbjn"
+    >
+      <h2
+        className="chakra-heading css-0"
+      >
+         
+        Authors
+      </h2>
+      <ul
+        className="css-152zwno"
+        role="list"
+      >
+        <li
+          className="css-cs8ahz"
+        >
+          <div
+            className="css-0"
+          >
+            author1
+          </div>
+          <button
+            className="chakra-button css-4xx2wk"
+            onClick={[Function]}
+            type="button"
+          >
+            -
+          </button>
+        </li>
+        <li
+          className="css-cs8ahz"
+        >
+          <div
+            className="css-0"
+          >
+            author2
+          </div>
+          <button
+            className="chakra-button css-4xx2wk"
+            onClick={[Function]}
+            type="button"
+          >
+            -
+          </button>
+        </li>
+      </ul>
+      <div
+        className="chakra-stack css-v3ng2i"
+      >
+        <input
+          className="chakra-input css-0"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          placeholder="Enter new author.."
+        />
+        <button
+          className="chakra-button css-kl83lb"
+          data-testid="add-author-button"
+          onClick={[Function]}
+          type="button"
+        >
+          Add 
+          author
+        </button>
+      </div>
+    </div>
+    <div
+      className="chakra-stack css-12gdbjn"
+    >
+      <h2
+        className="chakra-heading css-0"
+      >
+         
+        Genres
+      </h2>
+      <ul
+        className="css-152zwno"
+        role="list"
+      >
+        <li
+          className="css-cs8ahz"
+        >
+          <div
+            className="css-0"
+          >
+            genre1
+          </div>
+          <button
+            className="chakra-button css-4xx2wk"
+            onClick={[Function]}
+            type="button"
+          >
+            -
+          </button>
+        </li>
+        <li
+          className="css-cs8ahz"
+        >
+          <div
+            className="css-0"
+          >
+            genre2
+          </div>
+          <button
+            className="chakra-button css-4xx2wk"
+            onClick={[Function]}
+            type="button"
+          >
+            -
+          </button>
+        </li>
+      </ul>
+      <div
+        className="chakra-stack css-v3ng2i"
+      >
+        <input
+          className="chakra-input css-0"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          placeholder="Enter new genre.."
+        />
+        <button
+          className="chakra-button css-kl83lb"
+          data-testid="add-genre-button"
+          onClick={[Function]}
+          type="button"
+        >
+          Add 
+          genre
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

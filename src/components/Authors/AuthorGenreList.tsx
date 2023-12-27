@@ -128,6 +128,7 @@ const AuthorGenreList = () => {
                                 placeholder={`Enter new ${list.name}..`}
                             />
                             <Button
+                                data-testid={`add-${list.name}-button`}
                                 colorScheme="teal"
                                 paddingX="8"
                                 onClick={() => {

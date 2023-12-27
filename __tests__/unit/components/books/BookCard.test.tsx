@@ -1,8 +1,8 @@
+import React from "react";
 import renderer from "react-test-renderer";
 import { render, screen } from "@testing-library/react";
-
-import BookCard from "../../../src/components/Books/BookCard";
-import { defaultBookCover } from "../../../src/models/book";
+import BookCard from "../../../../src/components/Books/BookCard";
+import { defaultBookCover } from "../../../../src/models/book";
 
 describe("BookCard", () => {
     it("renders correctly", () => {
@@ -36,6 +36,7 @@ describe("BookCard", () => {
                     author: { _id: "1", name: "author1" },
                     genre: { _id: "1", name: "genre1" },
                     yearPublished: 2021,
+                    coverImage: "",
                     rating: 5,
                     description: "test",
                     numberInStock: 1,
