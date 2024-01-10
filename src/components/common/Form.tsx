@@ -124,10 +124,10 @@ const Form = <T extends FieldValues>({
         return (
             <FormControl>
                 <FormLabel htmlFor={name}>{label}</FormLabel>
-                <Select placeholder={placeholder} {...register(name)}>
+                <Select placeholder={placeholder} {...register(name)} id={name}>
                     {options?.map((option) => (
                         <option
-                            key={option.value}
+                            key={label + "_" + option.value}
                             value={option.value}
                             disabled={option.disabled}
                         >

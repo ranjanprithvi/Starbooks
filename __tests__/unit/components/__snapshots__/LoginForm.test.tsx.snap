@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm renders 1`] = `
+<div
+  className="css-piyoho"
+>
+  <div
+    className="css-1e29myf"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <div
+        className="chakra-stack css-tl3ftk"
+      >
+        <h2
+          className="chakra-heading css-r7q7qr"
+        >
+          Login
+        </h2>
+        <div
+          className="chakra-form-control css-h82jag"
+          role="group"
+        >
+          <div
+            className="chakra-form-control css-0"
+            role="group"
+          >
+            <label
+              className="chakra-form__label css-uvho5g"
+              htmlFor="email"
+              id="field-:r1:-label"
+            >
+              Email
+            </label>
+            <input
+              className="chakra-input css-0"
+              disabled={false}
+              id="email"
+              name="email"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={false}
+              required={false}
+              step="any"
+            />
+          </div>
+        </div>
+        <div
+          className="chakra-form-control css-h82jag"
+          role="group"
+        >
+          <div
+            className="chakra-form-control css-0"
+            role="group"
+          >
+            <label
+              className="chakra-form__label css-uvho5g"
+              htmlFor="password"
+              id="field-:r3:-label"
+            >
+              Password
+            </label>
+            <input
+              className="chakra-input css-0"
+              disabled={false}
+              id="password"
+              name="password"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={false}
+              required={false}
+              step="any"
+              type="password"
+            />
+          </div>
+        </div>
+        <div
+          className="chakra-stack css-mogqpi"
+        >
+          <button
+            className="chakra-button css-4xx2wk"
+            id="submit"
+            type="submit"
+          >
+            Submit
+          </button>
+          <button
+            className="chakra-button css-4xx2wk"
+            onClick={[Function]}
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+`;

@@ -1,5 +1,5 @@
 import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
-import Rating from "./Rating";
+import Rating from "../common/Rating";
 import { Book, defaultBookCover } from "../../models/book";
 
 interface Props {
@@ -13,6 +13,7 @@ const BookCard = ({ book }: Props) => {
             borderRadius={10}
             overflow="hidden"
             boxShadow={"2xl"}
+            id={`bookCard-${book._id}`}
         >
             <Image
                 src={book.coverImage || defaultBookCover}

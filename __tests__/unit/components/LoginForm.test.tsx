@@ -1,10 +1,14 @@
 import "@testing-library/jest-dom";
+import renderer from "react-test-renderer";
 import LoginForm from "../../../src/components/LoginForm";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { LoginContext } from "../../../src/contexts/loginContext";
 import apiClient from "../../../src/services/api-client";
-import { useToast } from "../../../src/hooks/generic/useToast";
+// import {
+//     mShowError,
+//     mShowSuccess,
+// } from "../../../src/hooks/generic/__mocks__/useToast";
 import React from "react";
 // import mockAxios from "jest-mock-axios";
 
@@ -22,19 +26,16 @@ Object.defineProperty(window, "location", {
     },
 });
 
+//mock useToast
+const mToast = jest.fn();
+jest.mock("@chakra-ui/react", () => ({
+    ...(jest.requireActual("@chakra-ui/react") as any),
+    useToast: () => mToast,
+}));
+
 //mock apiClient
 jest.mock("../../../src/services/api-client");
 const mApiClient = apiClient as jest.Mocked<typeof apiClient>;
-
-//mock useToast
-const mShowError = jest.fn();
-const mShowSuccess = jest.fn();
-jest.mock("../../../src/hooks/generic/useToast");
-const mUseToast = useToast as jest.MockedFunction<typeof useToast>;
-mUseToast.mockReturnValue({
-    showError: mShowError,
-    showSuccess: mShowSuccess,
-});
 
 //mock useNavigate
 const mUseNavigate = jest.fn();
@@ -49,12 +50,8 @@ afterEach(() => {
 
 describe("LoginForm", () => {
     it("renders", async () => {
-        render(<LoginForm />);
-
-        expect(screen.getByText(/email/i)).toBeInTheDocument();
-        expect(screen.getByText(/password/i)).toBeInTheDocument();
-        expect(screen.getByText(/submit/i)).toBeInTheDocument();
-        expect(screen.getByText(/cancel/i)).toBeInTheDocument();
+        const tree = renderer.create(<LoginForm />).toJSON();
+        expect(tree).toMatchSnapshot();
     });
 
     it("calls the post method with the credentials when both email and password are entered", async () => {
@@ -182,11 +179,13 @@ describe("LoginForm", () => {
             loginButton.click();
         });
 
-        expect(mShowError).toHaveBeenCalledWith(message);
+        expect(mToast).toHaveBeenCalledWith(message);
 
-        // expect(
-        //     await screen.findByText(/invalid username or password/i)
-        // ).toBeInTheDocument();
+        // await waitFor(() =>
+        //     expect(
+        //         screen.getByText(/invalid/i, { exact: false })
+        //     ).toBeInTheDocument()
+        // );
     });
 
     it("displays error message in case of network error", async () => {
@@ -225,7 +224,10 @@ describe("LoginForm", () => {
             loginButton.click();
         });
 
-        expect(mShowError).toHaveBeenCalledWith(message);
+        expect(mToast).toHaveBeenCalledWith(message);
+        // await waitFor(() =>
+        //     expect(screen.findByText(message)).toBeInTheDocument()
+        // );
     });
 
     it("navigates to previous screen when canceled", async () => {

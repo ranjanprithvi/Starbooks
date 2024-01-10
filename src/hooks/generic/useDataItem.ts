@@ -16,7 +16,13 @@ function useDataItem<T extends Entity>(
         setLoading(true);
 
         const dataService = httpService(path);
-        const { request, cancel } = dataService.get<T>(id, query);
+        const { request, cancel } =
+            id == "new"
+                ? {
+                      request: Promise.resolve({ data: {} as T }),
+                      cancel: () => {},
+                  }
+                : dataService.get<T>(id, query);
 
         request
             .then((res) => {

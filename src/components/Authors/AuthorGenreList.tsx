@@ -10,7 +10,6 @@ import {
     Input,
     List,
     ListItem,
-    MenuItem,
     VStack,
     useToast,
 } from "@chakra-ui/react";

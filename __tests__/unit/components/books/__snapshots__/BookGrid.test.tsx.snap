@@ -1,0 +1,608 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Books renders correctly 1`] = `
+<div
+  className="css-qfa1zt"
+>
+  <div
+    className="chakra-stack css-1bbwvbl"
+  >
+    <div
+      className="chakra-input__group css-1wyvqr1"
+      data-group={true}
+    >
+      <div
+        className="chakra-input__left-element css-1u2k0bl"
+        size="sm"
+      >
+        <svg
+          color="gray.600"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            {
+              "color": "gray.600",
+            }
+          }
+          viewBox="0 0 16 16"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+          />
+        </svg>
+      </div>
+      <input
+        className="chakra-input css-1n93v3n"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="Search Books..."
+        type="text"
+      />
+    </div>
+  </div>
+  <div
+    className="chakra-stack css-1tpkgwq"
+  >
+    <button
+      aria-controls="menu-list-:r1:"
+      aria-expanded={false}
+      aria-haspopup="menu"
+      className="chakra-button chakra-menu__menu-button css-4xx2wk"
+      data-testid="author-menubutton"
+      id="menu-button-:r1:"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      type="button"
+    >
+      <span
+        className="css-xl71ch"
+      >
+         
+        All Authors
+      </span>
+      <span
+        className="chakra-button__icon css-1hzyiq5"
+      >
+        <svg
+          aria-hidden={true}
+          fill="currentColor"
+          focusable={false}
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 16 16"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+            fillRule="evenodd"
+          />
+        </svg>
+      </span>
+    </button>
+    <div
+      className="css-0"
+      style={
+        {
+          "inset": "0 auto auto 0",
+          "minWidth": "max-content",
+          "position": "absolute",
+          "visibility": "hidden",
+        }
+      }
+    >
+      <div
+        aria-orientation="vertical"
+        className="chakra-menu__menu-list css-1f1guri"
+        id="menu-list-:r1:"
+        onKeyDown={[Function]}
+        role="menu"
+        style={
+          {
+            "opacity": 0,
+            "transform": "scale(0.8) translateZ(0)",
+            "transformOrigin": "var(--popper-transform-origin)",
+            "visibility": "hidden",
+          }
+        }
+        tabIndex={-1}
+      >
+        <button
+          className="chakra-menu__menuitem css-1k756t9"
+          id="menu-list-:r1:-menuitem-:r2:"
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseMove={[Function]}
+          role="menuitem"
+          tabIndex={0}
+          type="button"
+        >
+          All Authors
+        </button>
+        <hr
+          aria-orientation="horizontal"
+          className="chakra-divider css-kd8ssf"
+        />
+      </div>
+    </div>
+    <button
+      aria-controls="menu-list-:r4:"
+      aria-expanded={false}
+      aria-haspopup="menu"
+      className="chakra-button chakra-menu__menu-button css-4xx2wk"
+      id="menu-button-:r4:"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      type="button"
+    >
+      <span
+        className="css-xl71ch"
+      >
+        Order By: Date Added
+      </span>
+      <span
+        className="chakra-button__icon css-1hzyiq5"
+      >
+        <svg
+          aria-hidden={true}
+          fill="currentColor"
+          focusable={false}
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 16 16"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+            fillRule="evenodd"
+          />
+        </svg>
+      </span>
+    </button>
+    <div
+      className="css-0"
+      style={
+        {
+          "inset": "0 auto auto 0",
+          "minWidth": "max-content",
+          "position": "absolute",
+          "visibility": "hidden",
+        }
+      }
+    >
+      <div
+        aria-orientation="vertical"
+        className="chakra-menu__menu-list css-sjt5nk"
+        id="menu-list-:r4:"
+        onKeyDown={[Function]}
+        role="menu"
+        style={
+          {
+            "opacity": 0,
+            "transform": "scale(0.8) translateZ(0)",
+            "transformOrigin": "var(--popper-transform-origin)",
+            "visibility": "hidden",
+          }
+        }
+        tabIndex={-1}
+      >
+        <button
+          className="chakra-menu__menuitem css-1k756t9"
+          id="menu-list-:r4:-menuitem-:r5:"
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseMove={[Function]}
+          role="menuitem"
+          tabIndex={0}
+          type="button"
+        >
+          Date Added
+        </button>
+        <button
+          className="chakra-menu__menuitem css-1k756t9"
+          id="menu-list-:r4:-menuitem-:r6:"
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseMove={[Function]}
+          role="menuitem"
+          tabIndex={0}
+          type="button"
+        >
+          Title
+        </button>
+        <button
+          className="chakra-menu__menuitem css-1k756t9"
+          id="menu-list-:r4:-menuitem-:r7:"
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseMove={[Function]}
+          role="menuitem"
+          tabIndex={0}
+          type="button"
+        >
+          Rating
+        </button>
+        <button
+          className="chakra-menu__menuitem css-1k756t9"
+          id="menu-list-:r4:-menuitem-:r8:"
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseMove={[Function]}
+          role="menuitem"
+          tabIndex={0}
+          type="button"
+        >
+          Year Published
+        </button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      className="css-18nly56"
+    >
+      <a
+        href="/bookDetails/65987aa9e6b72d92ddcc1754"
+        onClick={[Function]}
+      >
+        <div
+          className="chakra-card css-12r5yzq"
+          id="bookCard-65987aa9e6b72d92ddcc1754"
+        >
+          <img
+            className="chakra-image css-1ec1yfo"
+            src="/src/assets/default-no-cover.jpeg"
+          />
+          <div
+            className="chakra-card__body css-0"
+          >
+            <h2
+              className="chakra-heading css-119ujjf"
+            >
+              asdf (1232)
+            </h2>
+            <div
+              className="chakra-stack css-1y3f6ad"
+            >
+              <p
+                className="chakra-text css-ax9bdp"
+              >
+                Autocar
+              </p>
+              <span
+                className="chakra-badge css-4z4zi4"
+              >
+                0
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a
+        href="/bookDetails/651becad552934bbabb7bdd5"
+        onClick={[Function]}
+      >
+        <div
+          className="chakra-card css-12r5yzq"
+          id="bookCard-651becad552934bbabb7bdd5"
+        >
+          <img
+            className="chakra-image css-1ec1yfo"
+            src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1389733809i/16319.jpg"
+          />
+          <div
+            className="chakra-card__body css-0"
+          >
+            <h2
+              className="chakra-heading css-119ujjf"
+            >
+              The Body in the Library (1945)
+            </h2>
+            <div
+              className="chakra-stack css-1y3f6ad"
+            >
+              <p
+                className="chakra-text css-ax9bdp"
+              >
+                Agatha Christie
+              </p>
+              <span
+                className="chakra-badge css-4z4zi4"
+              >
+                3.83
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a
+        href="/bookDetails/651765abb66bbab77eb9ed5b"
+        onClick={[Function]}
+      >
+        <div
+          className="chakra-card css-12r5yzq"
+          id="bookCard-651765abb66bbab77eb9ed5b"
+        >
+          <img
+            className="chakra-image css-1ec1yfo"
+            src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1486131451i/853510.jpg"
+          />
+          <div
+            className="chakra-card__body css-0"
+          >
+            <h2
+              className="chakra-heading css-119ujjf"
+            >
+              Murder on the Orient Express (1934)
+            </h2>
+            <div
+              className="chakra-stack css-1y3f6ad"
+            >
+              <p
+                className="chakra-text css-ax9bdp"
+              >
+                Agatha Christie
+              </p>
+              <span
+                className="chakra-badge css-4z4zi4"
+              >
+                4.2
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a
+        href="/bookDetails/651760180012d3fa25b3ddba"
+        onClick={[Function]}
+      >
+        <div
+          className="chakra-card css-12r5yzq"
+          id="bookCard-651760180012d3fa25b3ddba"
+        >
+          <img
+            className="chakra-image css-1ec1yfo"
+            src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1302053718i/9858081.jpg"
+          />
+          <div
+            className="chakra-card__body css-0"
+          >
+            <h2
+              className="chakra-heading css-119ujjf"
+            >
+              The Code of the Woosters (1938)
+            </h2>
+            <div
+              className="chakra-stack css-1y3f6ad"
+            >
+              <p
+                className="chakra-text css-ax9bdp"
+              >
+                P.G Wodehouse
+              </p>
+              <span
+                className="chakra-badge css-4z4zi4"
+              >
+                4.32
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a
+        href="/bookDetails/651486abc59681a0aa4771ed"
+        onClick={[Function]}
+      >
+        <div
+          className="chakra-card css-12r5yzq"
+          id="bookCard-651486abc59681a0aa4771ed"
+        >
+          <img
+            className="chakra-image css-1ec1yfo"
+            src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1579036753i/77203.jpg"
+          />
+          <div
+            className="chakra-card__body css-0"
+          >
+            <h2
+              className="chakra-heading css-119ujjf"
+            >
+              The Kite Runner (2003)
+            </h2>
+            <div
+              className="chakra-stack css-1y3f6ad"
+            >
+              <p
+                className="chakra-text css-ax9bdp"
+              >
+                Khaled Hosseini
+              </p>
+              <span
+                className="chakra-badge css-4z4zi4"
+              >
+                4.34
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a
+        href="/bookDetails/651485f0c59681a0aa4771df"
+        onClick={[Function]}
+      >
+        <div
+          className="chakra-card css-12r5yzq"
+          id="bookCard-651485f0c59681a0aa4771df"
+        >
+          <img
+            className="chakra-image css-1ec1yfo"
+            src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1390886502i/7664041.jpg"
+          />
+          <div
+            className="chakra-card__body css-0"
+          >
+            <h2
+              className="chakra-heading css-119ujjf"
+            >
+              Inheritance (2011)
+            </h2>
+            <div
+              className="chakra-stack css-1y3f6ad"
+            >
+              <p
+                className="chakra-text css-ax9bdp"
+              >
+                Christopher Paolini
+              </p>
+              <span
+                className="chakra-badge css-4z4zi4"
+              >
+                4.13
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a
+        href="/bookDetails/651452f1c59681a0aa477199"
+        onClick={[Function]}
+      >
+        <div
+          className="chakra-card css-12r5yzq"
+          id="bookCard-651452f1c59681a0aa477199"
+        >
+          <img
+            className="chakra-image css-1ec1yfo"
+            src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1661030683i/2248573.jpg"
+          />
+          <div
+            className="chakra-card__body css-0"
+          >
+            <h2
+              className="chakra-heading css-119ujjf"
+            >
+              Brisinger (2008)
+            </h2>
+            <div
+              className="chakra-stack css-1y3f6ad"
+            >
+              <p
+                className="chakra-text css-ax9bdp"
+              >
+                Christopher Paolini
+              </p>
+              <span
+                className="chakra-badge css-4z4zi4"
+              >
+                4.08
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a
+        href="/bookDetails/65145251c59681a0aa47718b"
+        onClick={[Function]}
+      >
+        <div
+          className="chakra-card css-12r5yzq"
+          id="bookCard-65145251c59681a0aa47718b"
+        >
+          <img
+            className="chakra-image css-1ec1yfo"
+            src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1387119654i/45978.jpg"
+          />
+          <div
+            className="chakra-card__body css-0"
+          >
+            <h2
+              className="chakra-heading css-119ujjf"
+            >
+              Eldest (2005)
+            </h2>
+            <div
+              className="chakra-stack css-1y3f6ad"
+            >
+              <p
+                className="chakra-text css-ax9bdp"
+              >
+                Christopher Paolini
+              </p>
+              <span
+                className="chakra-badge css-4z4zi4"
+              >
+                4.02
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a
+        href="/bookDetails/65145107c59681a0aa477174"
+        onClick={[Function]}
+      >
+        <div
+          className="chakra-card css-12r5yzq"
+          id="bookCard-65145107c59681a0aa477174"
+        >
+          <img
+            className="chakra-image css-1ec1yfo"
+            src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1309211607i/6687.jpg"
+          />
+          <div
+            className="chakra-card__body css-0"
+          >
+            <h2
+              className="chakra-heading css-119ujjf"
+            >
+              Charlie and the great glass elevator (1972)
+            </h2>
+            <div
+              className="chakra-stack css-1y3f6ad"
+            >
+              <p
+                className="chakra-text css-ax9bdp"
+              >
+                Roald Dahl
+              </p>
+              <span
+                className="chakra-badge css-4z4zi4"
+              >
+                3.68
+              </span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+`;

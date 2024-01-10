@@ -12,7 +12,7 @@ import Table from "../common/Table";
 import { Rental } from "../../models/rental";
 import useRentals from "../../hooks/useRentals";
 import _ from "lodash";
-import HttpService from "../../services/http-service";
+import { httpService } from "../../services/http-service";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { FaPlus } from "react-icons/fa";
@@ -21,7 +21,7 @@ import { useState } from "react";
 import Modal from "../common/Modal";
 
 export const handleReturned = async (rental: Rental, toast: any) => {
-    let rentalService = new HttpService("/rentals/return");
+    let rentalService = httpService("/rentals/return");
 
     rentalService
         .patch<Rental, Rental>(rental, rental._id)

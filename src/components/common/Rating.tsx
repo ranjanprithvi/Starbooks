@@ -10,10 +10,10 @@ const Rating = ({ rating }: Props) => {
         rating >= 4
             ? "green"
             : rating >= 3.5
-            ? "orange"
-            : rating >= 3
             ? "yellow"
-            : "";
+            : rating >= 3
+            ? "orange"
+            : "red";
 
     return (
         <Badge

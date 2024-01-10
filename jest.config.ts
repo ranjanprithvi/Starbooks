@@ -32,4 +32,5 @@ export default {
         "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/__mocks__/fileMock.js",
         "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
     },
+    // setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
 };

@@ -20,6 +20,7 @@ import { defaultBookCover } from "../../models/book";
 
 const BookDetails = () => {
     const { id } = useParams();
+    if (!id) return <Text>Book Not Found!</Text>;
     const { isLoggedIn, isAdmin } = useContext(LoginContext);
 
     const {

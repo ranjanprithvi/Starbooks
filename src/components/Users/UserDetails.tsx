@@ -33,6 +33,8 @@ const UserDetails = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [rentalToReturn, setRentalToReturn] = useState<Rental>({} as Rental);
 
+    if (!id) return null;
+
     const { user, isLoading, error } = useUser(id);
 
     if (error) return <Text>User Not Found!</Text>;

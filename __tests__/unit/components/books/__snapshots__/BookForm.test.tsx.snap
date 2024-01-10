@@ -1,0 +1,361 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BookForm renders 1`] = `
+<div
+  className="css-3xydd0"
+>
+  <div
+    className="css-zmtksu"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <div
+        className="chakra-stack css-tl3ftk"
+      >
+        <h2
+          className="chakra-heading css-r7q7qr"
+        >
+          Edit Book
+        </h2>
+        <div
+          className="chakra-form-control css-h82jag"
+          role="group"
+        >
+          <div
+            className="chakra-form-control css-0"
+            role="group"
+          >
+            <label
+              className="chakra-form__label css-uvho5g"
+              htmlFor="title"
+              id="field-:r1:-label"
+            >
+              Title
+            </label>
+            <input
+              className="chakra-input css-0"
+              disabled={false}
+              id="title"
+              name="title"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={false}
+              required={false}
+              step="any"
+            />
+          </div>
+        </div>
+        <div
+          className="chakra-form-control css-h82jag"
+          role="group"
+        >
+          <div
+            className="chakra-form-control css-0"
+            role="group"
+          >
+            <label
+              className="chakra-form__label css-uvho5g"
+              htmlFor="author"
+              id="field-:r3:-label"
+            >
+              Author
+            </label>
+            <div
+              className="chakra-select__wrapper css-42b2qy"
+            >
+              <select
+                className="chakra-select css-1ik61og"
+                disabled={false}
+                id="author"
+                name="author"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={false}
+                required={false}
+              >
+                <option
+                  value=""
+                >
+                  --Select author--
+                </option>
+                <option
+                  value="1"
+                >
+                  author1
+                </option>
+                <option
+                  value="2"
+                >
+                  author2
+                </option>
+              </select>
+              <div
+                className="chakra-select__icon-wrapper css-162mkon"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="chakra-select__icon"
+                  focusable={false}
+                  role="presentation"
+                  style={
+                    {
+                      "color": "currentColor",
+                      "height": "1em",
+                      "width": "1em",
+                    }
+                  }
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="chakra-form-control css-h82jag"
+          role="group"
+        >
+          <div
+            className="chakra-form-control css-0"
+            role="group"
+          >
+            <label
+              className="chakra-form__label css-uvho5g"
+              htmlFor="genre"
+              id="field-:r5:-label"
+            >
+              Genre
+            </label>
+            <div
+              className="chakra-select__wrapper css-42b2qy"
+            >
+              <select
+                className="chakra-select css-1ik61og"
+                disabled={false}
+                id="genre"
+                name="genre"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={false}
+                required={false}
+              >
+                <option
+                  value=""
+                >
+                  --Select genre--
+                </option>
+                <option
+                  value="1"
+                >
+                  genre1
+                </option>
+                <option
+                  value="2"
+                >
+                  genre2
+                </option>
+              </select>
+              <div
+                className="chakra-select__icon-wrapper css-162mkon"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="chakra-select__icon"
+                  focusable={false}
+                  role="presentation"
+                  style={
+                    {
+                      "color": "currentColor",
+                      "height": "1em",
+                      "width": "1em",
+                    }
+                  }
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="chakra-form-control css-h82jag"
+          role="group"
+        >
+          <div
+            className="chakra-form-control css-0"
+            role="group"
+          >
+            <label
+              className="chakra-form__label css-uvho5g"
+              htmlFor="yearPublished"
+              id="field-:r7:-label"
+            >
+              Year Published
+            </label>
+            <input
+              className="chakra-input css-0"
+              disabled={false}
+              id="yearPublished"
+              name="yearPublished"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={false}
+              required={false}
+              step="any"
+              type="number"
+            />
+          </div>
+        </div>
+        <div
+          className="chakra-form-control css-h82jag"
+          role="group"
+        >
+          <div
+            className="chakra-form-control css-0"
+            role="group"
+          >
+            <label
+              className="chakra-form__label css-uvho5g"
+              htmlFor="rating"
+              id="field-:r9:-label"
+            >
+              Rating
+            </label>
+            <input
+              className="chakra-input css-0"
+              disabled={false}
+              id="rating"
+              name="rating"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={false}
+              required={false}
+              step="any"
+              type="number"
+            />
+          </div>
+        </div>
+        <div
+          className="chakra-form-control css-h82jag"
+          role="group"
+        >
+          <div
+            className="chakra-form-control css-0"
+            role="group"
+          >
+            <label
+              className="chakra-form__label css-uvho5g"
+              htmlFor="numberInStock"
+              id="field-:rb:-label"
+            >
+              Number in Stock
+            </label>
+            <input
+              className="chakra-input css-0"
+              disabled={false}
+              id="numberInStock"
+              name="numberInStock"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={false}
+              required={false}
+              step="any"
+              type="number"
+            />
+          </div>
+        </div>
+        <div
+          className="chakra-form-control css-h82jag"
+          role="group"
+        >
+          <div
+            className="chakra-form-control css-0"
+            role="group"
+          >
+            <label
+              className="chakra-form__label css-uvho5g"
+              htmlFor="coverImage"
+              id="field-:rd:-label"
+            >
+              Cover Image
+            </label>
+            <input
+              className="chakra-input css-0"
+              disabled={false}
+              id="coverImage"
+              name="coverImage"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={false}
+              required={false}
+              step="any"
+            />
+          </div>
+        </div>
+        <div
+          className="chakra-form-control css-h82jag"
+          role="group"
+        >
+          <div
+            className="chakra-form-control css-0"
+            role="group"
+          >
+            <label
+              className="chakra-form__label css-uvho5g"
+              htmlFor="description"
+              id="field-:rf:-label"
+            >
+              Description
+            </label>
+            <textarea
+              className="chakra-textarea css-0"
+              disabled={false}
+              id="description"
+              name="description"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={false}
+              required={false}
+            />
+          </div>
+        </div>
+        <div
+          className="chakra-stack css-mogqpi"
+        >
+          <button
+            className="chakra-button css-4xx2wk"
+            id="submit"
+            type="submit"
+          >
+            Submit
+          </button>
+          <button
+            className="chakra-button css-4xx2wk"
+            onClick={[Function]}
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+`;

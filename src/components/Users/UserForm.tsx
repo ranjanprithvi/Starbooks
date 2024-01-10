@@ -4,7 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate, useParams } from "react-router-dom";
 import _ from "lodash";
-import HttpService from "../../services/http-service";
+import { httpService } from "../../services/http-service";
 import { User } from "../../models/user";
 import useUser from "../../hooks/useUser";
 import moment from "moment";
@@ -83,7 +83,7 @@ const UserForm = () => {
         maxBorrow: user.maxBorrow,
     };
 
-    if (error && id != "new") navigate("/not-found");
+    if (error) navigate("/not-found");
 
     const onSubmit = (data: UserData) => {
         const dataDTO = {
@@ -91,7 +91,7 @@ const UserForm = () => {
             countryCode: data.countryCode?.toString(),
             phoneNumber: data.phoneNumber?.toString(),
         } as UserDTO;
-        let userService = new HttpService("/users");
+        let userService = httpService("/users");
         let promise;
         if (id == "new") {
             data = _.omitBy(data, (value) => {

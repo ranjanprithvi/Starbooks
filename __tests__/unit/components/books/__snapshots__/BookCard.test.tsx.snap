@@ -3,6 +3,7 @@
 exports[`BookCard renders correctly 1`] = `
 <div
   className="chakra-card css-12r5yzq"
+  id="bookCard-123"
 >
   <img
     className="chakra-image css-1ec1yfo"

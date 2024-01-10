@@ -1,11 +1,7 @@
 import { User, UserQuery } from "../models/user";
 import useDataItem from "./generic/useDataItem";
 
-const useUser = (
-    id: string = "new",
-    query: UserQuery = {},
-    deps: any[] = []
-) => {
+const useUser = (id: string, query: UserQuery = {}, deps: any[] = []) => {
     const {
         data: user,
         setData: setUser,

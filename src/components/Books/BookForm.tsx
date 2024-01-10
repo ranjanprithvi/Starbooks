@@ -33,7 +33,9 @@ const schema = z.object({
         .union([
             z
                 .number()
-                .multipleOf(0.01)
+                .multipleOf(0.01, {
+                    message: "Rating must be a multiple of 0.01",
+                })
                 .min(0, { message: "Rating must be between 0 and 5" })
                 .max(5, {
                     message: "Rating must be between 0 and 5",
@@ -59,7 +61,7 @@ const schema = z.object({
     description: z.string().optional(),
 });
 
-type BookData = z.infer<typeof schema>;
+export type BookData = z.infer<typeof schema>;
 
 const BookForm = () => {
     const navigate = useNavigate();
@@ -94,7 +96,7 @@ const BookForm = () => {
     //     } as BookData;
     // }
 
-    if (error && id != "new") navigate("/not-found");
+    if (error) navigate("/not-found");
 
     const onSubmit = (data: BookData) => {
         let bookService = httpService("/books");
@@ -103,6 +105,7 @@ const BookForm = () => {
         if (id == "new") {
             data = _.omitBy(data, (value) => !value) as BookData;
             promise = bookService.post<BookData, Book>(data);
+            // console.log("wtv");
         } else {
             Number.isNaN(data.rating) && (data.rating = 0);
             Number.isNaN(data.numberInStock) && (data.numberInStock = 0);
@@ -171,7 +174,7 @@ const BookForm = () => {
             type: "textInput",
             label: "Cover Image",
             name: "coverImage",
-            inputType: "url",
+            // inputType: "url",
         },
         {
             type: "textArea",
