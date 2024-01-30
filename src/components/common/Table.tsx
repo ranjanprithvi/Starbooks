@@ -1,7 +1,6 @@
 import {
     Table as ChakraTable,
     TableContainer,
-    TableCaption,
     Thead,
     Tr,
     Th,
@@ -9,10 +8,8 @@ import {
     Td,
     VStack,
     Spinner,
-    Divider,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
-import _ from "lodash";
 
 export interface TableRowData {
     value?: string | number | boolean;
@@ -67,21 +64,6 @@ const Table = ({ data, headers, isLoading, ...rest }: Props) => {
                                     </Tr>
                                 );
                             })}
-                            {/* <Tr>
-                        <Td>inches</Td>
-                        <Td>millimetres (mm)</Td>
-                        <Td isNumeric>25.4</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>feet</Td>
-                        <Td>centimetres (cm)</Td>
-                        <Td isNumeric>30.48</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>yards</Td>
-                        <Td>metres (m)</Td>
-                        <Td isNumeric>0.91444</Td>
-                    </Tr> */}
                         </Tbody>
                     </ChakraTable>
                 )}

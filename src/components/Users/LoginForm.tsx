@@ -1,11 +1,11 @@
 import { Box, GridItem, useToast } from "@chakra-ui/react";
-import Form, { Field } from "./common/Form";
+import Form, { Field } from "../common/Form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import _ from "lodash";
 import { useContext } from "react";
-import { LoginContext } from "../contexts/loginContext";
-import { httpService } from "../services/http-service";
+import { LoginContext } from "../../contexts/loginContext";
+import { httpService } from "../../services/http-service";
 // import useToast from "../hooks/generic/useToast";
 
 const schema = z.object({

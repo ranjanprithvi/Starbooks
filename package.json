@@ -7,7 +7,7 @@
         "dev": "vite",
         "build": "rimraf dist && npx tsc && vite build",
         "preview": "vite preview",
-        "test": "jest --watchAll --verbose --runInBand --detectOpenHandles --coverage",
+        "test": "jest --verbose --runInBand --detectOpenHandles --coverage",
         "snapshotupdate": "jest -u"
     },
     "dependencies": {

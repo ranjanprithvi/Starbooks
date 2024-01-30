@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionTable renders correctly 1`] = `
+<div
+  className="chakra-accordion css-0"
+>
+  <div
+    className="chakra-accordion__item css-1fsnuue"
+  >
+    <h2>
+      <button
+        aria-controls="accordion-panel-:r0:"
+        aria-expanded={false}
+        className="chakra-accordion__button css-186sw4d"
+        disabled={false}
+        id="accordion-button-:r0:"
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        type="button"
+      >
+        <span
+          className="css-1eziwv"
+        >
+          test
+        </span>
+        <svg
+          aria-hidden={true}
+          className="chakra-icon chakra-accordion__icon css-8o5ky2"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </h2>
+    <div
+      className="chakra-collapse"
+      style={
+        {
+          "display": "none",
+          "height": "0px",
+          "opacity": 0,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <div
+        aria-labelledby="accordion-button-:r0:"
+        className="chakra-accordion__panel css-b0qdn7"
+        id="accordion-panel-:r0:"
+        role="region"
+      >
+        test
+      </div>
+    </div>
+  </div>
+</div>
+`;

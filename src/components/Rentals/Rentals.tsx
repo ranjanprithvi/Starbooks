@@ -46,7 +46,7 @@ const Rentals = () => {
     const [rentalToReturn, setRentalToReturn] = useState<Rental>({} as Rental);
 
     if (error) {
-        return null;
+        return <div>{error}</div>;
     }
 
     const rentalsData = rentals.map((rental) => ({

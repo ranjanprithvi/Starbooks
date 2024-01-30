@@ -1,39 +1,39 @@
-import { bookObj } from "../../data/mockData";
+import { userObj } from "../../data/mockData";
 
-const useBook = jest
+const useUser = jest
     .fn()
     .mockImplementation((id: string, query?: any, deps: any[] = []) => {
         return id == "new"
             ? {
-                  book: {} as typeof bookObj,
-                  setBook: jest.fn(),
+                  user: {} as typeof userObj,
+                  setUser: jest.fn(),
                   isLoading: false,
                   error: "",
                   setError: jest.fn(),
               }
             : id == "noCover"
             ? {
-                  book: { ...bookObj, coverImage: "" },
-                  setBook: jest.fn(),
+                  user: { ...userObj, coverImage: "" },
+                  setUser: jest.fn(),
                   isLoading: false,
                   error: "",
                   setError: jest.fn(),
               }
             : id == "invalid"
             ? {
-                  book: {} as typeof bookObj,
-                  setBook: jest.fn(),
+                  user: {} as typeof userObj,
+                  setUser: jest.fn(),
                   isLoading: false,
                   error: "Something went wrong",
                   setError: jest.fn(),
               }
             : {
-                  book: bookObj,
-                  setBook: jest.fn(),
+                  user: userObj,
+                  setUser: jest.fn(),
                   isLoading: false,
                   error: "",
                   setError: jest.fn(),
               };
     });
 
-export default useBook;
+export default useUser;

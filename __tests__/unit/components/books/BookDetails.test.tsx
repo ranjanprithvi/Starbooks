@@ -13,7 +13,13 @@ jest.mock("../../../../src/hooks/useBook");
 
 describe("BookDetails ", () => {
     it("renders correctly", () => {
-        const tree = renderer.create(<BookDetails />).toJSON();
+        const tree = renderer
+            .create(
+                <MemoryRouter initialEntries={[`/bookDetails/123`]}>
+                    <Routes />
+                </MemoryRouter>
+            )
+            .toJSON();
         expect(tree).toMatchSnapshot();
     });
 

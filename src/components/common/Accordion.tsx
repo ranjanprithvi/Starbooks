@@ -8,17 +8,17 @@ import {
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
-export interface AccordianRowData {
+export interface AccordionRowData {
     mainContent?: string | ReactNode;
     subContent?: string | ReactNode;
 }
 
 interface Props {
-    data: AccordianRowData[];
+    data: AccordionRowData[];
     [key: string]: any;
 }
 
-const Accordion = ({ data, ...rest }: Props) => {
+const AccordionTable = ({ data, ...rest }: Props) => {
     return (
         <ChakraAccordion {...rest} allowToggle>
             {data.map((item) => (
@@ -40,4 +40,4 @@ const Accordion = ({ data, ...rest }: Props) => {
     );
 };
 
-export default Accordion;
+export default AccordionTable;

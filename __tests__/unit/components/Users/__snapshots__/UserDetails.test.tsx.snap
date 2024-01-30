@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BookDetails  renders correctly 1`] = `
+exports[`UserDetails  renders correctly 1`] = `
 <div
   className="css-1foy0fl"
 >
@@ -8,15 +8,28 @@ exports[`BookDetails  renders correctly 1`] = `
     className="css-t517ds"
   >
     <div
-      className="css-ja053v"
+      className="css-1v81ncp"
     >
       <div
-        className="css-1cfqanb"
+        className="css-1gvp5h0"
       >
-        <img
-          className="chakra-image css-1gdciqd"
-          src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1681496408i/58536026.jpg"
+        <hr
+          aria-orientation="horizontal"
+          className="chakra-divider css-1upb9tn"
         />
+        <div
+          className="css-8g2ide"
+        >
+          <div
+            className="css-azx95j"
+          >
+            <h2
+              className="chakra-heading css-0"
+            >
+              test
+            </h2>
+          </div>
+        </div>
       </div>
       <div
         className="css-1gvp5h0"
@@ -26,148 +39,129 @@ exports[`BookDetails  renders correctly 1`] = `
           className="chakra-divider css-1upb9tn"
         />
         <div
-          className="css-1enoi9r"
+          className="css-8hm5fo"
         >
+          <p
+            className="chakra-text css-in3yi3"
+          >
+            Email 
+          </p>
            
+          <p
+            className="chakra-text css-0"
+          >
+            user@starbooks.com
+          </p>
         </div>
       </div>
       <div
         className="css-1gvp5h0"
       >
-         
+        <hr
+          aria-orientation="horizontal"
+          className="chakra-divider css-1upb9tn"
+        />
         <div
-          className="css-azx95j"
+          className="css-8hm5fo"
+        >
+          <p
+            className="chakra-text css-in3yi3"
+          >
+            Phone Number
+          </p>
+           
+          <p
+            className="chakra-text css-0"
+          >
+            +49 1234567890
+          </p>
+        </div>
+      </div>
+      <div
+        className="css-1gvp5h0"
+      >
+        <hr
+          aria-orientation="horizontal"
+          className="chakra-divider css-1upb9tn"
+        />
+        <div
+          className="css-8hm5fo"
+        >
+          <p
+            className="chakra-text css-in3yi3"
+          >
+            Date of Birth: 
+          </p>
+           
+          <p
+            className="chakra-text css-0"
+          >
+            01 Jan 2000
+          </p>
+        </div>
+      </div>
+      <div
+        className="css-1gvp5h0"
+      >
+        <hr
+          aria-orientation="horizontal"
+          className="chakra-divider css-1upb9tn"
+        />
+        <div
+          className="css-8hm5fo"
+        >
+          <p
+            className="chakra-text css-in3yi3"
+          >
+            Membership Expiry: 
+          </p>
+           
+          <p
+            className="chakra-text css-bjcoli"
+          >
+            01 Jan 2031
+          </p>
+        </div>
+      </div>
+      <div
+        className="css-1gvp5h0"
+      >
+        <hr
+          aria-orientation="horizontal"
+          className="chakra-divider css-1upb9tn"
+        />
+        <div
+          className="css-8hm5fo"
+        >
+          <p
+            className="chakra-text css-in3yi3"
+          >
+            Book Limit: 
+          </p>
+           
+          <p
+            className="chakra-text css-0"
+          >
+            2
+          </p>
+        </div>
+      </div>
+      <hr
+        aria-orientation="horizontal"
+        className="chakra-divider css-1upb9tn"
+      />
+      <div
+        className="css-ay71wn"
+      >
+        <div
+          className="chakra-stack css-1y3f6ad"
         >
           <h2
             className="chakra-heading css-0"
           >
-            test
+            Active Rentals
           </h2>
         </div>
-      </div>
-      <div
-        className="css-1gvp5h0"
-      >
-        <hr
-          aria-orientation="horizontal"
-          className="chakra-divider css-1upb9tn"
-        />
-        <div
-          className="css-8hm5fo"
-        >
-          <p
-            className="chakra-text css-in3yi3"
-          >
-            Author: 
-          </p>
-           
-          <p
-            className="chakra-text css-0"
-          >
-            author1
-          </p>
-        </div>
-      </div>
-      <div
-        className="css-1gvp5h0"
-      >
-        <hr
-          aria-orientation="horizontal"
-          className="chakra-divider css-1upb9tn"
-        />
-        <div
-          className="css-8hm5fo"
-        >
-          <p
-            className="chakra-text css-in3yi3"
-          >
-            Year Published: 
-          </p>
-           
-          <p
-            className="chakra-text css-0"
-          >
-            2021
-          </p>
-        </div>
-      </div>
-      <div
-        className="css-1gvp5h0"
-      >
-        <hr
-          aria-orientation="horizontal"
-          className="chakra-divider css-1upb9tn"
-        />
-        <div
-          className="css-8hm5fo"
-        >
-          <p
-            className="chakra-text css-in3yi3"
-          >
-            Genre: 
-          </p>
-           
-          <p
-            className="chakra-text css-0"
-          >
-            genre1
-          </p>
-        </div>
-      </div>
-      <div
-        className="css-1gvp5h0"
-      >
-        <hr
-          aria-orientation="horizontal"
-          className="chakra-divider css-1upb9tn"
-        />
-        <div
-          className="css-8hm5fo"
-        >
-          <p
-            className="chakra-text css-in3yi3"
-          >
-            Availability: 
-          </p>
-           
-          <span
-            className="chakra-badge css-9b3zcq"
-          >
-            Available (1 copies)
-          </span>
-        </div>
-      </div>
-      <div
-        className="css-1gvp5h0"
-      >
-        <hr
-          aria-orientation="horizontal"
-          className="chakra-divider css-1upb9tn"
-        />
-        <div
-          className="css-8hm5fo"
-        >
-          <p
-            className="chakra-text css-in3yi3"
-          >
-            Rating: 
-          </p>
-           
-          <p
-            className="chakra-text css-0"
-          >
-            5
-          </p>
-        </div>
-      </div>
-      <div
-        className="css-1k4ipjk"
-      >
-        <h2
-          className="chakra-heading css-0"
-        >
-          Description
-        </h2>
         <hr
           aria-orientation="horizontal"
           className="chakra-divider css-9c8gsq"
@@ -175,7 +169,7 @@ exports[`BookDetails  renders correctly 1`] = `
         <p
           className="chakra-text css-0"
         >
-          test
+          There are currently no active rentals
         </p>
       </div>
     </div>

@@ -1,10 +1,10 @@
 import "@testing-library/jest-dom";
 import renderer from "react-test-renderer";
-import LoginForm from "../../../src/components/LoginForm";
+import LoginForm from "../../../../src/components/Users/LoginForm";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import { LoginContext } from "../../../src/contexts/loginContext";
-import apiClient from "../../../src/services/api-client";
+import { LoginContext } from "../../../../src/contexts/loginContext";
+import apiClient from "../../../../src/services/api-client";
 // import {
 //     mShowError,
 //     mShowSuccess,
@@ -34,7 +34,7 @@ jest.mock("@chakra-ui/react", () => ({
 }));
 
 //mock apiClient
-jest.mock("../../../src/services/api-client");
+jest.mock("../../../../src/services/api-client");
 const mApiClient = apiClient as jest.Mocked<typeof apiClient>;
 
 //mock useNavigate

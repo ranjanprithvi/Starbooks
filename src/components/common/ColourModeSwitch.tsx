@@ -9,6 +9,7 @@ const ColourModeSwitch = ({ ...rest }) => {
                 isChecked={colorMode === "dark"}
                 onChange={toggleColorMode}
                 colorScheme="teal"
+                data-testid="toggler"
             />
 
             <Text>Dark Mode</Text>

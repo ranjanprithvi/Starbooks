@@ -24,7 +24,7 @@ import {
     TabList,
 } from "@chakra-ui/react";
 import logo from "../assets/Logo.png";
-import ColourModeSwitch from "./ColourModeSwitch";
+import ColourModeSwitch from "./common/ColourModeSwitch";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useContext, useRef } from "react";
 import { LoginContext } from "../contexts/loginContext";

@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rentals renders correctly 1`] = `
+<div
+  className="css-11dzgy"
+>
+  <div
+    className="chakra-stack css-1lmrh1f"
+  >
+    <div
+      className="chakra-stack css-15hkm2s"
+    >
+      <h2
+        className="chakra-heading css-0"
+      >
+        Rentals
+      </h2>
+      <a
+        className="chakra-button css-4xx2wk"
+        href="/rentals/new"
+        onClick={[Function]}
+      >
+        <span
+          className="chakra-button__icon css-1wh2kri"
+        >
+          <svg
+            aria-hidden={true}
+            fill="currentColor"
+            focusable={false}
+            height="1em"
+            stroke="currentColor"
+            strokeWidth="0"
+            style={
+              {
+                "color": undefined,
+              }
+            }
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+            />
+          </svg>
+        </span>
+        New Rental
+      </a>
+    </div>
+    <hr
+      aria-orientation="horizontal"
+      className="chakra-divider css-1upb9tn"
+    />
+    <div
+      className="chakra-table__container css-c53i0p"
+    >
+      <div
+        className="chakra-stack css-tl3ftk"
+      >
+        <table
+          className="chakra-table css-0"
+        >
+          <thead
+            className="css-0"
+          >
+            <tr
+              className="css-0"
+            >
+              <th
+                className="css-0"
+              >
+                Book
+              </th>
+              <th
+                className="css-0"
+              >
+                User
+              </th>
+              <th
+                className="css-0"
+              >
+                Date Out
+              </th>
+              <th
+                className="css-0"
+              >
+                Returned
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            className="css-0"
+          >
+            <tr
+              className="css-0"
+            >
+              <td
+                className="css-0"
+              >
+                asdf
+              </td>
+              <td
+                className="css-0"
+              >
+                John
+              </td>
+              <td
+                className="css-0"
+              >
+                01 Jan 1970
+              </td>
+              <td
+                className="css-0"
+              >
+                <div>
+                  01 Jan 2024
+                </div>
+              </td>
+            </tr>
+            <tr
+              className="css-0"
+            >
+              <td
+                className="css-0"
+              >
+                The Body in the Library
+              </td>
+              <td
+                className="css-0"
+              >
+                Jane
+              </td>
+              <td
+                className="css-0"
+              >
+                01 Jan 1970
+              </td>
+              <td
+                className="css-0"
+              >
+                <div>
+                  03 Jan 2024
+                </div>
+              </td>
+            </tr>
+            <tr
+              className="css-0"
+            >
+              <td
+                className="css-0"
+              >
+                Murder on the Orient Express
+              </td>
+              <td
+                className="css-0"
+              >
+                Jack
+              </td>
+              <td
+                className="css-0"
+              >
+                01 Jan 1970
+              </td>
+              <td
+                className="css-0"
+              >
+                <div>
+                  07 Jan 2024
+                </div>
+              </td>
+            </tr>
+            <tr
+              className="css-0"
+            >
+              <td
+                className="css-0"
+              >
+                The Code of the Woosters
+              </td>
+              <td
+                className="css-0"
+              >
+                John
+              </td>
+              <td
+                className="css-0"
+              >
+                01 Jan 1970
+              </td>
+              <td
+                className="css-0"
+              >
+                <button
+                  className="chakra-button css-1wtkyx3"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span
+                    className="chakra-button__icon css-1wh2kri"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      fill="currentColor"
+                      focusable={false}
+                      height="1em"
+                      stroke="currentColor"
+                      strokeWidth="0"
+                      style={
+                        {
+                          "color": undefined,
+                        }
+                      }
+                      viewBox="0 0 1024 1024"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M793 242H366v-74c0-6.7-7.7-10.4-12.9-6.3l-142 112a8 8 0 0 0 0 12.6l142 112c5.2 4.1 12.9.4 12.9-6.3v-74h415v470H175c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h618c35.3 0 64-28.7 64-64V306c0-35.3-28.7-64-64-64z"
+                      />
+                    </svg>
+                  </span>
+                  Mark as Returned
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+`;

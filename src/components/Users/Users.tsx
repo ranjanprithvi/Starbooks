@@ -9,9 +9,7 @@ import {
     MenuItem,
     MenuList,
     VStack,
-    useBreakpointValue,
     useDisclosure,
-    useToast,
     Text,
 } from "@chakra-ui/react";
 import Table from "../common/Table";
@@ -19,12 +17,13 @@ import useUsers from "../../hooks/useUsers";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { FaEye, FaPlus, FaUser } from "react-icons/fa";
+import { FaEye, FaPen, FaPlus, FaUser } from "react-icons/fa";
 import { BsChevronDown } from "react-icons/bs";
 import { User } from "../../models/user";
 import { useState } from "react";
 import Modal from "../common/Modal";
-import Accordion, { AccordianRowData } from "../common/Accordion";
+import AccordionTable, { AccordionRowData } from "../common/Accordion";
+import { TbTrash } from "react-icons/tb";
 
 interface Props {
     dataView?: string;
@@ -32,17 +31,12 @@ interface Props {
 
 const Users = ({ dataView }: Props) => {
     const { users, isLoading, error } = useUsers({ isAdmin: false });
-    const toast = useToast();
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [userToDelete, setUserToDelete] = useState<User>({} as User);
 
     if (error) {
-        return null;
-    }
-
-    function handleDelete(user: User, toast: any) {
-        console.log(user.name, "marked for deletion");
+        return <div>{error}</div>;
     }
 
     const usersData = users.map((user) => ({
@@ -52,7 +46,9 @@ const Users = ({ dataView }: Props) => {
                 renderComponent: () => (
                     <HStack>
                         <FaUser />
-                        <>{user.name}</>
+                        <Link to={`/userDetails/${user._id}`}>
+                            <u>{user.name}</u>
+                        </Link>
                     </HStack>
                 ),
             },
@@ -67,14 +63,14 @@ const Users = ({ dataView }: Props) => {
             actions: {
                 renderComponent: () => (
                     <HStack>
-                        <Button
-                            leftIcon={<FaEye />}
+                        {/* <Button
+                            leftIcon={<FaPen />}
                             as={Link}
-                            to={`/userDetails/${user._id}`}
+                            to={`/users/${user._id}}`}
                         >
-                            View
-                        </Button>
-                        <Menu>
+                            Edit
+                        </Button> */}
+                        {/* <Menu>
                             <MenuButton
                                 as={Button}
                                 type="button"
@@ -94,19 +90,23 @@ const Users = ({ dataView }: Props) => {
                                     Delete
                                 </MenuItem>
                             </MenuList>
-                        </Menu>
-                        {/* <Button
+                        </Menu> */}
+                        <Button
                             leftIcon={<TbTrash></TbTrash>}
                             colorScheme="red"
-                            onClick={() => handleDelete(user)}
+                            onClick={() => {
+                                setUserToDelete(user);
+                                onOpen();
+                            }}
                         >
                             Delete
-                        </Button> */}
+                        </Button>
                     </HStack>
                 ),
             },
         },
     }));
+
     return (
         <GridItem
             colSpan={2}
@@ -168,12 +168,12 @@ const Users = ({ dataView }: Props) => {
                         isLoading={isLoading}
                     ></Table>
                 )}
-                {dataView === "accordian" && (
-                    <Accordion
+                {dataView === "accordion" && (
+                    <AccordionTable
                         width="100%"
                         border="1px"
                         borderColor="gray.100"
-                        data={users.map<AccordianRowData>((user) => ({
+                        data={users.map<AccordionRowData>((user) => ({
                             mainContent: user.name,
                             subContent: (
                                 <VStack alignItems="start">

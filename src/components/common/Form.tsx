@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 export interface Option {
-    value: string;
+    value: string | number;
     label: string;
     disabled?: boolean;
 }
@@ -37,7 +37,10 @@ export interface Field<T> {
     inputType?: string;
     pattern?: string;
     options?: Option[];
-    sliderMarks?: SliderMarks[];
+    // sliderMarks?: SliderMarks[] | number[];
+    // sliderMarks?: number[];
+    // min?: number;
+    // max?: number;
     placeholder?: string;
 }
 
@@ -89,6 +92,7 @@ const Form = <T extends FieldValues>({
                         valueAsNumber:
                             inputType == "number" || inputType == "tel",
                     })}
+                    onWheel={(e) => (e.target as HTMLInputElement).blur()} // Prevents scrolling from skewing number input
                 />
             </FormControl>
         );
@@ -120,14 +124,26 @@ const Form = <T extends FieldValues>({
     //     );
     // }
 
-    function renderSelect({ label, name, options, placeholder }: Field<T>) {
+    function renderSelect({
+        label,
+        name,
+        options,
+        placeholder,
+        inputType,
+    }: Field<T>) {
         return (
             <FormControl>
                 <FormLabel htmlFor={name}>{label}</FormLabel>
-                <Select placeholder={placeholder} {...register(name)} id={name}>
+                <Select
+                    placeholder={placeholder}
+                    {...register(name, {
+                        valueAsNumber: inputType == "number",
+                    })}
+                    id={name}
+                >
                     {options?.map((option) => (
                         <option
-                            key={label + "_" + option.value}
+                            key={option.label + "_" + option.value}
                             value={option.value}
                             disabled={option.disabled}
                         >
@@ -139,22 +155,52 @@ const Form = <T extends FieldValues>({
         );
     }
 
-    function renderSlider({ label, name, sliderMarks }: Field<T>) {
-        return (
-            <FormControl>
-                <FormLabel htmlFor={name}>{label}</FormLabel>
-                <Slider>
-                    {sliderMarks?.map((mark) => (
-                        <SliderMark value={mark.value}>{mark.label}</SliderMark>
-                    ))}
-                    <SliderTrack>
-                        <SliderFilledTrack />
-                    </SliderTrack>
-                    <SliderThumb />
-                </Slider>
-            </FormControl>
-        );
-    }
+    // function renderSlider({ label, name, min, max }: Field<T>) {
+    //     return (
+    //         <FormControl>
+    //             <FormLabel htmlFor={name}>{label}</FormLabel>
+    //             <Slider
+    //                 min={min}
+    //                 max={max}
+    //                  {...register(name, { valueAsNumber: true})}
+    //             >
+    //                 <SliderTrack >
+    //                     <SliderFilledTrack />
+    //                 </SliderTrack>
+    //                 <SliderThumb boxSize={5} />
+    //             </Slider>
+    //         </FormControl>
+    //     );
+    // }
+
+    // function renderSlider({ label, name, sliderMarks }: Field<T>) {
+    //     return (
+    //         <FormControl>
+    //             <FormLabel htmlFor={name}>{label}</FormLabel>
+    //             <Slider>
+    //                 {sliderMarks?.map(
+    //                     (mark) => (
+    //                         // {
+    //                         // return typeof mark == "number" ? (
+    //                         <SliderMark key={mark} value={mark}>
+    //                             {mark}
+    //                         </SliderMark>
+    //                     )
+    //                     // ) : (
+    //                     //     <SliderMark key={mark.value} value={mark.value}>
+    //                     //         {mark.label || mark.value}
+    //                     //     </SliderMark>
+    //                     // );
+    //                     // }
+    //                 )}
+    //                 <SliderTrack>
+    //                     <SliderFilledTrack />
+    //                 </SliderTrack>
+    //                 <SliderThumb />
+    //             </Slider>
+    //         </FormControl>
+    //     );
+    // }
 
     function renderField(field: Field<T>) {
         let renderElement: (arg0: Field<T>) => JSX.Element;
@@ -162,9 +208,9 @@ const Form = <T extends FieldValues>({
             case "select":
                 renderElement = renderSelect;
                 break;
-            case "slider":
-                renderElement = renderSlider;
-                break;
+            // case "slider":
+            //     renderElement = renderSlider;
+            //     break;
             // case "numberInput":
             //     renderElement = renderNumberInput;
             //     break;

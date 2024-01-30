@@ -9,7 +9,8 @@ import {
 import { BsChevronDown } from "react-icons/bs";
 
 export interface Sort {
-    [key: string]: string;
+    name: string;
+    value: string;
 }
 
 interface Props {
@@ -23,11 +24,11 @@ const SortSelector = ({
     sortBy: sortField,
     sortFields,
     onSort,
-    size,
+    size = "sm",
 }: Props) => {
     return (
         <Menu>
-            <MenuButton as={Button} rightIcon={<BsChevronDown />} size="sm">
+            <MenuButton as={Button} rightIcon={<BsChevronDown />} size={size}>
                 {"Order By: " + sortField.name}
             </MenuButton>
 

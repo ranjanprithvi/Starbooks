@@ -5,20 +5,21 @@ import { act } from "react-dom/test-utils";
 import apiClient from "../../../../src/services/api-client";
 // import { useToast } from "../../../../src/hooks/generic/useToast";
 import React from "react";
-import { bookObj } from "../../../../src/__mocks__/data";
+import { bookObj } from "../../../../src/data/mockData";
 import { MemoryRouter } from "react-router-dom";
 import Routes from "../../../../src/Routes";
 import _ from "lodash";
+
+jest.mock("../../../../src/hooks/useAuthors");
+jest.mock("../../../../src/hooks/useGenres");
+jest.mock("../../../../src/hooks/useBook");
+
+jest.mock("../../../../src/components/common/ProtectedAdminComponent");
 
 //mock apiClient
 jest.mock("../../../../src/services/api-client");
 const mApiClient = apiClient as jest.Mocked<typeof apiClient>;
 mApiClient.post.mockResolvedValue({ data: bookObj });
-
-jest.mock("../../../../src/hooks/useAuthors");
-jest.mock("../../../../src/hooks/useGenres");
-jest.mock("../../../../src/hooks/useBook");
-const mNavigate = jest.fn();
 
 //mock useToast
 const mToast = jest.fn();
@@ -28,12 +29,11 @@ jest.mock("@chakra-ui/react", () => ({
 }));
 
 //mock useNavigate
+const mNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
     ...(jest.requireActual("react-router-dom") as any),
     useNavigate: () => mNavigate,
 }));
-
-jest.mock("../../../../src/components/common/ProtectedAdminComponent");
 
 describe("BookForm", () => {
     afterEach(() => {
@@ -454,10 +454,27 @@ describe("BookForm", () => {
 
     it("displays error message in case of network error", async () => {
         const message = "Sorry. Something went wrong";
-        mApiClient.post.mockResolvedValueOnce({
-            data: { token: "1234", isAdmin: true },
+        mApiClient.patch.mockRejectedValueOnce({});
+        // process.env.VITE_BACKEND_URL = "http://invalidUrl";
+        render(
+            <MemoryRouter initialEntries={[`/books/123`]}>
+                <Routes />
+            </MemoryRouter>
+        );
+
+        await act(async () => {
+            const submitButton = screen.getByText(
+                /submit/i
+            ) as HTMLButtonElement;
+            submitButton.click();
         });
-        process.env.VITE_BACKEND_URL = "http://invalidUrl";
+        expect(mToast).toHaveBeenCalled();
+    });
+
+    it("displays error message in case of network error", async () => {
+        const message = "Sorry. Something went wrong";
+        mApiClient.post.mockRejectedValueOnce({});
+        // process.env.VITE_BACKEND_URL = "http://invalidUrl";
         render(
             <MemoryRouter initialEntries={[`/books/new`]}>
                 <Routes />
@@ -490,12 +507,12 @@ describe("BookForm", () => {
             fireEvent.change(screen.getByLabelText(/description/i), {
                 target: { value: bookObj.description },
             });
-
             const submitButton = screen.getByText(
                 /submit/i
             ) as HTMLButtonElement;
             submitButton.click();
         });
+        expect(mToast).toHaveBeenCalled();
     });
 
     it("navigates to previous screen when canceled", async () => {

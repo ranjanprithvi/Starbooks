@@ -1,0 +1,348 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders the Navbar correctly 1`] = `
+<div
+  className="chakra-stack css-od58f6"
+>
+  <div
+    className="chakra-stack css-1igwmid"
+  >
+    <button
+      className="chakra-button css-m8g3bw"
+      onClick={[Function]}
+      type="button"
+    >
+      <svg
+        fill="none"
+        height="32px"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 15 15"
+        width="32px"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M1.5 3C1.22386 3 1 3.22386 1 3.5C1 3.77614 1.22386 4 1.5 4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H1.5ZM1 7.5C1 7.22386 1.22386 7 1.5 7H13.5C13.7761 7 14 7.22386 14 7.5C14 7.77614 13.7761 8 13.5 8H1.5C1.22386 8 1 7.77614 1 7.5ZM1 11.5C1 11.2239 1.22386 11 1.5 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7761 13.7761 12 13.5 12H1.5C1.22386 12 1 11.7761 1 11.5Z"
+          fill="currentColor"
+          fillRule="evenodd"
+        />
+      </svg>
+    </button>
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      <img
+        className="chakra-image css-1oh3kui"
+        src="test-file-stub"
+      />
+    </a>
+    <div
+      className="chakra-tabs css-1arzy49"
+    >
+      <div
+        aria-orientation="horizontal"
+        className="chakra-tabs__tablist css-k008qs"
+        onKeyDown={[Function]}
+        role="tablist"
+      >
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          <button
+            aria-controls="tabs-:r4:--tabpanel--1"
+            aria-disabled={false}
+            aria-selected={false}
+            className="chakra-tabs__tab css-z0uh78"
+            disabled={false}
+            id="tabs-:r4:--tab--1"
+            onClick={[Function]}
+            onFocus={[Function]}
+            role="tab"
+            tabIndex={-1}
+            type="button"
+          >
+            Home
+          </button>
+        </a>
+        <a
+          href="/books"
+          onClick={[Function]}
+        >
+          <button
+            aria-controls="tabs-:r4:--tabpanel--1"
+            aria-disabled={false}
+            aria-selected={false}
+            className="chakra-tabs__tab css-z0uh78"
+            disabled={false}
+            id="tabs-:r4:--tab--1"
+            onClick={[Function]}
+            onFocus={[Function]}
+            role="tab"
+            tabIndex={-1}
+            type="button"
+          >
+            Books
+          </button>
+        </a>
+        <a
+          href="/users"
+          onClick={[Function]}
+        >
+          <button
+            aria-controls="tabs-:r4:--tabpanel--1"
+            aria-disabled={false}
+            aria-selected={false}
+            className="chakra-tabs__tab css-z0uh78"
+            disabled={false}
+            id="tabs-:r4:--tab--1"
+            onClick={[Function]}
+            onFocus={[Function]}
+            role="tab"
+            tabIndex={-1}
+            type="button"
+          >
+            Users
+          </button>
+        </a>
+        <a
+          href="/rentals"
+          onClick={[Function]}
+        >
+          <button
+            aria-controls="tabs-:r4:--tabpanel--1"
+            aria-disabled={false}
+            aria-selected={false}
+            className="chakra-tabs__tab css-z0uh78"
+            disabled={false}
+            id="tabs-:r4:--tab--1"
+            onClick={[Function]}
+            onFocus={[Function]}
+            role="tab"
+            tabIndex={-1}
+            type="button"
+          >
+            Rentals
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="chakra-stack css-1igwmid"
+  >
+    <div
+      className="chakra-stack css-1keny0w"
+    >
+      <label
+        className="chakra-switch css-16pgy8f"
+        data-testid="toggler"
+        onClick={[Function]}
+      >
+        <input
+          checked={false}
+          className="chakra-switch__input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          style={
+            {
+              "border": "0",
+              "clip": "rect(0, 0, 0, 0)",
+              "height": "1px",
+              "margin": "-1px",
+              "overflow": "hidden",
+              "padding": "0",
+              "position": "absolute",
+              "whiteSpace": "nowrap",
+              "width": "1px",
+            }
+          }
+          type="checkbox"
+        />
+        <span
+          aria-hidden={true}
+          className="chakra-switch__track css-14qxnv8"
+          onMouseDown={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+        >
+          <span
+            className="chakra-switch__thumb css-0"
+          />
+        </span>
+      </label>
+      <p
+        className="chakra-text css-0"
+      >
+        Dark Mode
+      </p>
+    </div>
+    <button
+      aria-controls="menu-list-:r6:"
+      aria-expanded={false}
+      aria-haspopup="menu"
+      className="chakra-button chakra-menu__menu-button css-4xx2wk"
+      id="menu-button-:r6:"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      type="button"
+    >
+      <span
+        className="chakra-button__icon css-1wh2kri"
+      >
+        <svg
+          aria-hidden={true}
+          fill="currentColor"
+          focusable={false}
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z"
+          />
+        </svg>
+      </span>
+      <span
+        className="css-xl71ch"
+      >
+        Account
+      </span>
+      <span
+        className="chakra-button__icon css-1hzyiq5"
+      >
+        <svg
+          aria-hidden={true}
+          fill="currentColor"
+          focusable={false}
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 16 16"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+            fillRule="evenodd"
+          />
+        </svg>
+      </span>
+    </button>
+    <div
+      className="css-0"
+      style={
+        {
+          "inset": "0 auto auto 0",
+          "minWidth": "max-content",
+          "position": "absolute",
+          "visibility": "hidden",
+        }
+      }
+    >
+      <div
+        aria-orientation="vertical"
+        className="chakra-menu__menu-list css-sjt5nk"
+        id="menu-list-:r6:"
+        onKeyDown={[Function]}
+        role="menu"
+        style={
+          {
+            "opacity": 0,
+            "transform": "scale(0.8) translateZ(0)",
+            "transformOrigin": "var(--popper-transform-origin)",
+            "visibility": "hidden",
+          }
+        }
+        tabIndex={-1}
+      >
+        <button
+          className="chakra-menu__menuitem css-1k756t9"
+          id="menu-list-:r6:-menuitem-:r7:"
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseMove={[Function]}
+          role="menuitem"
+          tabIndex={0}
+          type="button"
+        >
+          <span
+            className="chakra-menu__icon-wrapper css-17xs0el"
+          >
+            <svg
+              aria-hidden={true}
+              className="chakra-menu__icon"
+              fill="none"
+              focusable="false"
+              height="1em"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              style={
+                {
+                  "color": undefined,
+                }
+              }
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+                stroke="none"
+              />
+              <path
+                d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
+              />
+              <path
+                d="M9 12h12l-3 -3"
+              />
+              <path
+                d="M18 15l3 -3"
+              />
+            </svg>
+          </span>
+          <span
+            style={
+              {
+                "flex": 1,
+                "pointerEvents": "none",
+              }
+            }
+          >
+            Logout
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

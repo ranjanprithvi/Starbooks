@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RatingBadge renders correctly 1`] = `
+<span
+  className="chakra-badge css-4z4zi4"
+>
+  3
+</span>
+`;

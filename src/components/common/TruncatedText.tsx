@@ -5,9 +5,11 @@ interface Props {
 }
 
 const TruncatedText = ({ text }: Props) => {
-    <Tooltip label={text.length > 20 ? text : ""}>
-        {text.length > 20 ? <>{text.slice(0, 20)}...</> : <>{text}</>}
-    </Tooltip>;
+    return (
+        <Tooltip label={text.length > 20 ? text : ""}>
+            {text.length > 20 ? <>{text.slice(0, 20)}...</> : <>{text}</>}
+        </Tooltip>
+    );
 };
 
 export default TruncatedText;

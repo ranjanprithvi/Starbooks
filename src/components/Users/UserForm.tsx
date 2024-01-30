@@ -8,6 +8,7 @@ import { httpService } from "../../services/http-service";
 import { User } from "../../models/user";
 import useUser from "../../hooks/useUser";
 import moment from "moment";
+import countryCodes from "../../data/countryPhoneCodes.json";
 
 const schemaObject = {
     name: z
@@ -15,36 +16,39 @@ const schemaObject = {
         .nonempty({ message: "Name is required" }),
     email: z
         .string({ invalid_type_error: "Email is required" })
+        .email({ message: "Invalid email" })
         .nonempty({ message: "Email is required" }),
-    countryCode: z
-        .union([
-            z
-                .number()
-                .min(0, { message: "Country Code must be between 0 and 200" })
-                .max(999, {
-                    message: "Country Code must be between 0 and 200",
-                }),
-            z.nan(),
-        ])
-        .optional(),
+    countryCode: z.union([z.string(), z.nan()]).optional(),
     phoneNumber: z
         .union([
             z
                 .number()
                 .min(0, {
-                    message: "Phone Number must must be between positive",
+                    message: "Phone Number must be positive",
                 })
                 .max(99999999999, {
-                    message: "Phone number should be less than 11 digits",
+                    message:
+                        "Phone Number should be less than or equal to 11 digits",
+                })
+                .multipleOf(1, {
+                    message: "Phone Number should be a whole number",
                 }),
             z.nan(),
         ])
         .optional(),
-    membershipExpiry: z.string({
-        invalid_type_error: "Membership expiry is required",
+    membershipExpiry: z.custom((value) => value !== "Invalid date", {
+        message: "Membership expiry is required",
     }),
-    dateOfBirth: z.string().optional(),
-    maxBorrow: z.number().optional(),
+    dateOfBirth: z.custom(
+        (value) =>
+            value !== "Invalid date" &&
+            value &&
+            new Date(value as string) < new Date(),
+        {
+            message: "Valid date of Birth is required",
+        }
+    ),
+    maxBorrow: z.union([z.number(), z.nan()]).optional(),
 };
 const schema = z.object(schemaObject);
 
@@ -72,7 +76,7 @@ const UserForm = () => {
     const resetObject = {
         name: user.name,
         email: user.email,
-        countryCode: parseInt(user.countryCode),
+        countryCode: user.countryCode,
         phoneNumber: parseInt(user.phoneNumber),
         dateOfBirth: moment(new Date(user.dateOfBirth || "")).format(
             "YYYY-MM-DD"
@@ -86,17 +90,20 @@ const UserForm = () => {
     if (error) navigate("/not-found");
 
     const onSubmit = (data: UserData) => {
-        const dataDTO = {
+        let dataDTO = {
             ...data,
             countryCode: data.countryCode?.toString(),
             phoneNumber: data.phoneNumber?.toString(),
         } as UserDTO;
+        // console.log(data);
+
         let userService = httpService("/users");
         let promise;
         if (id == "new") {
-            data = _.omitBy(data, (value) => {
+            dataDTO = _.omitBy(dataDTO, (value) => {
                 return !value || value === "Invalid date";
-            }) as UserData;
+            }) as UserDTO;
+
             promise = userService.post<UserDTO, User>(dataDTO);
         } else {
             data = _.omitBy(
@@ -108,7 +115,7 @@ const UserForm = () => {
 
         promise
             .then((res) => {
-                navigate("/users", {
+                navigate(`/userDetails/${res.data._id}`, {
                     replace: true,
                 });
             })
@@ -135,10 +142,14 @@ const UserForm = () => {
             name: "email",
         },
         {
-            type: "textInput",
+            type: "select",
             label: "Country Code",
             name: "countryCode",
-            inputType: "number",
+            options: countryCodes.map((countryCode) => ({
+                label: `${countryCode.country} (${countryCode.code})`,
+                value: countryCode.code,
+            })),
+            placeholder: "---Select Country Code---",
         },
         {
             type: "textInput",
@@ -159,9 +170,16 @@ const UserForm = () => {
             inputType: "date",
         },
         {
-            type: "textInput",
+            type: "select",
             label: "Book Limit",
             name: "maxBorrow",
+            options: [
+                { label: "1", value: 1 },
+                { label: "2", value: 2 },
+                { label: "3", value: 3 },
+                { label: "4", value: 4 },
+                { label: "5", value: 5 },
+            ],
             inputType: "number",
         },
     ];

@@ -1,4 +1,6 @@
 import "./App.css";
+import { useState } from "react";
+import { LoginContext } from "./contexts/loginContext";
 import {
     Grid,
     GridItem,
@@ -6,12 +8,9 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import { useState } from "react";
-import { LoginContext } from "./contexts/loginContext";
 import Routes from "./Routes";
 
 function App() {
-    const textColor = useColorModeValue("gray.700", "white");
     const [isLoggedIn, setLoggedIn] = useState(
         localStorage.getItem("token") !== null
     );
@@ -19,9 +18,11 @@ function App() {
         localStorage.getItem("isAdmin") == "true"
     );
 
+    const textColor = useColorModeValue("gray.700", "white");
+
     const dataView = useBreakpointValue(
         {
-            base: "accordian",
+            base: "accordion",
             md: "table",
         },
         {
@@ -45,9 +46,9 @@ function App() {
                 color={textColor}
                 templateAreas={{
                     base: `"nav" 
-                        "main"`,
+            "main"`,
                     lg: `"nav nav"         
-                      "aside main"`,
+          "aside main"`,
                 }}
                 templateColumns={{
                     base: "100vw",

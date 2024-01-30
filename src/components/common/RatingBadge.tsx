@@ -5,7 +5,7 @@ interface Props {
     rating: number;
 }
 
-const Rating = ({ rating }: Props) => {
+const RatingBadge = ({ rating }: Props) => {
     const colour =
         rating >= 4
             ? "green"
@@ -27,4 +27,4 @@ const Rating = ({ rating }: Props) => {
     );
 };
 
-export default Rating;
+export default RatingBadge;

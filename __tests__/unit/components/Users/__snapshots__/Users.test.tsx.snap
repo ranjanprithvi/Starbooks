@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users renders correctly 1`] = `
+<div
+  className="css-11dzgy"
+>
+  <div
+    className="chakra-stack css-1lmrh1f"
+  >
+    <div
+      className="chakra-stack css-15hkm2s"
+    >
+      <h2
+        className="chakra-heading css-0"
+      >
+        Users
+      </h2>
+      <a
+        className="chakra-button css-4xx2wk"
+        href="/users/new"
+        onClick={[Function]}
+      >
+        <span
+          className="chakra-button__icon css-1wh2kri"
+        >
+          <svg
+            aria-hidden={true}
+            fill="currentColor"
+            focusable={false}
+            height="1em"
+            stroke="currentColor"
+            strokeWidth="0"
+            style={
+              {
+                "color": undefined,
+              }
+            }
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+            />
+          </svg>
+        </span>
+        New User
+      </a>
+    </div>
+    <hr
+      aria-orientation="horizontal"
+      className="chakra-divider css-1upb9tn"
+    />
+  </div>
+</div>
+`;

@@ -174,8 +174,7 @@ const UserDetails = () => {
                         >
                             <Text fontWeight="bold">Phone Number</Text>{" "}
                             <Text>
-                                {"+" +
-                                    user.countryCode +
+                                {user.countryCode +
                                     " " +
                                     (user?.phoneNumber
                                         ? user?.phoneNumber.toString()
@@ -246,6 +245,10 @@ const UserDetails = () => {
                                         user.activeRentals?.length >=
                                         user.maxBorrow
                                             ? "Book Limit Reached"
+                                            : user.membershipExpiry &&
+                                              new Date(user.membershipExpiry) <
+                                                  new Date()
+                                            ? "Membership Expired"
                                             : ""
                                     }
                                 >
@@ -263,7 +266,11 @@ const UserDetails = () => {
                                         onClick={(event) => {
                                             if (
                                                 user.activeRentals?.length >=
-                                                user.maxBorrow
+                                                    user.maxBorrow ||
+                                                (user.membershipExpiry &&
+                                                    new Date(
+                                                        user.membershipExpiry
+                                                    ) < new Date())
                                             )
                                                 event.preventDefault();
                                         }}
@@ -271,7 +278,11 @@ const UserDetails = () => {
                                         leftIcon={<FaPlus />}
                                         isDisabled={
                                             user.activeRentals?.length >=
-                                            user.maxBorrow
+                                                user.maxBorrow ||
+                                            (user.membershipExpiry &&
+                                                new Date(
+                                                    user.membershipExpiry
+                                                ) < new Date())
                                         }
                                     >
                                         New Rental

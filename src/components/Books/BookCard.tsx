@@ -1,5 +1,5 @@
 import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
-import Rating from "../common/Rating";
+import RatingBadge from "../common/RatingBadge";
 import { Book, defaultBookCover } from "../../models/book";
 
 interface Props {
@@ -28,7 +28,7 @@ const BookCard = ({ book }: Props) => {
                 </Heading>
                 <HStack justifyContent={"space-between"}>
                     <Text color={"gray.500"}>{book.author.name}</Text>
-                    <Rating rating={book.rating} />
+                    <RatingBadge rating={book.rating} />
                 </HStack>
             </CardBody>
         </Card>

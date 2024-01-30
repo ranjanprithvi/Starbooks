@@ -6,7 +6,7 @@ import {
     Text,
     Button,
 } from "@chakra-ui/react";
-import { getGenreIcon } from "./genreIcons";
+import { getGenreIcon } from "../../data/genreIcons";
 import useGenres from "../../hooks/useGenres";
 import { Genre } from "../../models/genre";
 
